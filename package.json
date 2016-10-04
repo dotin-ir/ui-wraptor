@@ -1,6 +1,5 @@
 {
   "name": "ui-wraptor",
-  "private": true,
   "author": "Dotin Core Banking Team",
   "version": "0.0.1",
   "description": "Collection of React components which wrap a set of third-party components (currently material-ui).",
@@ -15,26 +14,20 @@
     "type": "git",
     "url": "https://github.com/dotin-ir/ui-wraptor.git"
   },
+  "publishConfig" : {
+    "registry" : "http://10.20.11.67:8081/nexus/content/repositories/npm-private/"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://jira.dotin.ir/browse/RPTR"
   },
-  "contributors": [
-	  { "name": "Mohsen Ahrimankosh" },
-	  { "name": "Meysam Asadian" },
-	  { "name": "Mohammad-Ali Dorosti" },
-	  { "name": "Mohammad-Javad Izadi" },
-	  { "name": "Ehsan Khodadadi" },
-	  { "name": "Danesh Razavi" }
-  ],
   "homepage": "http://dotin.ir/",
   "scripts": {
-    "build": "npm run build:icon-index && npm run build:babel && npm run build:copy-files",
-    "build:icon-index": "babel-node ./scripts/icon-index-generator.js",
-    "build:babel": "NODE_ENV=release babel ./src --out-dir ./build --ignore spec.js",
+    "build": "npm run build:babel && npm run build:copy-files",
+    "build:babel": "babel ./src --ignore *.spec.js --out-dir ./build",
     "build:copy-files": "babel-node ./scripts/copy-files.js",
     "clean:build": "rimraf build",
-    "lint": "eslint src docs/src test --quiet && echo \"eslint: no lint errors\"",
+    "lint": "eslint src docs/src test/integration && echo \"eslint: no lint errors\"",
     "lint:find-rules": "eslint-find-rules -u .eslintrc.js",
     "prebuild": "npm run clean:build",
     "test": "cross-env NODE_ENV=test babel-node test/index.js",
@@ -43,23 +36,15 @@
     "test:integration": "cross-env NODE_ENV=test babel-node test/index.js integration",
     "test:integration:watch": "cross-env NODE_ENV=test babel-node test/watch.js integration",
     "test:unit": "cross-env NODE_ENV=test babel-node test/index.js unit",
-    "test:unit:watch": "cross-env NODE_ENV=test babel-node test/watch.js unit"
+    "test:unit:watch": "cross-env NODE_ENV=test babel-node test/watch.js unit",
+    "publish": "npm run prebuild && npm run build && npm publish ./build --registry http://10.20.11.67:8081/nexus/content/repositories/npm-private/"
   },
   "peerDependencies": {
     "react": "^15.0.0",
-    "react-dom": "^15.0.0",
-    "react-tap-event-plugin": "^1.0.0"
+    "react-dom": "^15.0.0"
   },
   "dependencies": {
-    "inline-style-prefixer": "^2.0.1",
-    "keycode": "^2.1.1",
-    "lodash": "^4.13.1",
-    "react-addons-create-fragment": "^15.2.1",
-    "react-addons-transition-group": "^15.2.1",
-    "react-event-listener": "^0.2.1",
-    "recompose": "^0.20.2",
-    "simple-assign": "^0.1.0",
-    "warning": "^3.0.0"
+    "dotin-material-ui": "^0.15.4"
   },
   "devDependencies": {
     "app-module-path": "^1.0.6",
@@ -84,7 +69,6 @@
     "eslint": "^3.0.1",
     "eslint-find-rules": "^1.11.0",
     "eslint-plugin-babel": "^3.2.0",
-    "eslint-plugin-material-ui": "./packages/eslint-plugin-material-ui",
     "eslint-plugin-mocha": "^4.0.0",
     "eslint-plugin-react": "^5.0.1",
     "fs-extra": "^0.30.0",
@@ -111,5 +95,13 @@
     "rimraf": "^2.5.3",
     "sinon": "^1.17.3",
     "webpack": "^1.13.1"
-  }
+  },
+  "contributors": [
+	  { "name": "Mohsen Ahrimankosh" },
+	  { "name": "Meysam Asadian" },
+	  { "name": "Mohammad-Ali Dorosti" },
+	  { "name": "Mohammad-Javad Izadi" },
+	  { "name": "Ehsan Khodadadi" },
+	  { "name": "Danesh Razavi" }
+  ]
 }
