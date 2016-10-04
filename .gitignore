@@ -9,7 +9,8 @@ icon-builder/js
 icon-builder/jsx
 
 # Exclude IDE project folders
-.idea
+.idea/
+.vscode/
 *.sublime-project
 *.sublime-workspace
 jsconfig.json
