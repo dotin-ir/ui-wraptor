@@ -17,11 +17,7 @@ module.exports = {
         warnings: false,
       },
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new HtmlWebpackPlugin({
-      template: './template/index.html',
-      hash: true
-    })
+    new webpack.optimize.OccurrenceOrderPlugin()
   ],
   resolve: {
       extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]

@@ -19,11 +19,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       '__isDev__': 'true'
-    }),
-    new HtmlWebpackPlugin({
-      template: './template/index.html',
-      hash: true
-    }),
+    })
   ],
   resolve: {
       extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
