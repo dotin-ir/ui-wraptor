@@ -37,6 +37,10 @@ class DynamicMenu extends BaseComponent {
         showMini: false
     };
 
+    static contextTypes = {
+        theme: PropTypes.object.isRequired
+    };
+
     constructor(props, state) {
         super(props, state);
         this.elementKey = 1;
@@ -78,6 +82,9 @@ class DynamicMenu extends BaseComponent {
                               style={{ padding: '8px 16px' }}
                               children={subMen.length > 0 ? subMen : null}
                               key={this.generateElementKey()}
+                              useLayerForClickAway={true}
+                              anchorOrigin={{horizontal: (this.context.theme.isRtl ? 'left' : 'right'), vertical: 'top'}}
+                              targetOrigin={{horizontal: (this.context.theme.isRtl ? 'right' : 'left'), vertical: 'top'}}
                               onItemTouchTap={this.handleOnTouchTap.bind(this, menuData.url, menuData.urlData)}/>
                 );
             }

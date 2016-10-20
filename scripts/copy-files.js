@@ -5,6 +5,7 @@ import fse from 'fs-extra';
 const files = [
   'README.md',
   'LICENSE',
+  'src/index.d.ts'
 ];
 
 Promise.all(

@@ -9,6 +9,16 @@ class ThemeProvider extends BaseComponent {
         theme: PropTypes.object
     };
 
+    static childContextTypes = {
+        theme: PropTypes.object.isRequired,
+    };
+
+    getChildContext() {
+        return {
+            theme: this.props.theme || getMuiTheme(undefined, this.props.locale),
+        };
+    }
+
     render() {
         return (
             <MUIThemeProvider muiTheme={(getMuiTheme(this.props.theme) || getMuiTheme(undefined, this.props.locale))}>

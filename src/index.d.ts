@@ -39,6 +39,13 @@ declare namespace __UI_Wraptor {
     }
 
     export class DynamicMenu extends BaseComponent<DynamicMenuProps, {}> {}
+
+    // ThemeProvider
+    interface ThemeProviderProps extends React.ClassAttributes<ThemeProvider> {
+        theme?: any;
+    }
+
+    export class ThemeProvider extends BaseComponent<ThemeProviderProps,{}> {}
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -49,4 +56,9 @@ declare module 'ui-wraptor/BaseComponent' {
 declare module 'ui-wraptor/DynamicMenu' {
     export import DynamicMenu = __UI_Wraptor.DynamicMenu;
     export default DynamicMenu;
+}
+
+declare module 'ui-wraptor/ThemeProvider' {
+    export import ThemeProvider = __UI_Wraptor.ThemeProvider;
+    export default ThemeProvider;
 }
