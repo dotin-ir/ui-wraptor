@@ -73,6 +73,27 @@ declare namespace __UI_Wraptor {
     }
 
     export class FlatButton extends BaseComponent<IFlatButton,{}> {}
+    
+    // Select
+    interface TouchTapEvent extends React.SyntheticEvent {
+        altKey: boolean;
+        ctrlKey: boolean;
+        getModifierState(key: string): boolean;
+        metaKey: boolean;
+        shiftKey: boolean;
+    }
+    
+    interface ISelect {
+        value:any,
+        label?:string,
+        disabled?:boolean,
+        hintText?:string,
+        style?:any,
+        autoWidth?:boolean,
+        onChange?:(e: TouchTapEvent, index: number, menuItemValue: any) => void;
+    }
+    
+    export class Select extends BaseComponent<ISelect,{}> {}
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -98,4 +119,9 @@ declare module 'ui-wraptor/Dialog' {
 declare module 'ui-wraptor/FlatButton' {
     export import FlatButton = __UI_Wraptor.FlatButton;
     export default FlatButton;
+}
+
+declare module 'ui-wraptor/Select' {
+    export import Select = __UI_Wraptor.Select;
+    export default Select;
 }
