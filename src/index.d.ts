@@ -46,6 +46,17 @@ declare namespace __UI_Wraptor {
     }
 
     export class ThemeProvider extends BaseComponent<ThemeProviderProps,{}> {}
+    
+    // Dialog
+    interface IDialog {
+        title:string,
+        actions:any,
+        modal:boolean,
+        open:boolean,
+        onRequestClose?:(buttonClicked: boolean) => void;      
+    }
+    
+    export class Dialog extends BaseComponent<IDialog,{}> {}
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -61,4 +72,9 @@ declare module 'ui-wraptor/DynamicMenu' {
 declare module 'ui-wraptor/ThemeProvider' {
     export import ThemeProvider = __UI_Wraptor.ThemeProvider;
     export default ThemeProvider;
+}
+
+declare module 'ui-wraptor/Dialog' {
+    export import Dialog = __UI_Wraptor.Dialog;
+    export default Dialog;
 }
