@@ -57,6 +57,22 @@ declare namespace __UI_Wraptor {
     }
     
     export class Dialog extends BaseComponent<IDialog,{}> {}
+
+    // FlatButton
+    interface IFlatButton {
+        backgroundColor?: string,
+        hoverColor?: string,
+        icon?: React.ReactElement<any>,
+        keyboardFocused?: boolean,
+        label?: string,
+        onClick?: ()=>{},
+        onTouchTap?: ()=>{},
+        primary?: boolean,
+        secondary?: boolean,
+        style?: React.CSSProperties,
+    }
+
+    export class FlatButton extends BaseComponent<IFlatButton,{}> {}
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -77,4 +93,9 @@ declare module 'ui-wraptor/ThemeProvider' {
 declare module 'ui-wraptor/Dialog' {
     export import Dialog = __UI_Wraptor.Dialog;
     export default Dialog;
+}
+
+declare module 'ui-wraptor/FlatButton' {
+    export import FlatButton = __UI_Wraptor.FlatButton;
+    export default FlatButton;
 }
