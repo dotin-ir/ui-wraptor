@@ -84,16 +84,68 @@ declare namespace __UI_Wraptor {
     }
     
     interface ISelect {
-        value:any,
+        value?:any,
         label?:string,
         disabled?:boolean,
         hintText?:string,
-        style?:any,
+        style?:React.CSSProperties,
         autoWidth?:boolean,
         onChange?:(e: TouchTapEvent, index: number, menuItemValue: any) => void;
     }
     
     export class Select extends BaseComponent<ISelect,{}> {}
+
+    // RaisedButton
+    interface IRaisedButton {
+        label?:string,
+        disable?:boolean,
+        href?:string,
+        onClick?: (event:any)=>void,
+        icon?:React.ReactNode,
+        labelPosition?:"before" | "after",
+        primary?:boolean,
+        secondary?:boolean,
+        style?:React.CSSProperties;
+
+
+    }
+
+    export class RaisedButton extends BaseComponent<IRaisedButton,{}> {
+    }
+    // Divider
+    interface IDivider {
+        style?:React.CSSProperties;
+    }
+
+    export class Divider extends BaseComponent<IDivider,{}> {}
+
+    namespace propTypes {
+        type horizontal = 'left' | 'middle' | 'right';
+        type vertical = 'top' | 'center' | 'bottom';
+        type direction = 'left' | 'right' | 'up' | 'down';
+
+        interface origin {
+            horizontal: horizontal;
+            vertical: vertical;
+        }
+
+        type corners = 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right';
+        type cornersAndCenter = 'bottom-center' | 'bottom-left' | 'bottom-right' | 'top-center' | 'top-left' | 'top-right';
+    }
+
+    // Popover
+    interface IPopover {
+        style?:React.CSSProperties;
+        anchorEl?: React.ReactInstance;
+        anchorOrigin?: propTypes.origin;
+        targetOrigin?: propTypes.origin;
+        autoCloseWhenOffScreen?: boolean;
+        onRequestClose?: (reason: string) => void;
+        open?: boolean;
+    }
+
+    export class Popover extends BaseComponent<IPopover,{}> {}
+
 
 
     // Icon
@@ -157,6 +209,18 @@ declare module 'ui-wraptor/FlatButton' {
 declare module 'ui-wraptor/Select' {
     export import Select = __UI_Wraptor.Select;
     export default Select;
+}
+declare module 'ui-wraptor/RaisedButton' {
+    export import RaisedButton = __UI_Wraptor.RaisedButton;
+    export default RaisedButton;
+}
+declare module 'ui-wraptor/Divider' {
+    export import Divider = __UI_Wraptor.Divider;
+    export default Divider;
+}
+declare module 'ui-wraptor/Popover' {
+    export import Popover = __UI_Wraptor.Popover;
+    export default Popover;
 }
 
 
