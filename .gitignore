@@ -4,3 +4,6 @@ index.html
 .vscode/chrome/
 .idea
 /build/
+*.iml
+*.ipr
+
