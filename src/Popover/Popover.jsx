@@ -58,17 +58,28 @@ class Popover extends BaseComponent {
   }
 
   render() {
+    const {
+        style,
+        anchorEl,
+        anchorOrigin,
+        targetOrigin,
+        autoCloseWhenOffScreen,
+        onRequestClose,
+        open,
+        children,
+    } = this.props;
+
     return (
-        <MUIPopover style={this.props.style}
-                    anchorEl={this.props.anchorEl}
-                    anchorOrigin={this.props.anchorOrigin}
-                    targetOrigin={this.props.targetOrigin}
-                    autoCloseWhenOffScreen={this.props.autoCloseWhenOffScreen}
-                    onRequestClose={this.props.onRequestClose}
-                    open={this.props.open}
+        <MUIPopover style={style}
+                    anchorEl={anchorEl}
+                    anchorOrigin={anchorOrigin}
+                    targetOrigin={targetOrigin}
+                    autoCloseWhenOffScreen={autoCloseWhenOffScreen}
+                    onRequestClose={onRequestClose}
+                    open={open}
 
         >
-          {this.props.children}
+          {children}
         </MUIPopover>
     );
   }
