@@ -94,6 +94,39 @@ declare namespace __UI_Wraptor {
     }
     
     export class Select extends BaseComponent<ISelect,{}> {}
+
+
+    // Icon
+    interface IIcon {
+        color?:string,
+        hoverColor?:string,
+        style?:any
+    }
+
+    export class Dollar extends BaseComponent<IIcon,{}> {}
+    export class Shortcut extends BaseComponent<IIcon,{}> {}
+    export class Routine extends BaseComponent<IIcon,{}> {}
+    export class Dotin extends BaseComponent<IIcon,{}> {}
+    export class Management extends BaseComponent<IIcon,{}> {}
+    export class Customer extends BaseComponent<IIcon,{}> {}
+    export class Accounting extends BaseComponent<IIcon,{}> {}
+    export class Deposit extends BaseComponent<IIcon,{}> {}
+    export class Cheque extends BaseComponent<IIcon,{}> {}
+    export class Guarantee extends BaseComponent<IIcon,{}> {}
+    export class Loan extends BaseComponent<IIcon,{}> {}
+    export class Demand extends BaseComponent<IIcon,{}> {}
+    export class Report extends BaseComponent<IIcon,{}> {}
+    export class ArrowDropRight extends BaseComponent<IIcon,{}> {}
+    export class Card extends BaseComponent<IIcon,{}> {}
+    export class Notifications extends BaseComponent<IIcon,{}> {}
+    export class CashDesk extends BaseComponent<IIcon,{}> {}
+    export class Inbox extends BaseComponent<IIcon,{}> {}
+    export class FingerPrint extends BaseComponent<IIcon,{}> {}
+    export class TransferMoney extends BaseComponent<IIcon,{}> {}
+    export class Settings extends BaseComponent<IIcon,{}> {}
+    export class Bar extends BaseComponent<IIcon,{}> {}
+    export class Profile extends BaseComponent<IIcon,{}> {}
+    export class SignOut extends BaseComponent<IIcon,{}> {}
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -124,4 +157,32 @@ declare module 'ui-wraptor/FlatButton' {
 declare module 'ui-wraptor/Select' {
     export import Select = __UI_Wraptor.Select;
     export default Select;
+}
+
+
+declare module 'ui-wraptor/Icon' {
+    export import Dollar = __UI_Wraptor.Dollar;
+    export import Shortcut = __UI_Wraptor.Shortcut;
+    export import Routine = __UI_Wraptor.Routine;
+    export import Dotin = __UI_Wraptor.Dotin;
+    export import Management = __UI_Wraptor.Management
+    export import Customer = __UI_Wraptor.Customer;
+    export import Accounting = __UI_Wraptor.Accounting;
+    export import Deposit = __UI_Wraptor.Deposit;
+    export import Cheque = __UI_Wraptor.Cheque;
+    export import Guarantee = __UI_Wraptor.Guarantee;
+    export import Loan = __UI_Wraptor.Loan;
+    export import Demand = __UI_Wraptor.Demand;
+    export import Report = __UI_Wraptor.Report;
+    export import ArrowDropRight = __UI_Wraptor.ArrowDropRight;
+    export import Card = __UI_Wraptor.Card;
+    export import Notifications = __UI_Wraptor.Notifications;
+    export import CashDesk = __UI_Wraptor.CashDesk;
+    export import Inbox = __UI_Wraptor.Inbox;
+    export import FingerPrint = __UI_Wraptor.FingerPrint;
+    export import TransferMoney = __UI_Wraptor.TransferMoney;
+    export import Settings = __UI_Wraptor.Settings;
+    export import Bar = __UI_Wraptor.Bar;
+    export import SignOut = __UI_Wraptor.SignOut;
+    export import Profile = __UI_Wraptor.Profile;
 }
