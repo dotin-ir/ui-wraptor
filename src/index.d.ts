@@ -10,6 +10,7 @@ declare module "ui-wraptor" {
 
 declare namespace __UI_Wraptor {
     export import React = __React;
+    import ReactElement = __React.ReactElement;
 
     // BaseComponent
     export class BaseComponent<P,S> extends React.Component<P,S>{}
@@ -475,6 +476,21 @@ declare namespace __UI_Wraptor {
         lightWhite: string;
     }
     export var Colors: Colors;
+    
+    //CardLayout
+    interface ICardLayout {
+        style: React.CSSProperties 
+    }
+    
+    interface ICardHeader {
+        avatar: React.ReactNode,
+        title: string,
+        subtitle: string
+    }
+    
+    export class CardLayout extends BaseComponent<ICardLayout,{}> {}
+    export class CardHeader extends BaseComponent<ICardHeader,{}> {}
+    export class CardActions extends BaseComponent<{},{}> {}    
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -837,4 +853,11 @@ declare module "ui-wraptor/styles/colors" {
     export const fullWhite: string;
     export const darkWhite: string;
     export const lightWhite: string;
+}
+
+declare module 'ui-wraptor/CardLayout' {
+    export import CardLayout = __UI_Wraptor.CardLayout;
+    export import CardHeader = __UI_Wraptor.CardHeader;
+    export import CardActions = __UI_Wraptor.CardActions;
+    export default CardLayout;
 }
