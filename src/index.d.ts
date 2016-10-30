@@ -75,7 +75,7 @@ declare namespace __UI_Wraptor {
 
     export class FlatButton extends BaseComponent<IFlatButton,{}> {}
     
-    // Select
+
     interface TouchTapEvent extends React.SyntheticEvent {
         altKey: boolean;
         ctrlKey: boolean;
@@ -83,7 +83,7 @@ declare namespace __UI_Wraptor {
         metaKey: boolean;
         shiftKey: boolean;
     }
-    
+    // Select
     interface ISelect {
         value?:any,
         label?:string,
@@ -96,6 +96,7 @@ declare namespace __UI_Wraptor {
     
     export class Select extends BaseComponent<ISelect,{}> {}
 
+    //Paper
     interface IPaper{
         circle?: boolean,
         style?:React.CSSProperties,
@@ -153,6 +154,29 @@ declare namespace __UI_Wraptor {
     }
 
     export class Popover extends BaseComponent<IPopover,{}> {}
+
+    // Menu
+    interface IMenu {
+        desktop?: boolean;
+        style?: React.CSSProperties;
+        width?: string | number;
+    }
+
+    export class Menu extends BaseComponent<IMenu,{}> {}
+
+    // MenuItem
+    interface IMenuItem {
+        desktop?: boolean;
+        disabled?: boolean;
+        icon?: React.ReactElement<any>;
+        menuItems?: React.ReactNode;
+        style?: React.CSSProperties;
+        value?: any;
+        text?: React.ReactNode;
+    }
+
+    export class MenuItem extends BaseComponent<IMenuItem,{}> {}
+
 
 
 
@@ -539,7 +563,14 @@ declare module 'ui-wraptor/Popover' {
     export import Popover = __UI_Wraptor.Popover;
     export default Popover;
 }
-
+declare module 'ui-wraptor/Menu' {
+    export import Menu = __UI_Wraptor.Menu;
+    export default Menu;
+}
+declare module 'ui-wraptor/MenuItem' {
+    export import MenuItem = __UI_Wraptor.MenuItem;
+    export default MenuItem;
+}
 declare module 'ui-wraptor/icons' {
     export import Dollar = __UI_Wraptor.Dollar;
     export import Shortcut = __UI_Wraptor.Shortcut;
