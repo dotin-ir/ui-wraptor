@@ -173,7 +173,7 @@ declare namespace __UI_Wraptor {
     export class Notifications extends BaseComponent<IIcon,{}> {}
     export class CashDesk extends BaseComponent<IIcon,{}> {}
     export class Inbox extends BaseComponent<IIcon,{}> {}
-    export class FingerPrint extends BaseComponent<IIcon,{}> {}
+    export class Fingerprint extends BaseComponent<IIcon,{}> {}
     export class TransferMoney extends BaseComponent<IIcon,{}> {}
     export class Settings extends BaseComponent<IIcon,{}> {}
     export class Bar extends BaseComponent<IIcon,{}> {}
@@ -531,7 +531,7 @@ declare module 'ui-wraptor/icons' {
     export import Notifications = __UI_Wraptor.Notifications;
     export import CashDesk = __UI_Wraptor.CashDesk;
     export import Inbox = __UI_Wraptor.Inbox;
-    export import FingerPrint = __UI_Wraptor.FingerPrint;
+    export import Fingerprint = __UI_Wraptor.Fingerprint;
     export import TransferMoney = __UI_Wraptor.TransferMoney;
     export import Settings = __UI_Wraptor.Settings;
     export import Bar = __UI_Wraptor.Bar;

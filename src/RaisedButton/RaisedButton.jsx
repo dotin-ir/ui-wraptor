@@ -54,18 +54,30 @@ class RaisedButton extends BaseComponent {
   }
 
   render() {
+    const {
+        label,
+        disable,
+        href,
+        onClick,
+        icon,
+        labelPosition,
+        primary,
+        secondary,
+        style,
+        children,
+    } = this.props;
     return (
-        <MUIRaisedButton label={this.props.label}
-                         disable={this.props.disable}
-                         href={this.props.href}
-                         onClick={this.props.onClick}
-                         icon={this.props.icon}
-                         labelPosition={this.props.labelPosition}
-                         primary={this.props.primary}
-                         secondary={this.props.secondary}
-                         style={this.props.style}
+        <MUIRaisedButton label={label}
+                         disable={disable}
+                         href={href}
+                         onClick={onClick}
+                         icon={icon}
+                         labelPosition={labelPosition}
+                         primary={primary}
+                         secondary={secondary}
+                         style={style}
         >
-          {this.props.children}
+          {children}
         </MUIRaisedButton>
     );
   }

@@ -62,17 +62,28 @@ class Select extends BaseComponent {
     super(props, state);
   }
   render() {
+    const {
+        value,
+        label,
+        onChange,
+        style,
+        autoWidth,
+        disable,
+        hintText,
+        id,
+        children,
+    } = this.props;
     return (
-        <MUISelectField value={this.props.value}
-                     floatingLabelText={this.props.label}
-                     onChange={this.props.onChange}
-                     style={this.props.style}
-                     autoWidth={this.props.autoWidth}
-                     disable={this.props.disable}
-                     hintText={this.props.hintText}
-                     id={this.props.id}
+        <MUISelectField value={value}
+                     floatingLabelText={label}
+                     onChange={onChange}
+                     style={style}
+                     autoWidth={autoWidth}
+                     disable={disable}
+                     hintText={hintText}
+                     id={id}
        >
-          {this.props.children}
+          {children}
         </MUISelectField>
     );
   }

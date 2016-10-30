@@ -20,10 +20,14 @@ class Divider extends BaseComponent {
   }
 
   render() {
+    const {
+        style,
+        children,
+    } = this.props;
     return (
-        <MUIDivider style={this.props.style}
+        <MUIDivider style={style}
         >
-          {this.props.children}
+          {children}
         </MUIDivider>
     );
   }
