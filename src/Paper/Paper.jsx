@@ -1,38 +1,36 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import BaseComponent from "../BaseComponent";
 import MUIPaper from 'dotin-material-ui/Paper';
 
 class Paper extends BaseComponent {
     static propTypes = {
         /**
-         * Children passed into the paper element.
-         */
-        children: PropTypes.node,
-        /**
          * Set to true to generate a circlular paper container.
          */
         circle: PropTypes.bool,
         /**
-         * By default, the paper container will have a border radius.
-         * Set this to false to generate a container with sharp corners.
-         */
-        rounded: PropTypes.bool,
-        /**
          * Override the inline-styles of the root element.
          */
         style: PropTypes.object,
-        /**
-         * Set to false to disable CSS transitions for the paper element.
-         */
-        transitionEnabled: PropTypes.bool,
-        /**
-         * This number represents the zDepth of the paper shadow.
-         */
-        zDepth: propTypes.zDepth,
+
+    };
+    static contextTypes = {
+        theme: PropTypes.object.isRequired
     };
 
     render() {
-        return <MUIPaper />;
+        const {
+            children,
+            circle,
+            style,
+        } = this.props;
+        return <MUIPaper zDepth={1}
+                         children={children}
+                         circle={circle}
+                         style={style}
+        >
+            {children}
+         </MUIPaper>;
     }
 
 }

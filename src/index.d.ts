@@ -95,6 +95,13 @@ declare namespace __UI_Wraptor {
     
     export class Select extends BaseComponent<ISelect,{}> {}
 
+    interface IPaper{
+        circle?: boolean,
+        style?:React.CSSProperties,
+    }
+
+    export class Paper extends BaseComponent<IPaper,{}> {}
+
     // RaisedButton
     interface IRaisedButton {
         label?:string,
@@ -498,6 +505,11 @@ declare module 'ui-wraptor/FlatButton' {
 declare module 'ui-wraptor/Select' {
     export import Select = __UI_Wraptor.Select;
     export default Select;
+}
+
+declare module 'ui-wraptor/Paper' {
+    export import Paper = __UI_Wraptor.Paper;
+    export default Paper;
 }
 declare module 'ui-wraptor/RaisedButton' {
     export import RaisedButton = __UI_Wraptor.RaisedButton;
