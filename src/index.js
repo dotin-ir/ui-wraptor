@@ -38,3 +38,4 @@ export * as colors from './colors';
 export CardLayout from './CardLayout'
 export CardHeader from './CardLayout'
 export CardActions from './CardLayout'
+export default from './IconButton';

@@ -514,7 +514,22 @@ declare namespace __UI_Wraptor {
     
     export class CardLayout extends BaseComponent<ICardLayout,{}> {}
     export class CardHeader extends BaseComponent<ICardHeader,{}> {}
-    export class CardActions extends BaseComponent<{},{}> {}    
+    export class CardActions extends BaseComponent<{},{}> {}
+
+    interface IIconButton {
+        className?: string,
+        disabled?: boolean,
+        iconClassName?: string,
+        iconStyle?: React.CSSProperties,
+        onKeyboardFocus?: (e: React.FocusEvent, isKeyboardFocused: boolean) => void;
+        style?: React.CSSProperties,
+        tooltip?: string,
+        tooltipPosition?: propTypes.cornersAndCenter,
+        tooltipStyles?: React.CSSProperties,
+        onTouchTap?: React.TouchEventHandler,
+    }
+    export class IconButton extends BaseComponent<IIconButton,{}> {}
+
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -891,4 +906,9 @@ declare module 'ui-wraptor/CardLayout' {
     export import CardHeader = __UI_Wraptor.CardHeader;
     export import CardActions = __UI_Wraptor.CardActions;
     export default CardLayout;
+}
+
+declare module 'ui-wraptor/IconButton' {
+    export import IconButton = __UI_Wraptor.IconButton;
+    export default IconButton;
 }
