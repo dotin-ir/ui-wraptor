@@ -23,6 +23,12 @@ class MenuItem extends BaseComponent {
          */
         icon: PropTypes.element,
         /**
+         * Callback function fired when the menu item is touch-tapped.
+         *
+         * @param {object} event TouchTap event targeting the menu item.
+         */
+        onTouchTap: PropTypes.func,
+        /**
          * `MenuItem` elements to nest within the menu item.
          */
         menuItems: PropTypes.node,
@@ -58,8 +64,9 @@ class MenuItem extends BaseComponent {
             desktop,
             disabled,
             icon,
+            onTouchTap,
             menuItems,
-            text,
+            primaryText,
             style,
             value,
             children,
@@ -67,12 +74,12 @@ class MenuItem extends BaseComponent {
         return <MUIMenuItem desktop={desktop}
                             disabled={disabled}
                             leftIcon={icon}
+                            onTouchTap={onTouchTap}
                             menuItems={menuItems}
-                            primaryText={text}
+                            primaryText={primaryText}
                             style={style}
                             value={value}
         >
-            {children}
             </MUIMenuItem>
     }
 
