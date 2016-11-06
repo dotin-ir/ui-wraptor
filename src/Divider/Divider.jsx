@@ -4,33 +4,38 @@ import BaseComponent from "../BaseComponent";
 
 
 class Divider extends BaseComponent {
-  static propTypes = {
+    static propTypes = {
+        /**
+         * If true, the `Divider` will be indented.
+         */
+        inset: PropTypes.bool,
+        /**
+         * Override the inline-styles of the root element.
+         */
+        style: PropTypes.object
+    };
 
-    /**
-     * Override the inline-styles of the root element.
-     */
-    style: PropTypes.object,
-  };
+    static contextTypes = {
+        theme: PropTypes.object.isRequired
+    };
 
-  static contextTypes = {
-    theme: PropTypes.object.isRequired
-  };
-  constructor(props, state) {
-    super(props, state);
-  }
+    static defaultProps = {
+        inset: false
+    };
 
-  render() {
-    const {
-        style,
-        children,
-    } = this.props;
-    return (
-        <MUIDivider style={style}
-        >
-          {children}
-        </MUIDivider>
-    );
-  }
+    constructor(props, context) {
+        super(props, context);
+    }
+
+    render() {
+        
+        const {
+            style,
+            inset,
+        } = this.props;
+        
+        return <MUIDivider style={style} inset={inset}/>;
+    }
 }
 
 export default Divider;

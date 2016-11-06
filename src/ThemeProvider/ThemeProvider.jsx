@@ -15,7 +15,7 @@ class ThemeProvider extends BaseComponent {
 
     getChildContext() {
         return {
-            theme: this.props.theme || getMuiTheme(undefined, this.props.locale),
+            theme: getMuiTheme(this.props.theme) || getMuiTheme(undefined, this.props.locale),
         };
     }
 
