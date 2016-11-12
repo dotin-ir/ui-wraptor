@@ -178,6 +178,28 @@ declare namespace __UI_Wraptor {
     export class MenuItem extends BaseComponent<IMenuItem,{}> {}
 
 
+    //DatePicker
+    interface IDatePicker {
+        className?: string,
+        defaultDate?: any,
+        disabled?: boolean,
+        disableYearSelection?: boolean,
+        value?:any,
+        hintText?:string,
+        locale?:string,
+        dateTimeFormat?:Intl.DateTimeFormat
+    }
+
+    export class DatePicker extends BaseComponent<IDatePicker,{}> {}
+
+    //TimePicker
+    interface ITimePicker {
+        timeZone?: any,
+        defaultTime?: any,
+        disabled?: boolean,
+    }
+
+    export class TimePicker extends BaseComponent<ITimePicker,{}> {}    
 
 
     // Icon
@@ -911,4 +933,14 @@ declare module 'ui-wraptor/CardLayout' {
 declare module 'ui-wraptor/IconButton' {
     export import IconButton = __UI_Wraptor.IconButton;
     export default IconButton;
+}
+
+declare module 'ui-wraptor/DatePicker' {
+    export import DatePicker = __UI_Wraptor.DatePicker;
+    export default DatePicker;
+}
+
+declare module 'ui-wraptor/TimePicker' {
+    export import TimePicker = __UI_Wraptor.TimePicker;
+    export default TimePicker;
 }

@@ -22,13 +22,13 @@ module.exports = {
     })
   ],
   resolve: {
-      extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+      extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js",".json",".jsx"]
   },
   module: {
     loaders: [{
       test: /\.tsx?$/,
       loaders: ['react-hot', 'babel-loader','ts-loader']
-    }],
+    },  {include: /\.json$/, loaders: ["json-loader"]}],
     preLoaders: [
       { test: /\.js$/, loader: "source-map-loader" }
     ]

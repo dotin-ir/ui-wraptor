@@ -22,16 +22,32 @@
   },
   "homepage": "http://dotin.ir/",
   "contributors": [
-    { "name": "Mohsen Ahrimankosh" },
-    { "name": "Meysam Asadian" },
-    { "name": "Mohammad-Ali Dorosti" },
-    { "name": "Mohammad-Javad Izadi" },
-    { "name": "Ehsan Khodadadi" },
-    { "name": "Danesh Razavi" }
+    {
+      "name": "Mohsen Ahrimankosh"
+    },
+    {
+      "name": "Meysam Asadian"
+    },
+    {
+      "name": "Mohammad-Ali Dorosti"
+    },
+    {
+      "name": "Mohammad-Javad Izadi"
+    },
+    {
+      "name": "Ehsan Khodadadi"
+    },
+    {
+      "name": "Danesh Razavi"
+    }
   ],
   "dependencies": {
     "dotin-material-ui": "^0.16.0",
     "immutable": "^3.8.1",
+    "intl-locales-supported": "^1.0.0",
+    "json-loader": "^0.5.4",
+    "moment": "^2.15.2",
+    "moment-timezone": "^0.5.9",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",

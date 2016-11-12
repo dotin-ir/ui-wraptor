@@ -21,7 +21,7 @@ class ThemeProvider extends BaseComponent {
 
     render() {
         return (
-            <MUIThemeProvider muiTheme={(getMuiTheme(this.props.theme) || getMuiTheme(undefined, this.props.locale))}>
+            <MUIThemeProvider muiTheme={(getMuiTheme(this.props.theme) || getMuiTheme(undefined, this.props.timezone) || getMuiTheme(undefined, this.props.locale))}>
                 {this.props.children}
             </MUIThemeProvider>
         );
