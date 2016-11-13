@@ -184,10 +184,9 @@ declare namespace __UI_Wraptor {
         defaultDate?: any,
         disabled?: boolean,
         disableYearSelection?: boolean,
-        value?:any,
         hintText?:string,
-        locale?:string,
-        dateTimeFormat?:Intl.DateTimeFormat
+        locale?:string
+        dateTimeFormat?:any
     }
 
     export class DatePicker extends BaseComponent<IDatePicker,{}> {}
