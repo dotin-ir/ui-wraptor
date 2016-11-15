@@ -9,7 +9,7 @@ import IconButton from 'dotin-material-ui/IconButton';
 import BaseComponent from "../BaseComponent";
 
 const PaperStyle = {
-    display: 'inline-block',
+    display: 'block',
     margin: '16px 10px 16px 10px'
 };
 
