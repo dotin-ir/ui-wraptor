@@ -38,6 +38,10 @@ export * as colors from './colors';
 export CardLayout from './CardLayout'
 export CardHeader from './CardLayout'
 export CardActions from './CardLayout'
-export default from './IconButton';
+export IconButton from './IconButton';
 export DatePicker from './DatePicker';
 export TimePicker from './TimePicker';
+export TextField from './TextField';
+export PasswordField from './PasswordField';
+export GridList from './GridList';
+export GridTile from './GridList';
