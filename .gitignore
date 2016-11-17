@@ -1,9 +1,10 @@
 node_modules/
 public/
-index.html
+./index.html
 .vscode/chrome/
 .idea
 /build/
 *.iml
 *.ipr
+npm-debug.log
 
