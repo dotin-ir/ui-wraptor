@@ -45,3 +45,4 @@ export TextField from './TextField';
 export PasswordField from './PasswordField';
 export GridList from './GridList';
 export GridTile from './GridList';
+export SideNav from './SideNav';
