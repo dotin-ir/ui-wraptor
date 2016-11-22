@@ -76,6 +76,7 @@ class SideNav extends BaseComponent {
                 <ListItem
                     primaryText={primaryText}
                     nestedItems={nestedItems}
+                    leftIcon={navItem.fontIcon != null ? <FontIcon className={navItem.fontIcon} /> : <div></div>}
                     key={this.generateElementKey()}
                 />
                 );
