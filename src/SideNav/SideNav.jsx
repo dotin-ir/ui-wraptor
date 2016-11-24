@@ -41,49 +41,47 @@ class SideNav extends BaseComponent {
         return <List>{content}</List>;
     }
 
-    createNavItem(navItem, mini) {
-        let primaryText = navItem.caption;
+    getIcon(navItem) {
+        return navItem.fontIcon != null ? <FontIcon className={navItem.fontIcon}/> : <div></div>;
+    }
+
+    createNavItem(navItem, showMini) {
         let nestedItems = [];
         if (navItem != null) {
             if (navItem.subItems != null && navItem.subItems.length > 0) {
                 navItem.subItems.map((subItem) => {
-                    nestedItems.push(this.createNavItem(subItem, mini));
+                    nestedItems.push(this.createNavItem(subItem, showMini));
                 });
             }
-            // if (mini) {
-            //     elements.push(
-            //         <IconMenu iconButtonElement={<IconButton iconClassName={navigationCategory.fontIcon != null ? navigationCategory.fontIcon : null}/>}
-            //                   style={{ padding: '8px 16px' }}
-            //                   children={subMen.length > 0 ? subMen : null}
-            //                   key={this.generateElementKey()}
-            //                   useLayerForClickAway={true}
-            //                   anchorOrigin={{horizontal: (this.context.theme.isRtl ? 'left' : 'right'), vertical: 'top'}}
-            //                   targetOrigin={{horizontal: (this.context.theme.isRtl ? 'right' : 'left'), vertical: 'top'}}
-            //                   onItemTouchTap={this.handleOnTouchTap.bind(this, navigationCategory.url, navigationCategory.urlData)}/>
-            //     );
-            // } else {
-            //     elements.push(
-            //         <MenuItem primaryText={navigationCategory.caption}
-            //                   menuItems={subMen.length > 0 ? subMen : null}
-            //                   rightIcon={subMen.length > 0 ? <FontIcon className="fa fa-angle-right" style={FontIconStyle}/> : <div></div>}
-            //                   leftIcon={navigationCategory.fontIcon != null ? <FontIcon className={navigationCategory.fontIcon}/> : <div></div>} key={this.generateElementKey()}
-            //                   onTouchTap={this.handleOnTouchTap.bind(this, navigationCategory.url, navigationCategory.urlData)}/>
-            //     );
-            // }
         }
-        // if (elements.length > 0) {
-            return (
-                <ListItem
-                    primaryText={primaryText}
-                    nestedItems={nestedItems}
-                    leftIcon={navItem.fontIcon != null ? <FontIcon className={navItem.fontIcon} /> : <div></div>}
-                    key={this.generateElementKey()}
-                />
-                );
+        // if (showMini) {
+        //     elements.push(
+        //         <IconMenu iconButtonElement={<IconButton iconClassName={navigationCategory.fontIcon != null ? navigationCategory.fontIcon : null}/>}
+        //                   style={{ padding: '8px 16px' }}
+        //                   children={subMen.length > 0 ? subMen : null}
+        //                   key={this.generateElementKey()}
+        //                   useLayerForClickAway={true}
+        //                   anchorOrigin={{horizontal: (this.context.theme.isRtl ? 'left' : 'right'), vertical: 'top'}}
+        //                   targetOrigin={{horizontal: (this.context.theme.isRtl ? 'right' : 'left'), vertical: 'top'}}
+        //                   onItemTouchTap={this.handleOnTouchTap.bind(this, navigationCategory.url, navigationCategory.urlData)}/>
+        //     );
+        // } else {
+        //     elements.push(
+        //         <MenuItem primaryText={navigationCategory.caption}
+        //                   menuItems={subMen.length > 0 ? subMen : null}
+        //                   rightIcon={subMen.length > 0 ? <FontIcon className="fa fa-angle-right" style={FontIconStyle}/> : <div></div>}
+        //                   leftIcon={navigationCategory.fontIcon != null ? <FontIcon className={navigationCategory.fontIcon}/> : <div></div>} key={this.generateElementKey()}
+        //                   onTouchTap={this.handleOnTouchTap.bind(this, navigationCategory.url, navigationCategory.urlData)}/>
+        //     );
         // }
-        // else {
-        //     return null;
-        // }
+        return (
+            <ListItem
+                primaryText={showMini?null:navItem.caption}
+                nestedItems={nestedItems}
+                leftIcon={this.getIcon(navItem)}
+                key={this.generateElementKey()}
+            />
+            );
     }
 
     generateElementKey() {
