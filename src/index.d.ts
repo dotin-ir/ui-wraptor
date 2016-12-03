@@ -551,6 +551,36 @@ declare namespace __UI_Wraptor {
     }
     export class IconButton extends BaseComponent<IIconButton,{}> {}
 
+    interface ITextField {
+        label?: string,
+        className?: string,
+        defaultValue?: any,
+        disabled?: boolean,
+        errorText?: string,
+        hintText?: string,
+        id?: string,
+        onChange?:(e: TouchTapEvent, index: number, menuItemValue: any) => void;
+        style?: React.CSSProperties,
+    }
+    export class TextField extends BaseComponent<ITextField,{}> {}
+    export class PasswordField extends BaseComponent<ITextField,{}> {}
+
+    interface IGridList {
+        cellHeight?: number,
+        children?: any,
+        padding?: number,
+        cols?: number,
+        style?: React.CSSProperties,
+    }
+    export class GridList extends BaseComponent<IGridList,{}> {}
+
+    interface IGridTile {
+        children?: any,
+        cols?: number,
+        rows?: number,
+        style?: React.CSSProperties,
+    }
+    export class GridTile extends BaseComponent<IGridTile,{}> {}
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -942,4 +972,20 @@ declare module 'ui-wraptor/DatePicker' {
 declare module 'ui-wraptor/TimePicker' {
     export import TimePicker = __UI_Wraptor.TimePicker;
     export default TimePicker;
+}
+
+declare module 'ui-wraptor/TextField' {
+    export import TextField = __UI_Wraptor.TextField;
+    export default TextField;
+}
+
+declare module 'ui-wraptor/PasswordField' {
+    export import PasswordField = __UI_Wraptor.PasswordField;
+    export default PasswordField;
+}
+
+declare module 'ui-wraptor/GridList' {
+    export import GridList = __UI_Wraptor.GridList;
+    export import GridTile = __UI_Wraptor.GridTile;
+    export default GridList;
 }
