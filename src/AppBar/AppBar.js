@@ -101,7 +101,7 @@ class AppBar extends BaseComponent {
             title={title}
             titleStyle={titleStyle}
             iconStyleLeft={iconStyleLeft}
-            iconeStyleRight={iconStyleRight}
+            iconStyleRight={iconStyleRight}
             onTitleTouchTap={onTitleTouchTap}
             showMenuIconButton={showMenuIconButton}
             iconElementLeft={iconElementLeft}
