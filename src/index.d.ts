@@ -83,6 +83,9 @@ declare namespace __UI_Wraptor {
         metaKey: boolean;
         shiftKey: boolean;
     }
+
+    interface TouchTapEventHandler extends React.EventHandler<TouchTapEvent> { }
+
     // Select
     interface ISelect {
         value?:any,
@@ -581,6 +584,25 @@ declare namespace __UI_Wraptor {
         style?: React.CSSProperties,
     }
     export class GridTile extends BaseComponent<IGridTile,{}> {}
+
+    interface AppBarProps extends React.Props<AppBar> {
+        className?: string;
+        iconClassNameLeft?: string;
+        iconClassNameRight?: string;
+        iconElementLeft?: React.ReactElement<any>;
+        iconElementRight?: React.ReactElement<any>;
+        iconStyleRight?: React.CSSProperties;
+        iconStyleLeft?: React.CSSProperties;
+        onLeftIconButtonTouchTap?: TouchTapEventHandler;
+        onRightIconButtonTouchTap?: TouchTapEventHandler;
+        onTitleTouchTap?: TouchTapEventHandler;
+        showMenuIconButton?: boolean;
+        style?: React.CSSProperties;
+        title?: React.ReactNode;
+        titleStyle?: React.CSSProperties;
+        zDepth?: number;
+    }
+    export class AppBar extends React.Component<AppBarProps, {}>{}
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -988,4 +1010,9 @@ declare module 'ui-wraptor/GridList' {
     export import GridList = __UI_Wraptor.GridList;
     export import GridTile = __UI_Wraptor.GridTile;
     export default GridList;
+}
+
+declare module 'ui-wraptor/AppBar' {
+    export import AppBar = __UI_Wraptor.AppBar;
+    export default AppBar;
 }
