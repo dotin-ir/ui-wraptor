@@ -12,8 +12,16 @@ class Paper extends BaseComponent {
          * Override the inline-styles of the root element.
          */
         style: PropTypes.object,
-
+        /**
+         * Set to true to have no shadow.
+         */
+        noShadow: PropTypes.bool,
     };
+
+    static defaultProps = {
+        noShadow: false,
+    };
+
     static contextTypes = {
         theme: PropTypes.object.isRequired
     };
@@ -23,8 +31,9 @@ class Paper extends BaseComponent {
             children,
             circle,
             style,
+            noShadow,
         } = this.props;
-        return <MUIPaper zDepth={1}
+        return <MUIPaper zDepth={noShadow ? 0 : 1}
                          children={children}
                          circle={circle}
                          style={style}

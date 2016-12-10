@@ -102,6 +102,7 @@ declare namespace __UI_Wraptor {
     //Paper
     interface IPaper{
         circle?: boolean,
+        noShadow?: boolean,
         style?:React.CSSProperties,
     }
 
