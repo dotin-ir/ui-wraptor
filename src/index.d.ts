@@ -604,6 +604,13 @@ declare namespace __UI_Wraptor {
         zDepth?: number;
     }
     export class AppBar extends React.Component<AppBarProps, {}>{}
+
+    interface IFontIcon {
+        color?: string,
+        hoverColor?: string,
+        style?: React.CSSProperties,
+    }
+    export class FontIcon extends BaseComponent<IFontIcon,{}> {}
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -1016,4 +1023,9 @@ declare module 'ui-wraptor/GridList' {
 declare module 'ui-wraptor/AppBar' {
     export import AppBar = __UI_Wraptor.AppBar;
     export default AppBar;
+}
+
+declare module 'ui-wraptor/FontIcon' {
+    export import FontIcon = __UI_Wraptor.FontIcon;
+    export default FontIcon;
 }
