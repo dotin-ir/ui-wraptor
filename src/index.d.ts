@@ -611,6 +611,26 @@ declare namespace __UI_Wraptor {
         style?: React.CSSProperties,
     }
     export class FontIcon extends BaseComponent<IFontIcon,{}> {}
+
+    interface IToolbarSeparator {
+        className?: string,
+        style?: React.CSSProperties,
+    }
+    export class ToolbarSeparator extends BaseComponent<IToolbarSeparator,{}> {}
+
+    interface IToolbarGroup {
+        className?: string,
+        style?: React.CSSProperties,
+        children?: any,
+    }
+    export class ToolbarGroup extends BaseComponent<IToolbarGroup,{}> {}
+
+    interface IToolbar {
+        className?: string,
+        style?: React.CSSProperties,
+        children?: any,
+    }
+    export class Toolbar extends BaseComponent<IToolbar,{}> {}
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -1028,4 +1048,11 @@ declare module 'ui-wraptor/AppBar' {
 declare module 'ui-wraptor/FontIcon' {
     export import FontIcon = __UI_Wraptor.FontIcon;
     export default FontIcon;
+}
+
+declare module 'ui-wraptor/Toolbar' {
+    export import ToolbarSeparator = __UI_Wraptor.ToolbarSeparator;
+    export import ToolbarGroup = __UI_Wraptor.ToolbarGroup;
+    export import Toolbar = __UI_Wraptor.Toolbar;
+    export default Toolbar;
 }
