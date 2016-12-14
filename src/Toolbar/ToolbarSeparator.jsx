@@ -30,9 +30,7 @@ class ToolbarSeparator extends BaseComponent {
         return (
             <MUIToolbarSeparator className={className}
                                  style={style}
-            >
-                {children}
-            </MUIToolbarSeparator>
+            />
         );
     }
 }

@@ -1,4 +1,4 @@
-export GridList from './Toolbar';
-export GridTile from './ToolbarGroup';
-export default from './ToolbarSeparator';
+export ToolbarSeparator from './ToolbarSeparator';
+export ToolbarGroup from './ToolbarGroup';
+export default from './Toolbar';
 

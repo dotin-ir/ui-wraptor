@@ -17,6 +17,10 @@ class FontIcon extends BaseComponent {
          * Override the inline-styles of the root element.
          */
         style: PropTypes.object,
+        /**
+         * The css class name of the root element.
+         */
+        className: PropTypes.string,
     };
 
     static contextTypes = {
@@ -32,14 +36,14 @@ class FontIcon extends BaseComponent {
             color,
             hoverColor,
             style,
+            className,
         } = this.props;
         return (
             <MUFontIcon color={color}
                         hoverColor={hoverColor}
                         style={style}
-            >
-                {children}
-            </MUFontIcon>
+                        className={className}
+            />
         );
     }
 }

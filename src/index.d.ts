@@ -609,6 +609,7 @@ declare namespace __UI_Wraptor {
         color?: string,
         hoverColor?: string,
         style?: React.CSSProperties,
+        className?: string,
     }
     export class FontIcon extends BaseComponent<IFontIcon,{}> {}
 

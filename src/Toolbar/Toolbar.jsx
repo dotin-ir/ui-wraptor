@@ -1,7 +1,9 @@
 import React, {PropTypes} from 'react';
 import MUIToolbar from 'dotin-material-ui/Toolbar/Toolbar';
-import ToolbarSeparator from './ToolbarSeparator';
+import ToolbarSeparator from 'dotin-material-ui/Toolbar/ToolbarSeparator';
 import BaseComponent from '../BaseComponent';
+import FontIcon from 'dotin-material-ui/FontIcon'
+import ToolbarGroup from 'dotin-material-ui/Toolbar/ToolbarGroup'
 
 class Toolbar extends BaseComponent {
     static propTypes = {
@@ -37,14 +39,17 @@ class Toolbar extends BaseComponent {
             <MUIToolbar className={className}
                         style={style}
             >
-                {children.comments.map((child) => {
-                    switch (child.name) {
-                        case 'ToolbarSeparator' :
+                <ToolbarGroup>
+                    {children.map((child) => {
+                        if (child.name === 'ToolbarSeparator') {
                             return <ToolbarSeparator />;
-                        case 'FontIcon' :
-                            return <FontIcon className={child.className} />;
-                    }
-                })}
+                        } else if (child.name === 'FontIcon') {
+                            return <FontIcon className={child.className}/>;
+                        } else {
+                            return null;
+                        }
+                    })}
+                </ToolbarGroup>
             </MUIToolbar>
         );
     }
