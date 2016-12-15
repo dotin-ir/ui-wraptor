@@ -4,6 +4,7 @@ import ToolbarSeparator from 'dotin-material-ui/Toolbar/ToolbarSeparator';
 import BaseComponent from '../BaseComponent';
 import FontIcon from 'dotin-material-ui/FontIcon'
 import ToolbarGroup from 'dotin-material-ui/Toolbar/ToolbarGroup'
+import IconButton from 'dotin-material-ui/IconButton'
 
 class Toolbar extends BaseComponent {
     static propTypes = {
@@ -37,14 +38,16 @@ class Toolbar extends BaseComponent {
         } = this.props;
         return (
             <MUIToolbar className={className}
-                        style={style}
+                        style={Object.assign({backgroundColor: 'white',}, style)}
             >
                 <ToolbarGroup>
                     {children.map((child) => {
                         if (child.name === 'ToolbarSeparator') {
                             return <ToolbarSeparator />;
-                        } else if (child.name === 'FontIcon') {
-                            return <FontIcon className={child.className}/>;
+                        } else if (child.name === 'IconButton') {
+                            return <IconButton tooltip={child.tooltip} onTouchTap={child.onTouchTap}>
+                                <FontIcon className={child.className}/>
+                            </IconButton>;
                         } else {
                             return null;
                         }

@@ -610,6 +610,7 @@ declare namespace __UI_Wraptor {
         hoverColor?: string,
         style?: React.CSSProperties,
         className?: string,
+        onTouchTap?: React.TouchEventHandler,
     }
     export class FontIcon extends BaseComponent<IFontIcon,{}> {}
 

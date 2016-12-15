@@ -21,6 +21,7 @@ class FontIcon extends BaseComponent {
          * The css class name of the root element.
          */
         className: PropTypes.string,
+        onTouchTap: PropTypes.func,
     };
 
     static contextTypes = {
@@ -37,12 +38,14 @@ class FontIcon extends BaseComponent {
             hoverColor,
             style,
             className,
+            onTouchTap
         } = this.props;
         return (
             <MUFontIcon color={color}
                         hoverColor={hoverColor}
                         style={style}
                         className={className}
+                        onTouchTap={onTouchTap}
             />
         );
     }
