@@ -136,6 +136,7 @@ declare namespace __UI_Wraptor {
         type horizontal = 'left' | 'middle' | 'right';
         type vertical = 'top' | 'center' | 'bottom';
         type direction = 'left' | 'right' | 'up' | 'down';
+        type screenSize = 'small' | 'medium' | 'large';
 
         interface origin {
             horizontal: horizontal;
@@ -627,10 +628,18 @@ declare namespace __UI_Wraptor {
     }
     export class ToolbarGroup extends BaseComponent<IToolbarGroup,{}> {}
 
+    export interface ToolbarChild {
+        name:string,
+        className:string,
+        tooltip:string,
+        onTouchTap:React.TouchEventHandler,
+    }
+
     interface IToolbar {
         className?: string,
         style?: React.CSSProperties,
-        children?: any,
+        children?: ToolbarChild[],
+        size: propTypes.screenSize,
     }
     export class Toolbar extends BaseComponent<IToolbar,{}> {}
 }
