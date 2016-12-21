@@ -18,7 +18,8 @@ class SideNav extends BaseComponent {
     static propTypes = {
         showMini: PropTypes.bool,
         navTree: PropTypes.array,
-        onClick: PropTypes.func
+        onClick: PropTypes.func,
+        style: PropTypes.any,
     };
 
     static defaultProps = {
@@ -38,7 +39,7 @@ class SideNav extends BaseComponent {
     render() {
         let navTree = this.props.navTree;
         let content = navTree.map((navItem) => this.createNavItem(navItem, this.props.showMini));
-        return <List>{content}</List>;
+        return <List style={this.props.style}>{content}</List>;
     }
 
     getIcon(navItem) {
@@ -54,32 +55,13 @@ class SideNav extends BaseComponent {
                 });
             }
         }
-        // if (showMini) {
-        //     elements.push(
-        //         <IconMenu iconButtonElement={<IconButton iconClassName={navigationCategory.fontIcon != null ? navigationCategory.fontIcon : null}/>}
-        //                   style={{ padding: '8px 16px' }}
-        //                   children={subMen.length > 0 ? subMen : null}
-        //                   key={this.generateElementKey()}
-        //                   useLayerForClickAway={true}
-        //                   anchorOrigin={{horizontal: (this.context.theme.isRtl ? 'left' : 'right'), vertical: 'top'}}
-        //                   targetOrigin={{horizontal: (this.context.theme.isRtl ? 'right' : 'left'), vertical: 'top'}}
-        //                   onItemTouchTap={this.handleOnTouchTap.bind(this, navigationCategory.url, navigationCategory.urlData)}/>
-        //     );
-        // } else {
-        //     elements.push(
-        //         <MenuItem primaryText={navigationCategory.caption}
-        //                   menuItems={subMen.length > 0 ? subMen : null}
-        //                   rightIcon={subMen.length > 0 ? <FontIcon className="fa fa-angle-right" style={FontIconStyle}/> : <div></div>}
-        //                   leftIcon={navigationCategory.fontIcon != null ? <FontIcon className={navigationCategory.fontIcon}/> : <div></div>} key={this.generateElementKey()}
-        //                   onTouchTap={this.handleOnTouchTap.bind(this, navigationCategory.url, navigationCategory.urlData)}/>
-        //     );
-        // }
         return (
             <ListItem
                 primaryText={showMini?null:navItem.caption}
                 nestedItems={nestedItems}
                 leftIcon={this.getIcon(navItem)}
                 key={this.generateElementKey()}
+                insetChildren={!showMini}
             />
             );
     }
