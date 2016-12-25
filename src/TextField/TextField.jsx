@@ -50,6 +50,10 @@ class TextField extends BaseComponent {
      * Override the inline-styles of the root element.
      */
     style: PropTypes.object,
+    /**
+     * The value of the text field.
+     */
+    value: PropTypes.any,
   };
 
   static contextTypes = {
@@ -70,6 +74,7 @@ class TextField extends BaseComponent {
         onChange,
         style,
         children,
+        value,
     } = this.props;
     return (
         <MUITextField className={className}
@@ -81,6 +86,7 @@ class TextField extends BaseComponent {
                       id={id}
                       onChange={onChange}
                       style={style}
+                      value={value}
        >
           {children}
         </MUITextField>
