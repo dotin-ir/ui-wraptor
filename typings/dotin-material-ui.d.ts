@@ -5241,6 +5241,16 @@ declare module 'dotin-material-ui/svg-icons/navigation/more-vert' {
   export default NavigationMoreVert;
 }
 
+declare module 'dotin-material-ui/svg-icons/navigation/first-page' {
+    export import NavigationFirstPage = __DotinMaterialUI.SvgIcon;
+    export default NavigationFirstPage;
+}
+
+declare module 'dotin-material-ui/svg-icons/navigation/last-page' {
+    export import NavigationLastPage = __DotinMaterialUI.SvgIcon;
+    export default NavigationLastPage;
+}
+
 declare module 'dotin-material-ui/svg-icons/notification/rv-hookup' {
   export import NotificationRvHookup = __DotinMaterialUI.SvgIcon;
   export default NotificationRvHookup;

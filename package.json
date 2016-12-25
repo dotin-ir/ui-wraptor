@@ -1,6 +1,6 @@
 {
   "name": "ui-wraptor",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Dotin Core Banking Team",
   "description": "Collection of React components which wrap a set of third-party components (currently material-ui).",
   "keywords": [
@@ -52,6 +52,7 @@
     "react-dom": "^15.4",
     "react-redux": "^4.4.5",
     "react-tap-event-plugin": "^2.0.0",
+    "react-ultimate-pagination": "^0.9.0",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0"
   },
