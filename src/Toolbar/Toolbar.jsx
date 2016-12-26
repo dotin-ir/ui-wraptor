@@ -6,12 +6,14 @@ import ToolbarGroup from 'dotin-material-ui/Toolbar/ToolbarGroup';
 import IconButton from 'dotin-material-ui/IconButton';
 import IconMenu from 'dotin-material-ui/IconMenu';
 import MenuItem from 'dotin-material-ui/MenuItem';
-import MoreHorizIcon from 'dotin-material-ui/svg-icons/navigation/more-horiz';
+import MoreIcon from 'dotin-material-ui/svg-icons/navigation/more-vert';
+import Measure from 'react-measure';
+
 
 class Toolbar extends BaseComponent {
     static propTypes = {
         /**
-         * A json containing `FontIcon`s or `ToolbarSeparator`s that will be aliened in a `ToolbarGroup`.
+         * A json containing `FontIcon`s that will be aliened in a `ToolbarGroup`.
          */
         children: PropTypes.object,
         /**
@@ -22,14 +24,17 @@ class Toolbar extends BaseComponent {
          * Override the inline-styles of the root element.
          */
         style: PropTypes.object,
-        /**
-         * Reflects the size of screen to behave responsive.
-         */
-        size: PropTypes.string,
     };
 
     static contextTypes = {
         theme: PropTypes.object.isRequired
+    };
+
+    state = {
+        dimensions: {
+            width: -1,
+            height: -1
+        }
     };
 
     constructor(props, state) {
@@ -46,17 +51,32 @@ class Toolbar extends BaseComponent {
             className,
             children,
             style,
-            size,
         } = this.props;
-        return ( size === 'small' ? (
-            <IconMenu iconButtonElement={ <IconButton touch={true}> <MoreHorizIcon /> </IconButton> }>
-                {children.map((child) => this.getMenuItem(size, child))}
-            </IconMenu>) : (
-            <MUIToolbar className={className} style={Object.assign({backgroundColor: 'white',}, style)}>
-                <ToolbarGroup>
-                    {children.map((child) => this.getMenuItem(size, child))}
-                </ToolbarGroup>
-            </MUIToolbar>) );
+
+        const {width} = this.state.dimensions;
+        const actionBarSize = children ? children.length * this.context.theme.baseTheme.spacing.iconSize * 2 : 0;
+        const size = actionBarSize >= width ? 'small' : 'large';
+
+        return <Measure
+            onMeasure={(dimensions) => {
+          this.setState({dimensions})
+        }}
+        >
+            <div>
+                { size === 'small' ? (
+                    <IconMenu iconButtonElement={ <IconButton touch={true}> <MoreIcon /> </IconButton> }
+                              useLayerForClickAway={true}
+                    >
+                        {children.map((child) => this.getMenuItem(size, child))}
+                    </IconMenu>) : (
+                    <MUIToolbar className={className}
+                                style={Object.assign({backgroundColor: 'rgba(255,0,0,0)',}, style)}>
+                        <ToolbarGroup>
+                            {children.map((child) => this.getMenuItem(size, child))}
+                        </ToolbarGroup>
+                    </MUIToolbar>) }
+            </div>
+        </Measure>;
     }
 
     getMenuItem(menuSize, childData) {

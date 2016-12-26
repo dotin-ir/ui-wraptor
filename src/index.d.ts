@@ -615,21 +615,6 @@ declare namespace __UI_Wraptor {
     }
     export class FontIcon extends BaseComponent<IFontIcon,{}> {}
 
-/*
-    interface IToolbarSeparator {
-        className?: string,
-        style?: React.CSSProperties,
-    }
-    export class ToolbarSeparator extends BaseComponent<IToolbarSeparator,{}> {}
-
-    interface IToolbarGroup {
-        className?: string,
-        style?: React.CSSProperties,
-        children?: any,
-    }
-    export class ToolbarGroup extends BaseComponent<IToolbarGroup,{}> {}
-*/
-
     export interface ToolbarChild {
         name:string,
         className:string,
@@ -640,10 +625,26 @@ declare namespace __UI_Wraptor {
     interface IToolbar {
         className?: string,
         style?: React.CSSProperties,
-        children?: ToolbarChild[],
-        size: propTypes.screenSize,
+        children: ToolbarChild[],
     }
     export class Toolbar extends BaseComponent<IToolbar,{}> {}
+
+    export interface ResultTableColumnDefinition {
+        columnName: string,
+        columnTooltip?: string,
+        columnData: string,
+    }
+
+    export interface ResultTableData {
+        dataItem: any,
+        actionbarDefinition?: ToolbarChild[],
+    }
+
+    interface IResultTable {
+        data: ResultTableData[],
+        columnsDefinition: ResultTableColumnDefinition[],
+    }
+    export class ResultTable extends BaseComponent<IResultTable,{}> {}
 }
 
 declare module 'ui-wraptor/BaseComponent' {
@@ -1069,4 +1070,11 @@ declare module 'ui-wraptor/Toolbar' {
     export import Toolbar = __UI_Wraptor.Toolbar;
     export import ToolbarChild = __UI_Wraptor.ToolbarChild;
     export default Toolbar;
+}
+
+declare module 'ui-wraptor/ResultTable' {
+    export import ResultTableColumnDefinition = __UI_Wraptor.ResultTableColumnDefinition;
+    export import ResultTableData = __UI_Wraptor.ResultTableData;
+    export import ResultTable = __UI_Wraptor.ResultTable;
+    export default ResultTable;
 }
