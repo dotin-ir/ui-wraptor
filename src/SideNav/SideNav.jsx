@@ -58,6 +58,7 @@ class SideNav extends BaseComponent {
         return (
             <ListItem
                 primaryText={showMini?null:navItem.caption}
+                primaryTogglesNestedList={true}
                 onTouchTap={this.handleOnTouchTap.bind(this,navItem.url,navItem.urlData)}
                 nestedItems={nestedItems}
                 leftIcon={this.getIcon(navItem)}
