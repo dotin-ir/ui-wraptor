@@ -643,6 +643,7 @@ declare namespace __UI_Wraptor {
     interface IResultTable {
         data: ResultTableData[],
         columnsDefinition: ResultTableColumnDefinition[],
+        fromIndex: number,
     }
     export class ResultTable extends BaseComponent<IResultTable,{}> {}
 }

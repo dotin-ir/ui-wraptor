@@ -22,8 +22,14 @@ class ResultTable extends BaseComponent {
          * A json defining columns of result table.
          */
         columnsDefinition: PropTypes.object,
+        fromIndex: PropTypes.number,
     };
 
+    static defaultProps = {
+        fromIndex: 1,
+    };
+    
+    
     static contextTypes = {
         theme: PropTypes.object.isRequired
     };
@@ -36,6 +42,7 @@ class ResultTable extends BaseComponent {
         const {
             data,
             columnsDefinition,
+            fromIndex,
         } = this.props;
         return (
             <Table fixedFooter={false}
@@ -60,7 +67,7 @@ class ResultTable extends BaseComponent {
                 >
                     {data.map((row, index) => (
                         <TableRow key={index}>
-                            <TableRowColumn>{index + 1}</TableRowColumn>
+                            <TableRowColumn>{index + fromIndex}</TableRowColumn>
                             {columnsDefinition.map((columnDefinition) =>
                                 <TableRowColumn>{this.getValue(row.dataItem, columnDefinition.columnData)}</TableRowColumn>)}
                             <TableRowColumn style={visibleStyle}>
