@@ -107,7 +107,15 @@ class Pagination extends BaseComponent {
         this.handlePaging = this.handlePaging.bind(this);
     }
 
-
+    componentWillReceiveProps(nextProps) {
+        let fromIndex = ((nextProps.currentPage - 1) * nextProps.countPerPage) + 1;
+        this.setState({
+            currentPage: (nextProps.currentPage ? nextProps.currentPage : 1),
+            totalPages: calculateTotalPages(nextProps.totalCount, nextProps.countPerPage),
+            fromIndex: fromIndex,
+            toIndex: calculateToIndex(fromIndex, nextProps.countPerPage, nextProps.totalCount),
+        });
+    }
 
     handlePaging(newPage) {
         const {
