@@ -7,6 +7,7 @@ import NavigationChevronLeft from "dotin-material-ui/svg-icons/navigation/chevro
 import NavigationChevronRight from "dotin-material-ui/svg-icons/navigation/chevron-right";
 import NavigationToLeftPage from "dotin-material-ui/svg-icons/navigation/first-page";
 import NavigationToRightPage from "dotin-material-ui/svg-icons/navigation/last-page";
+import Paper from '../Paper';
 
 const flatButtonStyle = {
     minWidth: 36
@@ -152,13 +153,13 @@ class Pagination extends BaseComponent {
         };
         let details = (<span style={detailsStyle}>{this.state.fromIndex}-{this.state.toIndex} / {totalCount}</span>);
         return (
-            <div>
+            <Paper style={{display: 'table', marginLeft: 'auto'}} noShadow={true}>
+                {showDetails ? details : null}
                 <UltimatePaginationMaterialUi
                     totalPages={this.state.totalPages}
                     currentPage={this.state.currentPage}
                     onChange={this.handlePaging} />
-                {showDetails ? details : null}
-            </div>
+            </Paper>
         );
     }
 
