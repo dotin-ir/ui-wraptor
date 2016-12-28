@@ -1,9 +1,9 @@
 
 import React, {PropTypes} from 'react';
-import BaseCompnent from '../BaseComponent'
+import BaseComponent from '../BaseComponent'
 import MUILinearProgress from 'dotin-material-ui/LinearProgress';
 
-class LinearProgress extends BaseCompnent {
+class LinearProgress extends BaseComponent {
 
     static propTypes = {
         /**
