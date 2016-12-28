@@ -1,18 +1,15 @@
-import React, {PropTypes} from 'react';
-import Paper from 'dotin-material-ui/Paper';
-import Menu from 'dotin-material-ui/Menu';
-import MenuItem from 'dotin-material-ui/MenuItem';
-import Divider from 'dotin-material-ui/Divider';
-import FontIcon from 'dotin-material-ui/FontIcon';
-import IconMenu from 'dotin-material-ui/IconMenu';
-import IconButton from 'dotin-material-ui/IconButton';
+import React, {PropTypes} from "react";
+import FontIcon from "dotin-material-ui/FontIcon";
 import BaseComponent from "../BaseComponent";
+import {List, ListItem} from "dotin-material-ui/List";
 
-import {List, ListItem} from 'dotin-material-ui/List';
+function hasNestedItems(navItem) {
+    return navItem.subItems != null && navItem.subItems.length > 0;
+}
 
-// const FontIconStyle = {
-//     margin: '10px 2px 0px 0px'
-// };
+function getIcon(navItem) {
+    return navItem.fontIcon != null ? <FontIcon className={navItem.fontIcon}/> : <div></div>;
+}
 
 class SideNav extends BaseComponent {
     static propTypes = {
@@ -38,30 +35,26 @@ class SideNav extends BaseComponent {
 
     render() {
         let navTree = this.props.navTree;
-        let content = navTree.map((navItem) => this.createNavItem(navItem, this.props.showMini));
+        let content = navTree.map((navItem) => this.createNavItemComponent(navItem, this.props.showMini));
         return <List style={this.props.style}>{content}</List>;
     }
 
-    getIcon(navItem) {
-        return navItem.fontIcon != null ? <FontIcon className={navItem.fontIcon}/> : <div></div>;
-    }
-
-    createNavItem(navItem, showMini) {
+    createNavItemComponent(navItem, showMini) {
         let nestedItems = [];
         if (navItem != null) {
-            if (navItem.subItems != null && navItem.subItems.length > 0) {
+            if (hasNestedItems(navItem)) {
                 navItem.subItems.map((subItem) => {
-                    nestedItems.push(this.createNavItem(subItem, showMini));
+                    nestedItems.push(this.createNavItemComponent(subItem, showMini));
                 });
             }
         }
         return (
             <ListItem
                 primaryText={showMini?null:navItem.caption}
-                primaryTogglesNestedList={true}
-                onTouchTap={this.handleOnTouchTap.bind(this,navItem.url,navItem.urlData)}
+                primaryTogglesNestedList={hasNestedItems(navItem)}
+                onTouchTap={this.handleOnTouchTap.bind(this, navItem.url, navItem.urlData)}
                 nestedItems={nestedItems}
-                leftIcon={this.getIcon(navItem)}
+                leftIcon={getIcon(navItem)}
                 key={this.generateElementKey()}
                 insetChildren={!showMini}
             />
