@@ -1,6 +1,5 @@
 node_modules/
 public/
-./index.html
 .vscode/chrome/
 .idea
 /build/
@@ -8,3 +7,4 @@ public/
 *.ipr
 npm-debug.log
 
+/mybuild.sh
