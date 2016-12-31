@@ -119,6 +119,9 @@ class Pagination extends BaseComponent {
     }
 
     handlePaging(newPage) {
+        if (newPage <= 0) {
+            return;
+        }
         const {
             countPerPage,
             totalCount,
