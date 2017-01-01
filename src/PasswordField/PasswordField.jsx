@@ -63,7 +63,7 @@ class PasswordField extends BaseComponent {
         label,
         className,
         defaultValue,
-        disable,
+        disabled,
         errorText,
         hintText,
         id,
@@ -74,7 +74,7 @@ class PasswordField extends BaseComponent {
     return (
         <MUITextField className={className}
                       defaultValue={defaultValue}
-                      disable={disable}
+                      disabled={disabled}
                       errorText={errorText}
                       floatingLabelText={label}
                       hintText={hintText}

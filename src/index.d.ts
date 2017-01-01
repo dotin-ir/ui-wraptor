@@ -111,7 +111,7 @@ declare namespace __UI_Wraptor {
     // RaisedButton
     interface IRaisedButton {
         label?:string,
-        disable?:boolean,
+        disabled?:boolean,
         href?:string,
         onClick?: (event:any)=>void,
         icon?:React.ReactNode,

@@ -56,7 +56,7 @@ class RaisedButton extends BaseComponent {
   render() {
     const {
         label,
-        disable,
+        disabled,
         href,
         onClick,
         icon,
@@ -68,7 +68,7 @@ class RaisedButton extends BaseComponent {
     } = this.props;
     return (
         <MUIRaisedButton label={label}
-                         disable={disable}
+                         disabled={disabled}
                          href={href}
                          onClick={onClick}
                          icon={icon}

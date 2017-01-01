@@ -68,7 +68,7 @@ class Select extends BaseComponent {
         onChange,
         style,
         autoWidth,
-        disable,
+        disabled,
         hintText,
         id,
         children,
@@ -79,7 +79,7 @@ class Select extends BaseComponent {
                      onChange={onChange}
                      style={style}
                      autoWidth={autoWidth}
-                     disable={disable}
+                     disabled={disabled}
                      hintText={hintText}
                      id={id}
        >
