@@ -574,8 +574,10 @@ declare namespace __UI_Wraptor {
         errorText?: string,
         hintText?: string,
         id?: string,
-        onChange?:(e: TouchTapEvent, index: number, menuItemValue: any) => void;
+        onChange?:(e: TouchTapEvent, value: any) => void;
+        validate?:(value: any) => boolean;
         style?: React.CSSProperties,
+        value?:any,
     }
     export class TextField extends BaseComponent<ITextField,{}> {}
     export class PasswordField extends BaseComponent<ITextField,{}> {}
