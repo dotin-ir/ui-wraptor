@@ -189,9 +189,19 @@ declare namespace __UI_Wraptor {
         defaultDate?: any,
         disabled?: boolean,
         disableYearSelection?: boolean,
-        hintText?:string,
+        label?:string,
         locale?:string
         dateTimeFormat?:any
+        okLabel?:string
+        cancelLabel?:string
+        firstDayOfWeek?: number,
+        maxDate?: any,
+        minDate?: any,
+        shouldDisableDate?: (date:Date) => any,
+        onChange?: (e: TouchTapEvent, date:Date) => void,
+        id?: string,
+        style?: React.CSSProperties,
+        value?:any,
     }
 
     export class DatePicker extends BaseComponent<IDatePicker,{}> {}
