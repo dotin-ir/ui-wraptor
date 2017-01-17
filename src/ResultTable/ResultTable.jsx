@@ -89,14 +89,18 @@ class ResultTable extends BaseComponent {
     }
 
     getValue(row, key) {
-        return key.split('.').reduce((acc, word) => {
-            var segments = word.split('[');
-            return segments.slice(1, segments.length).map((index) => {
-                return +index.substr(0, index.length - 1);
-            }).reduce((acc, index) => {
-                return acc[index];
-            }, acc[segments[0]]);
-        }, row);
+        try {
+            return key.split('.').reduce((acc, word) => {
+                var segments = word.split('[');
+                return segments.slice(1, segments.length).map((index) => {
+                    return +index.substr(0, index.length - 1);
+                }).reduce((acc, index) => {
+                    return acc[index];
+                }, acc[segments[0]]);
+            }, row);
+        }catch (e){
+            return '';
+        }
     }
 
 }
