@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import MUITextField from 'dotin-material-ui/TextField';
 import BaseComponent from '../BaseComponent';
+import keycode from 'keycode';
 
 
 class TextField extends BaseComponent {
@@ -53,6 +54,7 @@ class TextField extends BaseComponent {
          */
         value: PropTypes.any,
         validate: PropTypes.func,
+        onEnter: PropTypes.func,
     };
 
     static contextTypes = {
@@ -94,6 +96,14 @@ class TextField extends BaseComponent {
         }
     }
 
+    handleEnter = (event) => {
+        if (!this.props.disabled) {
+            if (keycode(event) === 'enter') {
+                this.props.onEnter(event);
+            }
+        }
+    };
+
     render() {
         const {
             label,
@@ -118,6 +128,7 @@ class TextField extends BaseComponent {
                           onChange={this.handleChange.bind(this)}
                           style={style}
                           value={value}
+                          onKeyDown={this.handleEnter.bind(this)}
             >
                 {children}
             </MUITextField>

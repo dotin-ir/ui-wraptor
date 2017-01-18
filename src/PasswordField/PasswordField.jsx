@@ -1,9 +1,7 @@
 import React, {PropTypes} from 'react';
 import MUITextField from 'dotin-material-ui/TextField';
 import BaseComponent from '../BaseComponent';
-
-
-
+import keycode from 'keycode';
 
 class PasswordField extends BaseComponent {
   static propTypes = {
@@ -50,14 +48,25 @@ class PasswordField extends BaseComponent {
      * Override the inline-styles of the root element.
      */
     style: PropTypes.object,
+    onEnter: PropTypes.func,
   };
 
   static contextTypes = {
     theme: PropTypes.object.isRequired
   };
+
   constructor(props, state) {
     super(props, state);
   }
+
+  handleEnter = (event) => {
+    if (!this.props.disabled) {
+      if (keycode(event) === 'enter') {
+        this.props.onEnter(event);
+      }
+    }
+  };
+
   render() {
     const {
         label,
@@ -82,7 +91,8 @@ class PasswordField extends BaseComponent {
                       onChange={onChange}
                       style={style}
                       type="password"
-       >
+                      onKeyDown={this.handleEnter.bind(this)}
+        >
           {children}
         </MUITextField>
     );
