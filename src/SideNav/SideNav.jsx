@@ -13,7 +13,6 @@ function getIcon(navItem) {
 
 class SideNav extends BaseComponent {
     static propTypes = {
-        showMini: PropTypes.bool,
         navTree: PropTypes.array,
         onClick: PropTypes.func,
         style: PropTypes.any,
@@ -21,7 +20,6 @@ class SideNav extends BaseComponent {
 
     static defaultProps = {
         navTree: [],
-        showMini: false
     };
 
     static contextTypes = {
@@ -35,28 +33,27 @@ class SideNav extends BaseComponent {
 
     render() {
         let navTree = this.props.navTree;
-        let content = navTree.map((navItem) => this.createNavItemComponent(navItem, this.props.showMini));
+        let content = navTree.map((navItem) => this.createNavItemComponent(navItem));
         return <List style={this.props.style}>{content}</List>;
     }
 
-    createNavItemComponent(navItem, showMini) {
+    createNavItemComponent(navItem) {
         let nestedItems = [];
         if (navItem != null) {
             if (hasNestedItems(navItem)) {
                 navItem.subItems.map((subItem) => {
-                    nestedItems.push(this.createNavItemComponent(subItem, showMini));
+                    nestedItems.push(this.createNavItemComponent(subItem));
                 });
             }
         }
         return (
             <ListItem
-                primaryText={showMini?null:navItem.caption}
+                primaryText={navItem.caption}
                 primaryTogglesNestedList={hasNestedItems(navItem)}
                 onTouchTap={this.handleOnTouchTap.bind(this, navItem.url, navItem.urlData)}
                 nestedItems={nestedItems}
                 leftIcon={getIcon(navItem)}
                 key={this.generateElementKey()}
-                insetChildren={!showMini}
             />
             );
     }
