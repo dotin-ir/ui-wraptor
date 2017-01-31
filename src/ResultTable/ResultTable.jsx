@@ -23,10 +23,17 @@ class ResultTable extends BaseComponent {
          */
         columnsDefinition: PropTypes.object,
         fromIndex: PropTypes.number,
+        /**
+         * If true, table rows can be selected.
+         * If multiple row selection is desired, enable multiSelectable.
+         * The default value is false.
+         */
+        selectable: PropTypes.bool,
     };
 
     static defaultProps = {
         fromIndex: 1,
+        selectable: false,
     };
     
     
@@ -43,11 +50,12 @@ class ResultTable extends BaseComponent {
             data,
             columnsDefinition,
             fromIndex,
+            selectable,
         } = this.props;
         return (
             <Table fixedFooter={false}
                    fixedHeader={true}
-                   selectable={false}
+                   selectable={selectable}
                    bodyStyle={visibleStyle}
                    wrapperStyle={visibleStyle}
             >
