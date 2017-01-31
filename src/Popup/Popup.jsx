@@ -46,6 +46,9 @@ class Popup extends BaseComponent {
                 open={this.state.open}
                 autoScrollBodyContent={true}
                 autoDetectWindowHeight={true}
+                repositionOnUpdate={false}
+                style={{paddingTop: 0}}
+                contentStyle={{maxHeight: 'none', maxWidth: 'none'}}
                 overlayStyle={overlayStyle}
             >
                 {this.props.children}

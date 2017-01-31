@@ -9,6 +9,8 @@ class Drawer extends BaseComponent {
         docked: PropTypes.bool,
         open: PropTypes.bool,
         width: PropTypes.number,
+        onRequestChange: PropTypes.any,
+        style: PropTypes.any,
     };
 
     static defaultProps = {
@@ -16,7 +18,8 @@ class Drawer extends BaseComponent {
         disableSwipeToOpen: false,
         docked: true,
         open: null,
-        width: null
+        width: null,
+        onRequestChange: null
     };
 
     static contextTypes = {
@@ -34,6 +37,8 @@ class Drawer extends BaseComponent {
                 docked={this.props.docked}
                 open={this.props.open}
                 width={this.props.width}
+                onRequestChange={this.props.onRequestChange}
+                style={this.props.style}
             >
                 {this.props.children}
             </MuiDrawer>
