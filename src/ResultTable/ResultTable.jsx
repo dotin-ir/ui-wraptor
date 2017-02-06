@@ -29,11 +29,25 @@ class ResultTable extends BaseComponent {
          * The default value is false.
          */
         selectable: PropTypes.bool,
+        /**
+         * If true, multiple table rows can be selected.
+         * CTRL/CMD+Click and SHIFT+Click are valid actions.
+         * The default value is false.
+         */
+        multiSelectable: PropTypes.bool,
+        /**
+         * Called when a row is selected.
+         * selectedRows is an array of all row selections.
+         * IF all rows have been selected, the string "all"
+         * will be returned instead to indicate that all rows have been selected.
+         */
+        onRowSelection: PropTypes.func,
     };
 
     static defaultProps = {
         fromIndex: 1,
         selectable: false,
+        multiSelectable: false,
     };
     
     
@@ -51,6 +65,8 @@ class ResultTable extends BaseComponent {
             columnsDefinition,
             fromIndex,
             selectable,
+            multiSelectable,
+            onRowSelection,
         } = this.props;
         return (
             <Table fixedFooter={false}
@@ -58,6 +74,8 @@ class ResultTable extends BaseComponent {
                    selectable={selectable}
                    bodyStyle={visibleStyle}
                    wrapperStyle={visibleStyle}
+                   multiSelectable={multiSelectable}
+                   onRowSelection={onRowSelection}
             >
                 <TableHeader displaySelectAll={false}
                              adjustForCheckbox={false}
@@ -69,9 +87,10 @@ class ResultTable extends BaseComponent {
                         <TableHeaderColumn />
                     </TableRow>
                 </TableHeader>
-                <TableBody displayRowCheckbox={false}
+                <TableBody displayRowCheckbox={selectable}
                            showRowHover={true}
                            stripedRows={false}
+                           deselectOnClickaway={false}
                 >
                     {data.map((row, index) => (
                         <TableRow key={index}>
