@@ -98,7 +98,7 @@ class ResultTable extends BaseComponent {
                             {columnsDefinition.map((columnDefinition) =>
                                 <TableRowColumn>{this.getValue(row.dataItem, columnDefinition.columnData)}</TableRowColumn>)}
                             <TableRowColumn style={visibleStyle}>
-                                <Actionbar children={row.actionbarDefinition}/>
+                                {row.actionbarDefinition && row.actionbarDefinition.length > 0 ? <Actionbar children={row.actionbarDefinition}/> : null}
                             </TableRowColumn>
                         </TableRow>
                     ))}
