@@ -116,6 +116,7 @@ class TextField extends BaseComponent {
             style,
             children,
             value,
+            type,
         } = this.props;
         return (
             <MUITextField className={className}
@@ -128,6 +129,7 @@ class TextField extends BaseComponent {
                           onChange={this.handleChange.bind(this)}
                           style={style}
                           value={value}
+                          type={type}
                           onKeyDown={this.handleEnter.bind(this)}
             >
                 {children}

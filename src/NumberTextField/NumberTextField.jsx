@@ -3,10 +3,9 @@ import BaseComponent from '../BaseComponent';
 
 import VMasker from 'vanilla-masker';
 import TextField from '../TextField';
-// import * as UI from 'dotin-material-ui';
 
 
-class MaskedTextField extends BaseComponent {
+class NumberTextField extends BaseComponent {
     static propTypes = {
         /**
          * Dotin property type
@@ -55,15 +54,8 @@ class MaskedTextField extends BaseComponent {
          * The value of the text field.
          */
         value: PropTypes.any,
-        validate: PropTypes.func,
-        onEnter: PropTypes.func,
-        /**
-         * Specifies the type of input to display
-         * such as "password" or "text".
-         */
-        type: PropTypes.string,
 
-        mask: PropTypes.string,
+        length: PropTypes.number,
     };
 
     static contextTypes = {
@@ -75,26 +67,34 @@ class MaskedTextField extends BaseComponent {
         this.state = props.defaultValue?{value: props.defaultValue}:{value:''};
     }
 
-    onChange(mask, e) {
-        const value = VMasker.toPattern(e.target.value, mask);
-        this.setState({ value });
+    onChange(length,e) {
+        let value=this.state.value;
+        if(length){
+            var mask="";
+            for(var i=0;i<length;i++){
+                mask+="9";
+            }
+            value = VMasker.toPattern(e.target.value, mask);
+            this.setState({ value });
+        }else{
+            value = VMasker.toNumber(e.target.value);
+            this.setState({ value });
+        }
         if (this.props.onChange)
             this.props.onChange(e, value);
     }
 
     render() {
-        const {mask, ...other} = this.props;
-        delete other.defaultValue; 
-        other.onChange = this.onChange.bind(this, mask);
-        other.value = this.state.value;
-        return (<TextField {...other} />);
+        const {length,...props} = this.props;
+        delete props.defaultValue;
+        props.onChange = this.onChange.bind(this,length);
+        props.value = this.state.value;
+        return (<TextField {...props} />);
     }
 }
-MaskedTextField.propTypes = {
-    mask: React.PropTypes.string
-};
 
-export default MaskedTextField;
+
+export default NumberTextField;
 
 
 
