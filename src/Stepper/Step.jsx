@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import BaseComponent from '../BaseComponent';
-import MuiStep from 'dotin-material-ui/Stepper/Step';
+import {Step as MuiStep} from 'dotin-material-ui/Stepper';
 
 class Step extends BaseComponent {
     static propTypes = {
@@ -14,14 +14,18 @@ class Step extends BaseComponent {
         style: PropTypes.object,
     };
 
+    constructor(props, state) {
+        super(props, state);
+    }
     render() {
         const {
             children,
             style,
+            ...other
         } = this.props;
 
         return (
-            <MuiStep style={style}>
+            <MuiStep style={style} {...other}>
                 {children}
             </MuiStep>
         );

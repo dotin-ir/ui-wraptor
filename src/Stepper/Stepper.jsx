@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import BaseComponent from '../BaseComponent';
-import MuiStepper from 'dotin-material-ui/Stepper';
+import {Stepper as MuiStepper} from 'dotin-material-ui/Stepper';
 
 class Stepper extends BaseComponent {
 
@@ -20,6 +20,9 @@ class Stepper extends BaseComponent {
     };
 
     static contextTypes = {muiTheme: PropTypes.object.isRequired};
+    constructor(props, state) {
+        super(props, state);
+    }
 
     render() {
         const {
@@ -27,7 +30,6 @@ class Stepper extends BaseComponent {
             children,
             style,
         } = this.props;
-
 
         return (
             <MuiStepper activeStep={activeStep}

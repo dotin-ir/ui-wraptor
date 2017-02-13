@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import BaseComponent from '../BaseComponent';
-import MuiStepLabel from 'dotin-material-ui/Stepper/StepLabel';
+import {StepLabel as MuiStepLabel} from 'dotin-material-ui/Stepper';
 
 
 class StepLabel extends BaseComponent {
@@ -15,14 +15,19 @@ class StepLabel extends BaseComponent {
         style: PropTypes.object,
     };
 
+    constructor(props, state) {
+        super(props, state);
+    }
+    
     render() {
         const {
             children,
             style,
+            ...other
         } = this.props;
 
         return (
-            <MuiStepLabel style={style}>
+            <MuiStepLabel style={style} {...other}>
                 {children}
             </MuiStepLabel>
         );
