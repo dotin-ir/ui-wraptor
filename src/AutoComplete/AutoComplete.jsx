@@ -42,7 +42,11 @@ class AutoComplete extends BaseComponent {
          * @param {array} dataSource The auto-complete's `dataSource` array.
          */
         onUpdateInput: PropTypes.func,
-        
+        /**
+         * Text being input to auto complete.
+         */
+        searchText: PropTypes.string,
+
         /**
          * Override the inline-styles of the root element.
          */
@@ -63,7 +67,7 @@ class AutoComplete extends BaseComponent {
     };
 
     componentWillMount() {
-        if(this.props.validate) {
+        if (this.props.validate) {
             this.setState({
                 valid: this.props.validate(this.props.value),
             });
@@ -77,7 +81,7 @@ class AutoComplete extends BaseComponent {
             });
         }
     }
-    
+
 
     render() {
         const {
@@ -87,21 +91,23 @@ class AutoComplete extends BaseComponent {
             hintText,
             onNewRequest,
             onUpdateInput,
+            searchText,
             id,
             style,
         } = this.props;
         return (
             <MUIAutoComplete floatingLabelText={label}
-                          dataSource={dataSource}
-                          errorText={errorText}
-                          hintText={hintText}
-                          id={id}
-                          filter={AutoComplete.fuzzyFilter}
-                          onNewRequest={onNewRequest}
-                          style={style}
-                          onUpdateInput={onUpdateInput}
-                          dataSourceConfig={dataSourceConfig}
-                          maxSearchResults={5}
+                             dataSource={dataSource}
+                             errorText={errorText}
+                             hintText={hintText}
+                             id={id}
+                             filter={AutoComplete.fuzzyFilter}
+                             onNewRequest={onNewRequest}
+                             style={style}
+                             onUpdateInput={onUpdateInput}
+                             searchText={searchText}
+                             dataSourceConfig={dataSourceConfig}
+                             maxSearchResults={5}
             >
             </MUIAutoComplete>
         );
