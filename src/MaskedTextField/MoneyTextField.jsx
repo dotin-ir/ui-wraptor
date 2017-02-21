@@ -102,7 +102,6 @@ class MoneyTextField extends BaseComponent {
         const {...other} = this.props;
         delete other.defaultValue; 
         other.onChange = this.onChange.bind(this);
-        other.value = this.state.value;
         return (<TextField {...other} />);
     }
 }

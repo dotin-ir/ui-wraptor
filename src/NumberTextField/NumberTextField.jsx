@@ -88,7 +88,6 @@ class NumberTextField extends BaseComponent {
         const {length,...props} = this.props;
         delete props.defaultValue;
         props.onChange = this.onChange.bind(this,length);
-        props.value = this.state.value;
         return (<TextField {...props} />);
     }
 }
