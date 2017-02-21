@@ -52,7 +52,6 @@ class DisplayImage extends BaseComponent {
                 <DisplayImageIcon />
             </MUIconButton>
             <ReactImage
-                
                 images={images}
                 width={width}
                 isOpen={this.state.isOpen}

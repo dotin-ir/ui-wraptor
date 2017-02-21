@@ -11,16 +11,34 @@ class Popup extends BaseComponent {
         onBeforeClose: PropTypes.func,
         onClosing: PropTypes.func,
         onAfterClosed: PropTypes.func.isRequired,
-        overlayVisible: PropTypes.bool
+        overlayVisible: PropTypes.bool,
     };
 
     constructor(props, context) {
+
         super(props, context);
         this.state = {
             open: true,
+            actions: [<FlatButton label={this.props.closeCaption} secondary={true}
+                                  onTouchTap={this.handleClose.bind(this)}/>],
+            isInitial: false
         };
+        this.defaultAction = [<FlatButton label={this.props.closeCaption} secondary={true}
+                                          onTouchTap={this.handleClose.bind(this)}/>];
+        this.initActionBar = this.initActionBar.bind(this);
     }
 
+    initActionBar(actions) {
+        if (!this.state.isInitial) {
+            this.setState(
+                {
+                    actions: actions.concat(this.defaultAction),
+                    isInitial: true
+                }
+            );
+        }
+    }
+    
     handleClose() {
         if (this.props.onBeforeClose && this.props.onBeforeClose() === false) {
             return;
@@ -31,17 +49,36 @@ class Popup extends BaseComponent {
         this.setState({open: false});
         this.props.onAfterClosed();
     }
+    
+    static childContextTypes = {
+        initActionBar: PropTypes.func,
+    };
 
+    getChildContext() {
+        return {initActionBar: this.initActionBar};
+    }
+    
+    
     render() {
+        const {
+            children,
+        } = this.props;
+        
         const overlayStyle = this.props.overlayVisible ? {} : {
                 backgroundColor: 'transparent'
-            };
+        };  
+
+        const upgradeChildren = React.Children.map(children, (child) => {
+            return [
+                React.cloneElement(child, child.props),
+            ];
+        });
+
         return (
             <Dialog
                 title={this.props.title}
                 titleStyle={{fontSize: 18, lineHeight: '10px'}}
-                actions={<FlatButton label={this.props.closeCaption} secondary={true}
-                                     onTouchTap={this.handleClose.bind(this)}/>}
+                actions={this.state.actions}
                 modal={true}
                 open={this.state.open}
                 autoScrollBodyContent={true}
@@ -51,7 +88,7 @@ class Popup extends BaseComponent {
                 contentStyle={{maxHeight: 'none', maxWidth: 'none'}}
                 overlayStyle={overlayStyle}
             >
-                {this.props.children}
+                {upgradeChildren}
             </Dialog>
         );
     }
