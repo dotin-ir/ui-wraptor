@@ -80,6 +80,7 @@ class MenuItem extends BaseComponent {
                             style={style}
                             value={value}
         >
+            {children}
             </MUIMenuItem>
     }
 

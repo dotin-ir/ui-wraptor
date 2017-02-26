@@ -90,6 +90,15 @@ class Toolbar extends BaseComponent {
                         onTouchTap={childData.onTouchTap}
                     />
                 );
+            } else if (childData.name === 'Element') {
+                return (
+                    <MenuItem
+                        primaryText={childData.tooltip}
+                        key={this.generateElementKey()}
+                    >
+                        {childData.element}
+                    </MenuItem>
+                );
             } else {
                 return null;
             }
@@ -99,6 +108,8 @@ class Toolbar extends BaseComponent {
                                    key={this.generateElementKey()}>
                     {childData.className ? <FontIcon className={childData.className} /> : (childData.icon ? childData.icon : null)}
                 </IconButton>;
+            } else if (childData.name === 'Element') {
+                return (childData.element);
             } else {
                 return null;
             }
