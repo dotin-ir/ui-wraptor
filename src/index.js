@@ -47,3 +47,4 @@ export GridList from './GridList';
 export GridTile from './GridList';
 export SideNav from './SideNav';
 export DisplayImage from './DisplayImage';
+export Chip from './Chip';
