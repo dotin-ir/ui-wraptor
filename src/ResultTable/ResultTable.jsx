@@ -96,7 +96,7 @@ class ResultTable extends BaseComponent {
                         <TableRow key={index}>
                             <TableRowColumn>{index + fromIndex}</TableRowColumn>
                             {columnsDefinition.map((columnDefinition) =>
-                                <TableRowColumn>{this.getValue(row.dataItem, columnDefinition.columnData)}</TableRowColumn>)}
+                                <TableRowColumn>{this.getValue(row.dataItem, columnDefinition.dataAddress)}</TableRowColumn>)}
                             <TableRowColumn style={visibleStyle}>
                                 {row.actionbarDefinition && row.actionbarDefinition.length > 0 ? <Actionbar children={row.actionbarDefinition}/> : null}
                             </TableRowColumn>
@@ -109,8 +109,8 @@ class ResultTable extends BaseComponent {
 
     createColumnHeader(columnDefinition) {
         return (
-            <TableHeaderColumn tooltip={columnDefinition.columnTooltip}>
-                {columnDefinition.columnName}
+            <TableHeaderColumn tooltip={columnDefinition.tooltip?columnDefinition.tooltip:columnDefinition.name}>
+                {columnDefinition.name}
             </TableHeaderColumn>
         );
     }

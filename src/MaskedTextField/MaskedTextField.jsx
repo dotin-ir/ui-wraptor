@@ -86,6 +86,7 @@ class MaskedTextField extends BaseComponent {
         const {mask, ...other} = this.props;
         delete other.defaultValue; 
         other.onChange = this.onChange.bind(this, mask);
+        other.value = this.state.value;
         return (<TextField {...other} />);
     }
 }
