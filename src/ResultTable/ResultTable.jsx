@@ -6,12 +6,19 @@ import TableHeaderColumn from 'dotin-material-ui/Table/TableHeaderColumn';
 import TableBody from 'dotin-material-ui/Table/TableBody';
 import TableRow from 'dotin-material-ui/Table/TableRow';
 import TableRowColumn from 'dotin-material-ui/Table/TableRowColumn';
-import Actionbar from '../Toolbar/index'
+
+import Actionbar from '../Toolbar/index';
+import ColumnSelector from '../IconMultiSelectList/index';
+import TableRowIdentifier from '../TableRowIdentifier/index';
+
+import SortSwitch from "../SortColumnSwitch"
 
 const visibleStyle = {
     overflow: 'visible',
 };
-
+const indexColumnStyle = {
+    width:'20px'
+}
 class ResultTable extends BaseComponent {
     static propTypes = {
         /**
@@ -42,6 +49,8 @@ class ResultTable extends BaseComponent {
          * will be returned instead to indicate that all rows have been selected.
          */
         onRowSelection: PropTypes.func,
+
+        onSort: PropTypes.func,
     };
 
     static defaultProps = {
@@ -49,14 +58,42 @@ class ResultTable extends BaseComponent {
         selectable: false,
         multiSelectable: false,
     };
-    
-    
+
+
     static contextTypes = {
         theme: PropTypes.object.isRequired
     };
 
     constructor(props, state) {
         super(props, state);
+        this.state={
+            columnsDefinition: this.props.columnsDefinition,
+        }
+        this.sortASCHandler = this.sortASCHandler.bind(this);
+        this.sortDESCHandler = this.sortDESCHandler.bind(this);
+        this.comparator = this.comparator.bind(this);
+        this.sortDataASC = this.sortDataASC.bind(this);
+    }
+
+    comparator(dataAddress, rowOne, rowTwo){
+        var valOne = this.getValue(rowOne, dataAddress);
+        var valTwo = this.getValue(rowTwo, dataAddress);
+        return valOne < valTwo ? -1 : valOne > valTwo ? 1 : 0;
+    }
+    sortDataASC(columnDefinition){
+        return this.props.rawData.sort(this.comparator.bind(this, columnDefinition.dataAddress));
+    }
+    sortASCHandler(columnDefinition){
+        this.props.onSort(this.sortDataASC(columnDefinition));
+    }
+    sortDESCHandler(columnDefinition){
+        this.props.onSort(this.sortDataASC(columnDefinition).reverse());
+    }
+
+    columnSelectHandler(columnsDefinition){
+        this.setState(Object.assign(this.state,{
+            columnsDefinition: columnsDefinition
+        }))
     }
 
     render() {
@@ -67,8 +104,15 @@ class ResultTable extends BaseComponent {
             selectable,
             multiSelectable,
             onRowSelection,
+            rowIdentifierDefinitions,
+            hasColumnFilter
         } = this.props;
+        var columnSelector = null;
+        if (hasColumnFilter == true || hasColumnFilter == 'true')
+            columnSelector = (
+                <ColumnSelector columnsDefinition={columnsDefinition} onChange={this.columnSelectHandler.bind(this)}/>);
         return (
+            <div>
             <Table fixedFooter={false}
                    fixedHeader={true}
                    selectable={selectable}
@@ -82,9 +126,13 @@ class ResultTable extends BaseComponent {
                              enableSelectAll={false}
                 >
                     <TableRow>
+                        <TableHeaderColumn style={indexColumnStyle}>
+                            {columnSelector}
+                        </TableHeaderColumn>
                         <TableHeaderColumn />
-                        {columnsDefinition.map((columnDefinition) => this.createColumnHeader(columnDefinition))}
+                        {this.state.columnsDefinition.map((columnDefinition) => this.createColumnHeader(columnDefinition))}
                         <TableHeaderColumn />
+
                     </TableRow>
                 </TableHeader>
                 <TableBody displayRowCheckbox={selectable}
@@ -94,24 +142,44 @@ class ResultTable extends BaseComponent {
                 >
                     {data.map((row, index) => (
                         <TableRow key={index}>
-                            <TableRowColumn>{index + fromIndex}</TableRowColumn>
-                            {columnsDefinition.map((columnDefinition) =>
-                                <TableRowColumn>{this.getValue(row.dataItem, columnDefinition.dataAddress)}</TableRowColumn>)}
+                            <TableRowColumn style={indexColumnStyle}>{index + fromIndex}</TableRowColumn>
+                            <TableRowColumn>
+                                <TableRowIdentifier rowIdentifierDefinitions={rowIdentifierDefinitions} dataItem={row.dataItem}/>
+                            </TableRowColumn>
+                            {this.state.columnsDefinition.map((columnDefinition) =>{
+                                    return columnDefinition.present || columnDefinition.present === undefined ?
+                                        <TableRowColumn>{this.getValue(row.dataItem, columnDefinition.dataAddress)}</TableRowColumn>
+                                    : null
+                                }
+                                )}
+
                             <TableRowColumn style={visibleStyle}>
                                 {row.actionbarDefinition && row.actionbarDefinition.length > 0 ? <Actionbar children={row.actionbarDefinition}/> : null}
                             </TableRowColumn>
+
+
+
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
+            </div>
         );
     }
 
     createColumnHeader(columnDefinition) {
         return (
-            <TableHeaderColumn tooltip={columnDefinition.tooltip?columnDefinition.tooltip:columnDefinition.name}>
+        columnDefinition.present || columnDefinition.present === undefined ?
+            <TableHeaderColumn tooltip={columnDefinition.tooltip ? columnDefinition.tooltip : columnDefinition.name}>
                 {columnDefinition.name}
+                {
+                    columnDefinition.sortable ?
+                        <SortSwitch ascHandler={this.sortASCHandler.bind(this, columnDefinition)}
+                                    descHandler={this.sortDESCHandler.bind(this, columnDefinition)}/>
+                        : null
+                }
             </TableHeaderColumn>
+            : null
         );
     }
 
