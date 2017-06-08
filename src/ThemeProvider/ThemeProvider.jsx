@@ -15,13 +15,13 @@ class ThemeProvider extends BaseComponent {
 
     getChildContext() {
         return {
-            theme: getMuiTheme(this.props.theme) || getMuiTheme(undefined, this.props.locale),
+            theme: getMuiTheme(this.props.theme),
         };
     }
 
     render() {
         return (
-            <MUIThemeProvider muiTheme={(getMuiTheme(this.props.theme) || getMuiTheme(undefined, this.props.timezone) || getMuiTheme(undefined, this.props.locale))}>
+            <MUIThemeProvider muiTheme={getMuiTheme(this.props.theme)}>
                 {this.props.children}
             </MUIThemeProvider>
         );
