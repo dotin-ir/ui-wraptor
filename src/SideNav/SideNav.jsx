@@ -50,7 +50,7 @@ class SideNav extends BaseComponent {
             <ListItem
                 primaryText={navItem.caption}
                 primaryTogglesNestedList={hasNestedItems(navItem)}
-                onTouchTap={this.handleOnTouchTap.bind(this, navItem.url, navItem.urlData)}
+                onTouchTap={this.handleOnTouchTap.bind(this, navItem)}
                 nestedItems={nestedItems}
                 leftIcon={getIcon(navItem)}
                 key={this.generateElementKey()}
@@ -62,8 +62,8 @@ class SideNav extends BaseComponent {
         return 'main-menu-' + (++this.elementKey);
     }
 
-    handleOnTouchTap(url, urlData) {
-        this.props.onClick(url, urlData);
+    handleOnTouchTap(navItem) {
+        this.props.onClick(navItem);
     }
 }
 
