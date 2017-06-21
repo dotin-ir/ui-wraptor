@@ -10,7 +10,7 @@ var identifierStyle = {
 
 const tooltipStyle = {
     boxSizing: 'border-box',
-    marginTop: '10px'
+    marginTop: '20px'
 }
 
 

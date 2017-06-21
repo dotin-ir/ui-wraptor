@@ -5,7 +5,7 @@ import TableHeader from 'dotin-material-ui/Table/TableHeader';
 import TableHeaderColumn from 'dotin-material-ui/Table/TableHeaderColumn';
 import TableBody from 'dotin-material-ui/Table/TableBody';
 import TableRow from 'dotin-material-ui/Table/TableRow';
-import TableRowColumn from 'dotin-material-ui/Table/TableRowColumn';
+import TableRowColumn from '../TableRowColumn/TableRowColumn';
 
 import Actionbar from '../Toolbar/index';
 import ColumnSelector from '../IconMultiSelectList/index';
@@ -147,13 +147,14 @@ class ResultTable extends BaseComponent {
                                 <TableRowIdentifier rowIdentifierDefinitions={rowIdentifierDefinitions} dataItem={row.dataItem}/>
                             </TableRowColumn>
                             {this.state.columnsDefinition.map((columnDefinition) =>{
+                                    var text = this.getValue(row.dataItem, columnDefinition.dataAddress);
                                     return columnDefinition.present || columnDefinition.present === undefined ?
-                                        <TableRowColumn>{this.getValue(row.dataItem, columnDefinition.dataAddress)}</TableRowColumn>
+                                        <TableRowColumn tooltip={text}>{text}</TableRowColumn>
                                     : null
                                 }
                                 )}
 
-                            <TableRowColumn style={visibleStyle}>
+                            <TableRowColumn style={visibleStyle} >
                                 {row.actionbarDefinition && row.actionbarDefinition.length > 0 ? <Actionbar children={row.actionbarDefinition}/> : null}
                             </TableRowColumn>
 
