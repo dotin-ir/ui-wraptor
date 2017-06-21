@@ -14,7 +14,7 @@
     "url": "https://github.com/dotin-ir/ui-wraptor.git"
   },
   "publishConfig": {
-    "registry": "http://10.20.11.67:8081/nexus/content/repositories/npm-private/"
+    "registry": "https://nexus3.dotin.ir/repository/Core-Release/"
   },
   "license": "MIT",
   "bugs": {
@@ -96,7 +96,7 @@
     "prebuild": "npm run clean:build",
     "build:webpack": "webpack --progress --colors --config webpack.config.prod.js",
     "dev:webpack": "webpack-dev-server --progress --colors --config webpack.config.dev.js",
-    "publish": "npm run prebuild && npm run build && npm publish ./build --registry http://10.20.11.67:8081/nexus/content/repositories/npm-private/"
+    "publish": "npm run prebuild && npm run build && npm publish ./build --registry https://nexus3.dotin.ir/repository/Core-Release/"
   },
   "typings": "./typings"
 }
