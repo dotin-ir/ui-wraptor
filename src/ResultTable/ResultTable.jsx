@@ -13,11 +13,17 @@ import TableRowIdentifier from '../TableRowIdentifier/index';
 
 import SortSwitch from "../SortColumnSwitch"
 
-const visibleStyle = {
-    overflow: 'visible',
-};
-const indexColumnStyle = {
-    width:'20px'
+
+const styles = {
+    visibleStyle: {
+        overflow: 'visible',
+    },
+    indexColumnStyle: {
+        width: '20px'
+    },
+    identifierColumnStyle: {
+        width: '20px'
+    }
 }
 class ResultTable extends BaseComponent {
     static propTypes = {
@@ -51,6 +57,8 @@ class ResultTable extends BaseComponent {
         onRowSelection: PropTypes.func,
 
         onSort: PropTypes.func,
+
+        rowIdentifierDefinitions : PropTypes.object,
     };
 
     static defaultProps = {
@@ -116,8 +124,8 @@ class ResultTable extends BaseComponent {
             <Table fixedFooter={false}
                    fixedHeader={true}
                    selectable={selectable}
-                   bodyStyle={visibleStyle}
-                   wrapperStyle={visibleStyle}
+                   bodyStyle={styles.visibleStyle}
+                   wrapperStyle={styles.visibleStyle}
                    multiSelectable={multiSelectable}
                    onRowSelection={onRowSelection}
             >
@@ -126,10 +134,15 @@ class ResultTable extends BaseComponent {
                              enableSelectAll={false}
                 >
                     <TableRow>
-                        <TableHeaderColumn style={indexColumnStyle}>
+                        <TableHeaderColumn style={styles.indexColumnStyle}>
                             {columnSelector}
                         </TableHeaderColumn>
-                        <TableHeaderColumn />
+                        {
+                            rowIdentifierDefinitions ?
+                                <TableHeaderColumn style={styles.identifierColumnStyle}/>
+                                :
+                                null
+                        }
                         {this.state.columnsDefinition.map((columnDefinition) => this.createColumnHeader(columnDefinition))}
                         <TableHeaderColumn />
 
@@ -142,10 +155,15 @@ class ResultTable extends BaseComponent {
                 >
                     {data.map((row, index) => (
                         <TableRow key={index}>
-                            <TableRowColumn style={indexColumnStyle}>{index + fromIndex}</TableRowColumn>
-                            <TableRowColumn>
-                                <TableRowIdentifier rowIdentifierDefinitions={rowIdentifierDefinitions} dataItem={row.dataItem}/>
-                            </TableRowColumn>
+                            <TableRowColumn style={styles.indexColumnStyle}>{index + fromIndex}</TableRowColumn>
+                            {
+                                rowIdentifierDefinitions ?
+                                    <TableRowColumn style={styles.identifierColumnStyle}>
+                                        <TableRowIdentifier rowIdentifierDefinitions={rowIdentifierDefinitions} dataItem={row.dataItem}/>
+                                    </TableRowColumn>:
+                                    null
+                            }
+
                             {this.state.columnsDefinition.map((columnDefinition) =>{
                                     var text = this.getValue(row.dataItem, columnDefinition.dataAddress);
                                     return columnDefinition.present || columnDefinition.present === undefined ?
@@ -154,7 +172,7 @@ class ResultTable extends BaseComponent {
                                 }
                                 )}
 
-                            <TableRowColumn style={visibleStyle} >
+                            <TableRowColumn style={styles.visibleStyle} >
                                 {row.actionbarDefinition && row.actionbarDefinition.length > 0 ? <Actionbar children={row.actionbarDefinition}/> : null}
                             </TableRowColumn>
 

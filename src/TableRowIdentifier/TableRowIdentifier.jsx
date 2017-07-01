@@ -2,7 +2,7 @@ import React from 'react';
 import BaseComponent from '../BaseComponent';
 import Tooltip from 'dotin-material-ui/internal/Tooltip';
 
-var identifierStyle = {
+const identifierStyle = {
     position: 'relative',
     width: "5px",
     height: "100%"
@@ -35,15 +35,14 @@ class TableRowIdentifier extends BaseComponent {
             rowIdentifierDefinitions,
             dataItem
         } = this.props;
-        if(rowIdentifierDefinitions===undefined || rowIdentifierDefinitions == null)
+        if(!rowIdentifierDefinitions)
             return null;
 
-        var backgroundColor = null;
+        var finalStyle = null;
         var tooltip = null;
         rowIdentifierDefinitions.map((rowIdentifierDefinition)=> {
             if (this.getValue(dataItem, rowIdentifierDefinition.dataAddress) == rowIdentifierDefinition.dataValue) {
-                backgroundColor = rowIdentifierDefinition.color;
-                identifierStyle = Object.assign(identifierStyle, {backgroundColor: backgroundColor});
+                finalStyle = Object.assign({}, identifierStyle, {backgroundColor: rowIdentifierDefinition.color});
                 if (rowIdentifierDefinition.tooltip != undefined && rowIdentifierDefinition.tooltip != '') {
                     tooltip = (<Tooltip label={rowIdentifierDefinition.tooltip }
                                         show={this.state.hovered}
@@ -54,7 +53,7 @@ class TableRowIdentifier extends BaseComponent {
 
         return ( <div onMouseEnter={this.mouseEnterHandler.bind(this)}
                       onMouseLeave={this.mouseLeaveHandler.bind(this)}
-                      style={identifierStyle}
+                      style={finalStyle}
             >
                 {tooltip}
             </div>
