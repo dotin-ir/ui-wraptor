@@ -1,13 +1,8 @@
 import React, {PropTypes} from 'react';
-import BaseComponent from "../BaseComponent";
 import MUIThemeProvider from 'dotin-material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'dotin-material-ui/styles/getMuiTheme'
 
-class ThemeProvider extends BaseComponent {
-
-    static propTypes = {
-        theme: PropTypes.object
-    };
+export class ThemeProvider extends React.Component {
 
     static childContextTypes = {
         theme: PropTypes.object.isRequired,
@@ -20,13 +15,11 @@ class ThemeProvider extends BaseComponent {
     }
 
     render() {
-        return (
-            <MUIThemeProvider muiTheme={getMuiTheme(this.props.theme)}>
-                {this.props.children}
-            </MUIThemeProvider>
-        );
+        return <MUIThemeProvider muiTheme={getMuiTheme(this.props.theme)}>
+            {this.props.children}
+        </MUIThemeProvider>
     }
 
 }
 
-export default ThemeProvider;
+export default ThemeProvider

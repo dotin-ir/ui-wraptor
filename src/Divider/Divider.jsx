@@ -15,17 +15,9 @@ class Divider extends BaseComponent {
         style: PropTypes.object
     };
 
-    static contextTypes = {
-        theme: PropTypes.object.isRequired
-    };
-
     static defaultProps = {
         inset: false
     };
-
-    constructor(props, context) {
-        super(props, context);
-    }
 
     render() {
         

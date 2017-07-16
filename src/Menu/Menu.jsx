@@ -26,10 +26,6 @@ class Menu extends BaseComponent {
         desktop: true,
     };
 
-    static contextTypes = {
-        theme: PropTypes.object.isRequired
-    };
-
     render() {
         const {
             desktop,

@@ -1,70 +1,28 @@
-import React, {PropTypes} from "react";
+import React from "react";
 import FontIcon from "dotin-material-ui/FontIcon";
-import BaseComponent from "../BaseComponent";
 import {List, ListItem} from "dotin-material-ui/List";
 
-function hasNestedItems(navItem) {
-    return navItem.subItems != null && navItem.subItems.length > 0;
+const style = {
+    // maxHeight: this.props.windowHeight,
+    overflowX: 'hidden',
+    overflowY: 'auto',
+    maxWidth: 250,
+};
+
+export function SideNav(props) {
+    function createNavItemElements(navItems) {
+        return navItems.map((navItem, i) => {
+            return <ListItem
+                        primaryText={navItem.caption}
+                        primaryTogglesNestedList={Array.isArray(navItem.subItems) && navItem.subItems.length > 0}
+                        onTouchTap={props.onSelect.bind(null, navItem)}
+                        nestedItems={navItem.subItems && createNavItemElements(navItem.subItems)}
+                        leftIcon={navItem.fontIcon && <FontIcon className={navItem.fontIcon}/>}
+                        key={i}
+                    />
+        })
+    }
+    return <List style={style}>{createNavItemElements(props.navTree)}</List>
 }
 
-function getIcon(navItem) {
-    return navItem.fontIcon != null ? <FontIcon className={navItem.fontIcon}/> : <div></div>;
-}
-
-class SideNav extends BaseComponent {
-    static propTypes = {
-        navTree: PropTypes.array,
-        onClick: PropTypes.func,
-        style: PropTypes.any,
-    };
-
-    static defaultProps = {
-        navTree: [],
-    };
-
-    static contextTypes = {
-        theme: PropTypes.object.isRequired
-    };
-
-    constructor(props, state) {
-        super(props, state);
-        this.elementKey = 1;
-    }
-
-    render() {
-        let navTree = this.props.navTree;
-        let content = navTree.map((navItem) => this.createNavItemComponent(navItem));
-        return <List style={this.props.style}>{content}</List>;
-    }
-
-    createNavItemComponent(navItem) {
-        let nestedItems = [];
-        if (navItem != null) {
-            if (hasNestedItems(navItem)) {
-                navItem.subItems.map((subItem) => {
-                    nestedItems.push(this.createNavItemComponent(subItem));
-                });
-            }
-        }
-        return (
-            <ListItem
-                primaryText={navItem.caption}
-                primaryTogglesNestedList={hasNestedItems(navItem)}
-                onTouchTap={this.handleOnTouchTap.bind(this, navItem)}
-                nestedItems={nestedItems}
-                leftIcon={getIcon(navItem)}
-                key={this.generateElementKey()}
-            />
-            );
-    }
-
-    generateElementKey() {
-        return 'main-menu-' + (++this.elementKey);
-    }
-
-    handleOnTouchTap(navItem) {
-        this.props.onClick(navItem);
-    }
-}
-
-export default SideNav;
+export default SideNav

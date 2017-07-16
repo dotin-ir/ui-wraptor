@@ -22,10 +22,6 @@ class Paper extends BaseComponent {
         noShadow: false,
     };
 
-    static contextTypes = {
-        theme: PropTypes.object.isRequired
-    };
-
     render() {
         const {
             children,

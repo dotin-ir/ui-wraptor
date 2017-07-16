@@ -66,12 +66,8 @@ class MaskedTextField extends BaseComponent {
         mask: PropTypes.string,
     };
 
-    static contextTypes = {
-        theme: PropTypes.object.isRequired
-    };
-
     constructor(props) {
-        super(props);
+        super();
         this.state = props.defaultValue?{value: props.defaultValue}:{value:''};
     }
 

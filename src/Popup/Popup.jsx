@@ -14,9 +14,9 @@ class Popup extends BaseComponent {
         overlayVisible: PropTypes.bool,
     };
 
-    constructor(props, context) {
+    constructor(props) {
 
-        super(props, context);
+        super();
         this.state = {
             open: true,
             actions: [<FlatButton label={this.props.closeCaption} secondary={true}

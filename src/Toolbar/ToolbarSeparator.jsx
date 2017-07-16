@@ -14,14 +14,6 @@ class ToolbarSeparator extends BaseComponent {
         style: PropTypes.object,
     };
 
-    static contextTypes = {
-        theme: PropTypes.object.isRequired
-    };
-
-    constructor(props, state) {
-        super(props, state);
-    }
-
     render() {
         const {
             className,

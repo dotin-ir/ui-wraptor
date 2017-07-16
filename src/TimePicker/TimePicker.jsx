@@ -21,10 +21,6 @@ class TimePicker extends BaseComponent {
         timeZone: PropTypes.object,        
     };
 
-    static contextTypes = {
-        theme: PropTypes.object.isRequired,
-    };
-
     calculateCurrentTime(defaultTimeZone, timeZone) {
         let finalTimeZone = timeZone != null ? timeZone : defaultTimeZone;
         let tz = Array.isArray(finalTimeZone) ? finalTimeZone.length > 0 ? finalTimeZone[0] : undefined : finalTimeZone;

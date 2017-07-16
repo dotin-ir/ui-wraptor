@@ -53,12 +53,6 @@ class MenuItem extends BaseComponent {
         disabled: false,
     };
 
-    static contextTypes = {
-        theme: PropTypes.object.isRequired
-    };
-    
-
-
     render() {
         const {
             desktop,

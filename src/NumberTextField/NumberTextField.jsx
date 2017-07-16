@@ -58,12 +58,8 @@ class NumberTextField extends BaseComponent {
         length: PropTypes.number,
     };
 
-    static contextTypes = {
-        theme: PropTypes.object.isRequired
-    };
-
     constructor(props) {
-        super(props);
+        super();
         this.state = props.defaultValue?{value: props.defaultValue}:{value:''};
     }
 

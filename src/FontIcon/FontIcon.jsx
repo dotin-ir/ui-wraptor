@@ -24,14 +24,6 @@ class FontIcon extends BaseComponent {
         onTouchTap: PropTypes.func,
     };
 
-    static contextTypes = {
-        theme: PropTypes.object.isRequired
-    };
-
-    constructor(props, state) {
-        super(props, state);
-    }
-
     render() {
         const {
             color,

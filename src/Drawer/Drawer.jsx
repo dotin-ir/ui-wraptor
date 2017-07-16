@@ -1,50 +1,27 @@
-import React, {PropTypes} from "react";
-import BaseComponent from "../BaseComponent";
+import React from "react";
 import MuiDrawer  from "dotin-material-ui/Drawer";
 
-class Drawer extends BaseComponent {
-    static propTypes = {
-        children: PropTypes.node,
-        disableSwipeToOpen: PropTypes.bool,
-        docked: PropTypes.bool,
-        open: PropTypes.bool,
-        width: PropTypes.number,
-        onRequestChange: PropTypes.any,
-        style: PropTypes.any,
-    };
+const style = {
+    WebkitTapHighlightColor: 'rgba(0,0,0,0)',
+    boxSizing: 'border-box',
+    boxShadow: '0 1px 6px rgba(0,0,0,0.12),0 1px 4px rgba(0,0,0,0.12)',
+    display: 'block',
+    zIndex: 1,
+    transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+    borderRadius: '2px',
+    float: 'left',
+    width: '250px',
+};
 
-    static defaultProps = {
-        children: null,
-        disableSwipeToOpen: false,
-        docked: true,
-        open: null,
-        width: null,
-        onRequestChange: null
-    };
-
-    static contextTypes = {
-        theme: PropTypes.object.isRequired
-    };
-
-    constructor(props, state) {
-        super(props, state);
-    }
-
-    render() {
-        return (
-            <MuiDrawer
-                disableSwipeToOpen={this.props.disableSwipeToOpen}
-                docked={this.props.docked}
-                open={this.props.open}
-                width={this.props.width}
-                onRequestChange={this.props.onRequestChange}
-                style={this.props.style}
-            >
-                {this.props.children}
-            </MuiDrawer>
-        );
-    }
-
+export function Drawer(props) {
+    return <MuiDrawer
+        docked={props.docked}
+        open={props.open}
+        onRequestChange={props.onOpenClose}
+        style={style}
+        >
+        {props.children}
+    </MuiDrawer>
 }
 
-export default Drawer;
+export default Drawer

@@ -19,11 +19,6 @@ class Stepper extends BaseComponent {
         style: PropTypes.object,
     };
 
-    static contextTypes = {muiTheme: PropTypes.object.isRequired};
-    constructor(props, state) {
-        super(props, state);
-    }
-
     render() {
         const {
             activeStep,

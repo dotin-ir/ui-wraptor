@@ -51,14 +51,6 @@ class PasswordField extends BaseComponent {
     onEnter: PropTypes.func,
   };
 
-  static contextTypes = {
-    theme: PropTypes.object.isRequired
-  };
-
-  constructor(props, state) {
-    super(props, state);
-  }
-
   handleEnter = (event) => {
     if (!this.props.disabled) {
       if (keycode(event) === 'enter') {

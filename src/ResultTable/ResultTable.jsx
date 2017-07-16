@@ -67,13 +67,8 @@ class ResultTable extends BaseComponent {
         multiSelectable: false,
     };
 
-
-    static contextTypes = {
-        theme: PropTypes.object.isRequired
-    };
-
-    constructor(props, state) {
-        super(props, state);
+    constructor(props) {
+        super(props);
         this.state={
             columnsDefinition: this.props.columnsDefinition,
         }

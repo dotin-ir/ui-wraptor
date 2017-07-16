@@ -55,12 +55,6 @@ class Select extends BaseComponent {
     autoWidth: false,
     disabled: false,
   };
-  static contextTypes = {
-    theme: PropTypes.object.isRequired
-  };
-  constructor(props, state) {
-    super(props, state);
-  }
   render() {
     const {
         value,

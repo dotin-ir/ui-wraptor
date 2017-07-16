@@ -24,12 +24,6 @@ class GridTile extends BaseComponent {
     style: PropTypes.object,
   };
 
-  static contextTypes = {
-    theme: PropTypes.object.isRequired
-  };
-  constructor(props, state) {
-    super(props, state);
-  }
   render() {
     const {
         cols,

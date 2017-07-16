@@ -45,13 +45,6 @@ class RaisedButton extends BaseComponent {
   static defaultProps = {
     disabled: false,
   };
-  static contextTypes = {
-    theme: PropTypes.object.isRequired
-  };
-
-  constructor(props, state) {
-    super(props, state);
-  }
 
   render() {
     const {
