@@ -30,6 +30,11 @@ class Tab extends Component {
      */
     onTouchTap: PropTypes.func,
     /**
+    * Fired when the active tab changes by touch or tap.
+    * Use this event to specify any functionality when an active tab changes.
+    */
+    onActive: PropTypes.func,
+    /**
      * If value prop passed to Tabs component, this value prop is also required.
      * It assigns a value to the tab so that it can be selected by the Tabs.
      */
@@ -59,6 +64,7 @@ class Tab extends Component {
       style,
       children,
       onTouchTap,
+      onActive,
       value,
       width,
       index,
@@ -70,6 +76,7 @@ class Tab extends Component {
                label={label}
                style={style}
                onTouchTap={onTouchTap}
+               onActive={onActive}
                value={value}
                width={width}
                index={index}
