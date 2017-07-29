@@ -71,11 +71,20 @@ class ResultTable extends BaseComponent {
         super(props);
         this.state={
             columnsDefinition: this.props.columnsDefinition,
+            data: this.props.data,
         }
         this.sortASCHandler = this.sortASCHandler.bind(this);
         this.sortDESCHandler = this.sortDESCHandler.bind(this);
         this.comparator = this.comparator.bind(this);
         this.sortDataASC = this.sortDataASC.bind(this);
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setState(Object.assign(this.state,
+            {
+                data: newProps.data,
+            }
+        ))
     }
 
     comparator(dataAddress, rowOne, rowTwo){
@@ -99,6 +108,31 @@ class ResultTable extends BaseComponent {
         }))
     }
 
+    onRowSelection(list) {
+        const data = this.state.data.slice()
+        let selectedRow = []
+
+        if (typeof list === 'string') {
+            if (list === 'none') {
+                selectedRow = [];
+            } else if (list === 'all') {
+                selectedRow = data;
+            }
+        }else {
+            if(list.length > 0) {
+                list.map((selectedRowIndex) => {
+                    data.map((row, rowIndex) => {
+                        if(rowIndex == selectedRowIndex) {
+                            selectedRow.push(row)
+                        }
+                    })
+                })
+            }
+        }
+
+        this.props.onRowSelection(selectedRow)
+    }
+
     render() {
         const {
             data,
@@ -106,7 +140,6 @@ class ResultTable extends BaseComponent {
             fromIndex,
             selectable,
             multiSelectable,
-            onRowSelection,
             rowIdentifierDefinitions,
             hasColumnFilter
         } = this.props;
@@ -122,7 +155,7 @@ class ResultTable extends BaseComponent {
                    bodyStyle={styles.visibleStyle}
                    wrapperStyle={styles.visibleStyle}
                    multiSelectable={multiSelectable}
-                   onRowSelection={onRowSelection}
+                   onRowSelection={this.onRowSelection.bind(this)}
             >
                 <TableHeader displaySelectAll={false}
                              adjustForCheckbox={false}
