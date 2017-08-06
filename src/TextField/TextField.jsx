@@ -55,6 +55,24 @@ class TextField extends BaseComponent {
         value: PropTypes.any,
         validate: PropTypes.func,
         onEnter: PropTypes.func,
+        /**
+         *  If true, a textarea element will be rendered.
+         *  The textarea also grows and shrinks according to the number of lines
+         *  */
+        multiLine: PropTypes.bool,
+        /**
+         *  Number of rows to display when multiLine option is set to true
+         *  */
+        rows: PropTypes.number,
+        /**
+         *  Maximum number of rows to display when multiLine option is set to true
+         *  */
+        rowsMax: PropTypes.number,
+        /**
+         *  Override the inline-styles of the TextField's textarea element.
+         *  The TextField use either a textarea or an input, this property has effects only when multiLine is true
+         *  */
+        textareaStyle: PropTypes.object
     };
 
     state = {
@@ -109,6 +127,10 @@ class TextField extends BaseComponent {
             children,
             value,
             type,
+            multiLine,
+            rows,
+            rowsMax,
+            textareaStyle
         } = this.props;
         return (
             <MUITextField className={className}
@@ -123,6 +145,10 @@ class TextField extends BaseComponent {
                           value={value}
                           type={type}
                           onKeyDown={this.handleEnter.bind(this)}
+                          multiLine= {multiLine}
+                          rows= {rows}
+                          rowsMax= {rowsMax}
+                          textareaStyle= {textareaStyle}
             >
                 {children}
             </MUITextField>
