@@ -9,6 +9,7 @@ const tooltipStyle = {
 }
 const tableRowColumnStyle={
     position: "relative",
+    whiteSpace: 'pre-line',
     overflow: "visible"
 }
 
