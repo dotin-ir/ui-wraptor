@@ -1,6 +1,6 @@
 {
   "name": "ui-wraptor",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Dotin Core Banking Team",
   "description": "Collection of React components which wrap a set of third-party components (currently material-ui).",
   "keywords": [
@@ -42,7 +42,7 @@
     }
   ],
   "dependencies": {
-    "dotin-material-ui": "^0.18.2",
+    "dotin-material-ui": "^0.18.1",
     "immutable": "^3.8.1",
     "intl-locales-supported": "^1.0.0",
     "json-loader": "^0.5.4",
