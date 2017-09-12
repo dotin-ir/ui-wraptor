@@ -1321,6 +1321,7 @@ declare namespace __DotinMaterialUI {
         maxHeight?: number;
         menuStyle?: any;
         openImmediately?: boolean;
+        multiple?: boolean
     }
     export class SelectField extends React.Component<SelectFieldProps, {}> {
     }

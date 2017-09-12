@@ -49,6 +49,10 @@ class Select extends BaseComponent {
      * The value that is currently selected.
      */
     value: PropTypes.any,
+    /**
+     * If true, value must be an array and the menu will support multiple selections.
+     */
+    multiple:PropTypes.bool
   };
 
   static defaultProps = {
@@ -66,6 +70,7 @@ class Select extends BaseComponent {
         hintText,
         id,
         children,
+        multiple,
     } = this.props;
     return (
         <MUISelectField value={value}
@@ -76,6 +81,7 @@ class Select extends BaseComponent {
                      disabled={disabled}
                      hintText={hintText}
                      id={id}
+                     multiple={multiple}
        >
           {children}
         </MUISelectField>
