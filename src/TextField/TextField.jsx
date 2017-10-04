@@ -55,6 +55,7 @@ class TextField extends BaseComponent {
         value: PropTypes.any,
         validate: PropTypes.func,
         onEnter: PropTypes.func,
+        onKeyDown: PropTypes.func,
         /**
          *  If true, a textarea element will be rendered.
          *  The textarea also grows and shrinks according to the number of lines
@@ -106,10 +107,11 @@ class TextField extends BaseComponent {
         }
     }
 
-    handleEnter = (event) => {
+    handleKeyDown = (event) => {
+        if(this.props.onKeyDown) this.props.onKeyDown(event)
         if (!this.props.disabled) {
             if (keycode(event) === 'enter') {
-                this.props.onEnter(event);
+                if(this.props.onEnter) this.props.onEnter(event);
             }
         }
     };
@@ -144,7 +146,7 @@ class TextField extends BaseComponent {
                           style={style}
                           value={value}
                           type={type}
-                          onKeyDown={this.handleEnter.bind(this)}
+                          onKeyDown={this.handleKeyDown.bind(this)}
                           multiLine= {multiLine}
                           rows= {rows}
                           rowsMax= {rowsMax}
