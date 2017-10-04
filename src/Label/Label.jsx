@@ -1,10 +1,20 @@
+/**
+ * Check if a value is valid to be displayed inside a label.
+ *
+ * @param value: The value to check.
+ * @returns boolean: True if the string provided is valid, false otherwise.
+ */
 import React, {PropTypes} from 'react';
 import BaseComponent from '../BaseComponent'
 import shallowEqual from 'recompose/shallowEqual';
 import transitions from 'dotin-material-ui/styles/transitions';
 import TextFieldLabel from 'dotin-material-ui/TextField/TextFieldLabel';
 import TextFieldUnderline from 'dotin-material-ui/TextField/TextFieldUnderline';
+import {blue500,orange500} from 'dotin-material-ui/styles/colors';
 import warning from 'warning';
+import Popover from "dotin-material-ui/Popover";
+import {MenuItem, Paper, RaisedButton} from "dotin-material-ui";
+import Menu from "../Menu/Menu";
 
 const getStyles = (props, context, state) => {
     const {
@@ -56,6 +66,17 @@ const getStyles = (props, context, state) => {
             font: 'inherit',
             marginTop: (props.caption ? 72 : 48) / 2,
         },
+        more: {
+            position: 'absolute',
+            display:'block',
+            width:'450px',
+            wordWrap:'break-word',
+            padding:'20px 20px',
+            color: '#000',
+            cursor: 'inherit',
+            font: 'inherit',
+            display: 'inline-block',
+        },
     };
 
     styles.label.height = '100%';
@@ -75,14 +96,20 @@ const getStyles = (props, context, state) => {
     return styles;
 };
 
-/**
- * Check if a value is valid to be displayed inside a label.
- *
- * @param value: The value to check.
- * @returns boolean: True if the string provided is valid, false otherwise.
- */
 function isValid(value) {
     return value !== '' && value !== undefined && value !== null;
+}
+
+
+function createLauncher(value) {
+    let array = value.split(" ");
+    let candide = array[0];
+    if (candide.length < 20) {
+        return candide + "..."
+    }
+    else {
+        return candide.substring(0, 20) + "...";
+    }
 }
 
 class Label extends BaseComponent {
@@ -147,6 +174,23 @@ class Label extends BaseComponent {
         }
     }
 
+    handleMouseOver = (event) => {
+        // This prevents ghost click.
+        event.preventDefault();
+        this.setState({
+            open: true,
+            anchorEl: event.currentTarget,
+        });
+    };
+
+
+    handleRequestClose = () => {
+        this.setState({
+            open: false,
+        });
+    };
+
+
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return (
             !shallowEqual(this.props, nextProps) ||
@@ -166,7 +210,6 @@ class Label extends BaseComponent {
         const {prepareStyles} = this.context.theme;
         const styles = getStyles(this.props, this.context, this.state);
         const spanId = id || this.uniqueId;
-
         const errorTextElement = this.state.errorText && (
                 <div style={prepareStyles(styles.error)}>
                     {this.state.errorText}
@@ -190,7 +233,17 @@ class Label extends BaseComponent {
             ref: (elem) => this.label = elem,
         };
 
-        let labelElement = (
+        let isOverFlow = value.length > 33 && (typeof value) === 'string';
+        let labelElement = isOverFlow ? (
+            <span
+                style={Object.assign(styles.label, {color:blue500, cursor:"help"})}
+                {...other}
+                {...inputProps}
+                onMouseOver={this.handleMouseOver}
+            >
+                {createLauncher(value)}
+            </span>
+        ) : (
             <span
                 style={styles.label}
                 {...other}
@@ -200,6 +253,9 @@ class Label extends BaseComponent {
             </span>
         );
 
+
+        const underlineStyle = isOverFlow ? {borderColor:blue500, borderBottom: "dashed 2px", cursor:"help"} : {};
+        const {open,anchorEl} = this.state;
         return (
             <div
                 style={prepareStyles(styles.root)}
@@ -210,8 +266,33 @@ class Label extends BaseComponent {
                     disabled={false}
                     error={!!this.state.errorText}
                     muiTheme={this.context.theme}
+                    style = {underlineStyle}
                 />
                 {errorTextElement}
+                {
+                    open ?
+                        <Popover
+                            open={true}
+                            anchorEl={anchorEl}
+                            anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+                            targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                            onRequestClose={this.handleRequestClose}
+                            style={{marginTop:'-20px'}}
+                            zDepth={5}
+                        >
+                            <Paper style={{
+                                    minHeight: 250,
+                                    width: 450,
+                                }}
+                            >
+                                <span
+                                    style={styles.more}
+                                >
+                                    {value}
+                                </span>
+                            </Paper>
+                        </Popover>:null
+                }
             </div>
         );
     }
