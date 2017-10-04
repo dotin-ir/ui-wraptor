@@ -59,12 +59,9 @@ class TableRowColumn extends React.Component {
             hoverable,
             onClick,
             tooltip,
+            children
         } = this.props;
 
-
-            var tooltipComponent = (<Tooltip label={tooltip }
-                                show={this.state.hovered}
-                                style={tooltipStyle}/>);
         return (
             <MUITableRowColumn
                 style={Object.assign({},style,tableRowColumnStyle)}
@@ -75,8 +72,10 @@ class TableRowColumn extends React.Component {
                 onHover={this.mouseEnterHandler.bind(this)}
                 onHoverExit={this.mouseLeaveHandler.bind(this)}
             >
-                {this.props.children}
-                {tooltipComponent}
+                {children}
+                {children && tooltip ? <Tooltip label={tooltip }
+                                                show={this.state.hovered}
+                                                style={tooltipStyle}/> : undefined}
             </MUITableRowColumn>
         )
     }
