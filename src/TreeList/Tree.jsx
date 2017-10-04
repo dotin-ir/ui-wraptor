@@ -3,7 +3,7 @@ import TreeList from './TreeList'
 import HTML5Backend from 'react-dnd-html5-backend';
 import {DragDropContext }from 'react-dnd';
 
-class Test extends React.Component {
+class Tree extends React.Component {
     static propTypes = {
         listItems: PropTypes.array.isRequired,
         firstFile: PropTypes.number,
@@ -107,7 +107,7 @@ class Test extends React.Component {
     }
 }
 
-export default DragDropContext(HTML5Backend)(Test);
+export default DragDropContext(HTML5Backend)(Tree);
 
 function getAllParents(listItem, listItems, parents=[]) {
     if (listItem.parentIndex) {
