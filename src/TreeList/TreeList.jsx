@@ -332,9 +332,10 @@ class TreeList extends BaseComponent {
                     targetOrigin={{horizontal: 'right', vertical: 'bottom'}}
                 >
                     {
-                        listItem.actionBarDefinition.map((action) =>
+                        listItem.actionBarDefinition.map((action, index) =>
                         {
                             return <MenuItem primaryText={action.name}
+                                             key = {index}
                                              leftIcon={action.className ? <FontIcon className={action.className} /> : (action.icon ? action.icon : null)}
                                              onTouchTap={action.onTouchTap}/>
                         })
