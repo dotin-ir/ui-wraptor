@@ -29,11 +29,11 @@ export TransferMoney from './icons'
 export Settings from './icons'
 export Bar from './icons'
 export Profile from './icons'
-export SignOut from './icons`'
+export SignOut from './icons'
 export RaisedButton from './RaisedButton'
 export Divider from './Divider'
 export Popover from './Popover'
-export * as colors from './colors';
+// export * as colors from './colors';
 export CardLayout from './CardLayout'
 export CardHeader from './CardLayout'
 export CardActions from './CardLayout'
