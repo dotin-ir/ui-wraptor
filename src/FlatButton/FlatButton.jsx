@@ -14,7 +14,8 @@ class FlatButton extends BaseComponent {
         onTouchTap:PropTypes.func,
         primary:PropTypes.bool,
         secondary:PropTypes.bool,
-        style:PropTypes.any        
+        style:PropTypes.any,
+        labelStyle:PropTypes.any
     };
 
     render() {
@@ -29,6 +30,7 @@ class FlatButton extends BaseComponent {
                 primary={this.props.primary}
                 secondary={this.props.secondary}
                 style={this.props.style}
+                labelStyle={this.props.labelStyle}
             />
     }
 }
