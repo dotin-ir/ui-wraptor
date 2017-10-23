@@ -59,6 +59,11 @@ class ResultTable extends BaseComponent {
         onSort: PropTypes.func,
 
         rowIdentifierDefinitions : PropTypes.object,
+
+        /**
+         * default color for table row identifier color
+         */
+        defaultColor : PropTypes.object,
     };
 
     static defaultProps = {
@@ -141,7 +146,8 @@ class ResultTable extends BaseComponent {
             selectable,
             multiSelectable,
             rowIdentifierDefinitions,
-            hasColumnFilter
+            hasColumnFilter,
+            defaultColor
         } = this.props;
         var columnSelector = null;
         if (hasColumnFilter == true || hasColumnFilter == 'true')
@@ -187,7 +193,9 @@ class ResultTable extends BaseComponent {
                             {
                                 rowIdentifierDefinitions ?
                                     <TableRowColumn style={styles.identifierColumnStyle}>
-                                        <TableRowIdentifier rowIdentifierDefinitions={rowIdentifierDefinitions} dataItem={row.dataItem}/>
+                                        <TableRowIdentifier rowIdentifierDefinitions={rowIdentifierDefinitions}
+                                                            defaultColor={defaultColor}
+                                                            dataItem={row.dataItem}/>
                                     </TableRowColumn>:
                                     null
                             }

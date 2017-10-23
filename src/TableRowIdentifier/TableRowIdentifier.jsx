@@ -33,11 +33,12 @@ class TableRowIdentifier extends BaseComponent {
     render() {
         const {
             rowIdentifierDefinitions,
-            dataItem
+            dataItem,
+            defaultColor
         } = this.props;
         if(!rowIdentifierDefinitions)
             return null;
-
+        let color = defaultColor ? defaultColor : '#DDD';
         var finalStyle = null;
         var tooltip = null;
         rowIdentifierDefinitions.map((rowIdentifierDefinition)=> {
@@ -48,6 +49,8 @@ class TableRowIdentifier extends BaseComponent {
                                         show={this.state.hovered}
                                         style={tooltipStyle}/>);
                 }
+            } else {
+                finalStyle = Object.assign({}, identifierStyle, {backgroundColor: color});
             }
         })
 
