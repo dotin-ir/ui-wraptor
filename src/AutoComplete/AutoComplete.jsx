@@ -51,6 +51,7 @@ class AutoComplete extends BaseComponent {
          * Override the inline-styles of the root element.
          */
         style: PropTypes.object,
+        dataSourceConfig: PropTypes.any
     };
 
     state = {
@@ -85,6 +86,7 @@ class AutoComplete extends BaseComponent {
             searchText,
             id,
             style,
+            dataSourceConfig
         } = this.props;
         return (
             <MUIAutoComplete floatingLabelText={label}
@@ -97,7 +99,7 @@ class AutoComplete extends BaseComponent {
                              style={style}
                              onUpdateInput={onUpdateInput}
                              searchText={searchText}
-                             dataSourceConfig={dataSourceConfig}
+                             dataSourceConfig={dataSourceConfig ? dataSourceConfig : _dataSourceConfig }
                              maxSearchResults={5}
             >
             </MUIAutoComplete>
