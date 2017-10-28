@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import MUIAutoComplete from 'dotin-material-ui/AutoComplete';
 import BaseComponent from '../BaseComponent';
 
-const dataSourceConfig = {
+const _dataSourceConfig = {
     text: 'text',
     value: 'value',
 };
