@@ -1,2 +1,2 @@
 export default from './TextField';
-export RestrictTextField from './RestrictedTextField';
+export RestrictedTextField from './RestrictedTextField';
