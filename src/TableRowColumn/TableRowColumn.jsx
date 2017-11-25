@@ -30,7 +30,7 @@ class TableRowColumn extends React.Component {
 
         onHoverExit: PropTypes.func,
 
-        tooltip: PropTypes.string,
+        tooltip: PropTypes.any,
     };
 
 

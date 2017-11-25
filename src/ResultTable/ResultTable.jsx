@@ -30,7 +30,7 @@ class ResultTable extends BaseComponent {
         /**
          * A json containing data to be shown.
          */
-        data: PropTypes.object,
+        data: PropTypes.array,
         /**
          * A json defining columns of result table.
          */
