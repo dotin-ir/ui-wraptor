@@ -15,7 +15,7 @@ class Toolbar extends BaseComponent {
         /**
          * A json containing `FontIcon`s that will be aliened in a `ToolbarGroup`.
          */
-        children: PropTypes.object,
+        children: PropTypes.array,
         /**
          * The css class name of the root element.
          */
