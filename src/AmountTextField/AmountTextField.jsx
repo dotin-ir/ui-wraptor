@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import RestrictedInput from './RestrictedInput';
+import RestrictedInput from './AmountPatternChecker';
 import Tooltip from 'dotin-material-ui/internal/Tooltip';
 
 const tooltipStyle = {
@@ -222,6 +222,9 @@ class AmountTextField extends React.Component{
                     value={this.state.value}
                     onChange={this.handleChange}
                     hasStar = {this.props.hasStar}
+                    errorText = {this.props.errorText}
+                    validate = {this.props.validate}
+
                 />
                 <Tooltip
                     label={this.state.tooltipLabel }
