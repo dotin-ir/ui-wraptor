@@ -39,7 +39,7 @@ class RestrictedTextField extends BaseComponent {
 
     handleChange(e, value) {
         if (value.search(this.props.fieldPattern) !== -1)
-            if(this.props.onChange) this.props.onChange(value)
+            if(this.props.onChange) this.props.onChange(e, value)
         else
             e.preventDefault();
     }
