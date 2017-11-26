@@ -55,6 +55,7 @@ class TextField extends BaseComponent {
         value: PropTypes.any,
         validate: PropTypes.func,
         onEnter: PropTypes.func,
+        onFocus: PropTypes.func,
         onKeyDown: PropTypes.func,
         /**
          *  If true, a textarea element will be rendered.
@@ -132,7 +133,8 @@ class TextField extends BaseComponent {
             multiLine,
             rows,
             rowsMax,
-            textareaStyle
+            textareaStyle,
+            onFocus,
         } = this.props;
         return (
             <MUITextField className={className}
@@ -147,6 +149,7 @@ class TextField extends BaseComponent {
                           value={value}
                           type={type}
                           onKeyDown={this.handleKeyDown.bind(this)}
+                          onFocus= {onFocus}
                           multiLine= {multiLine}
                           rows= {rows}
                           rowsMax= {rowsMax}
