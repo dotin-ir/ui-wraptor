@@ -34,7 +34,7 @@ class ResultTable extends BaseComponent {
         /**
          * A json defining columns of result table.
          */
-        columnsDefinition: PropTypes.object,
+        columnsDefinition: PropTypes.array,
         fromIndex: PropTypes.number,
         /**
          * If true, table rows can be selected.
@@ -58,7 +58,7 @@ class ResultTable extends BaseComponent {
 
         onSort: PropTypes.func,
 
-        rowIdentifierDefinitions : PropTypes.object,
+        rowIdentifierDefinitions : PropTypes.array,
 
         /**
          * default color for table row identifier color
@@ -139,6 +139,7 @@ class ResultTable extends BaseComponent {
     }
 
     render() {
+        var i = 0;
         const {
             data,
             columnsDefinition,
@@ -203,7 +204,7 @@ class ResultTable extends BaseComponent {
                             {this.state.columnsDefinition.map((columnDefinition) =>{
                                     var text = this.getValue(row.dataItem, columnDefinition.dataAddress);
                                     return columnDefinition.present || columnDefinition.present === undefined ?
-                                        <TableRowColumn tooltip={text}>{text}</TableRowColumn>
+                                        <TableRowColumn key={i++} tooltip={text}>{text}</TableRowColumn>
                                     : null
                                 }
                                 )}
@@ -223,9 +224,10 @@ class ResultTable extends BaseComponent {
     }
 
     createColumnHeader(columnDefinition) {
+        var i =0;
         return (
         columnDefinition.present || columnDefinition.present === undefined ?
-            <TableHeaderColumn tooltip={columnDefinition.tooltip ? columnDefinition.tooltip : columnDefinition.name}>
+            <TableHeaderColumn key={i++} tooltip={columnDefinition.tooltip ? columnDefinition.tooltip : columnDefinition.name}>
                 {columnDefinition.name}
                 {
                     columnDefinition.sortable ?

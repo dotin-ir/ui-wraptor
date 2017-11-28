@@ -9,9 +9,9 @@ import SaveButton from 'dotin-material-ui/svg-icons/content/save';
  * Three controlled examples, the first allowing a single selection, the second multiple selections,
  * the third using internal state.
  */
-export default class IconMenuExampleControlled extends Component {
+export default class IconMultiSelectList extends Component {
     static propTypes = {
-        columnsDefinition: PropTypes.object,
+        columnsDefinition: PropTypes.array,
         onChange: PropTypes.func
     };
 
@@ -54,7 +54,7 @@ export default class IconMenuExampleControlled extends Component {
     }
     createMenuItems(columnDefinition, key){
         return(
-        <MenuItem value={key} primaryText={columnDefinition.name}/>
+        <MenuItem key={key} value={key} primaryText={columnDefinition.name}/>
         )
     }
     render() {
