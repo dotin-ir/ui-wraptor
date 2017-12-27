@@ -63,9 +63,13 @@ class Checkbox extends BaseComponent {
         valueLink: PropTypes.object,
     };
 
+    static contextTypes = {
+        theme: PropTypes.object.isRequired,
+    };
+
     render() {
         const {
-            ...all
+            ...all ,
         } = this.props;
 
         return <MUICheckbox {...all}/>

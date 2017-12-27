@@ -3,8 +3,11 @@ import MUITextField from 'dotin-material-ui/TextField';
 import BaseComponent from '../BaseComponent';
 import keycode from 'keycode';
 
-
 class TextField extends BaseComponent {
+
+    static contextTypes = {
+        theme: PropTypes.object.isRequired,
+    };
     static propTypes = {
         /**
          * Dotin property type
@@ -74,7 +77,8 @@ class TextField extends BaseComponent {
          *  Override the inline-styles of the TextField's textarea element.
          *  The TextField use either a textarea or an input, this property has effects only when multiLine is true
          *  */
-        textareaStyle: PropTypes.object
+        textareaStyle: PropTypes.object,
+        fullWidth: PropTypes.bool
     };
 
     state = {
@@ -82,7 +86,7 @@ class TextField extends BaseComponent {
     };
 
     componentWillMount() {
-        if(this.props.validate) {
+        if (this.props.validate) {
             this.setState({
                 valid: this.props.validate(this.props.value),
             });
@@ -101,7 +105,7 @@ class TextField extends BaseComponent {
         if (this.props.onChange) {
             this.props.onChange(e, value);
         }
-        if(this.props.validate) {
+        if (this.props.validate) {
             this.setState({
                 valid: this.props.validate(value),
             });
@@ -109,10 +113,10 @@ class TextField extends BaseComponent {
     }
 
     handleKeyDown = (event) => {
-        if(this.props.onKeyDown) this.props.onKeyDown(event)
+        if (this.props.onKeyDown) this.props.onKeyDown(event)
         if (!this.props.disabled) {
             if (keycode(event) === 'enter') {
-                if(this.props.onEnter) this.props.onEnter(event);
+                if (this.props.onEnter) this.props.onEnter(event);
             }
         }
     };
@@ -135,7 +139,57 @@ class TextField extends BaseComponent {
             rowsMax,
             textareaStyle,
             onFocus,
+            fullWidth,
         } = this.props;
+
+        // todo : saeed review these code
+        const theme = this.context.theme,
+            textFieldStyles = theme.textField,
+            textarea = textFieldStyles.textarea,
+            labelStyles = theme.label,
+            errorStyles = textFieldStyles.errorStyle;
+
+        const inputStyle = {
+            height: textFieldStyles.height,
+            padding: textFieldStyles.padding,
+            fontSize: textFieldStyles.fontSize,
+            borderStyle: textFieldStyles.borderStyle,
+            borderWidth: textFieldStyles.borderWidth,
+            borderColor: textFieldStyles.borderColor,
+            borderRadius : textFieldStyles.borderRadius,
+            marginTop:textFieldStyles.margin
+        };
+        multiLine ? Object.assign(inputStyle, {
+            height: 'auto',
+            padding: 0,
+            minHeight: textFieldStyles.height
+        }) : '';
+
+        // boolean for determine material default underline showed or hide
+        const showUnderLine = textFieldStyles.showUnderLine;
+        // styles for label in textField
+        const floatingLabelStyle = {
+            position: labelStyles.position,
+            fontSize: labelStyles.fontSize,
+            color: labelStyles.color,
+        };
+        const errorStyle = {
+            bottom: errorStyles.bottom
+        };
+        const floatingLabelFocusStyle = {
+            color: labelStyles.focus.color
+        };
+
+        const textareaStyles = {
+            marginTop: theme.noMargin ,
+            marginBottom : theme.noMargin,
+            padding:textFieldStyles.padding
+        };
+
+        /*    const rootStyles = {
+             backgroundColor:BaseTheme.container.background,
+         };
+*/
         return (
             <MUITextField className={className}
                           defaultValue={defaultValue}
@@ -145,15 +199,21 @@ class TextField extends BaseComponent {
                           hintText={hintText}
                           id={id}
                           onChange={this.handleChange.bind(this)}
+                          inputStyle={inputStyle}
                           style={style}
                           value={value}
                           type={type}
                           onKeyDown={this.handleKeyDown.bind(this)}
-                          onFocus= {onFocus}
-                          multiLine= {multiLine}
-                          rows= {rows}
-                          rowsMax= {rowsMax}
-                          textareaStyle= {textareaStyle}
+                          onFocus={onFocus}
+                          multiLine={multiLine}
+                          rows={rows}
+                          rowsMax={rowsMax}
+                          textareaStyle={textareaStyles}
+                          fullWidth={fullWidth}
+                          underlineShow={showUnderLine}
+                          floatingLabelStyle={floatingLabelStyle}
+                          errorStyle={errorStyle}
+                          floatingLabelFocusStyle={floatingLabelFocusStyle}
             >
                 {children}
             </MUITextField>

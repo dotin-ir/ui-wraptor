@@ -10,7 +10,7 @@ import shallowEqual from 'recompose/shallowEqual';
 import transitions from 'dotin-material-ui/styles/transitions';
 import TextFieldLabel from 'dotin-material-ui/TextField/TextFieldLabel';
 import TextFieldUnderline from 'dotin-material-ui/TextField/TextFieldUnderline';
-import {blue500,orange500} from 'dotin-material-ui/styles/colors';
+import {blue500, orange500} from 'dotin-material-ui/styles/colors';
 import warning from 'warning';
 import Popover from "dotin-material-ui/Popover";
 import {MenuItem, Paper, RaisedButton} from "dotin-material-ui";
@@ -68,10 +68,10 @@ const getStyles = (props, context, state) => {
         },
         more: {
             position: 'absolute',
-            display:'block',
-            width:'450px',
-            wordWrap:'break-word',
-            padding:'20px 20px',
+            display: 'block',
+            width: '450px',
+            wordWrap: 'break-word',
+            padding: '20px 20px',
             color: '#000',
             cursor: 'inherit',
             font: 'inherit',
@@ -200,6 +200,29 @@ class Label extends BaseComponent {
     }
 
     render() {
+        const theme = this.context.theme,
+            textFieldStyles = theme.textField,
+            labelStyles = theme.label;
+
+        const inputStyle = {
+            margin: textFieldStyles.margin,
+            height: textFieldStyles.height,
+            padding: textFieldStyles.padding,
+            fontSize: textFieldStyles.fontSize,
+            display: textFieldStyles.disabled.display,
+            background: textFieldStyles.disabled.backgroundColor,
+            color: textFieldStyles.disabled.color,
+            opacity: textFieldStyles.disabled.opacity,
+            lineHeight: textFieldStyles.disabled.lineHeight,
+            borderStyle: textFieldStyles.borderStyle,
+            borderWidth: textFieldStyles.borderWidth,
+            borderColor: textFieldStyles.borderColor
+        };
+        const floatingLabelStyle = {
+            position: labelStyles.position,
+            fontSize: labelStyles.fontSize
+        };
+
         const {
             caption,
             id,
@@ -211,22 +234,22 @@ class Label extends BaseComponent {
         const styles = getStyles(this.props, this.context, this.state);
         const spanId = id || this.uniqueId;
         const errorTextElement = this.state.errorText && (
-                <div style={prepareStyles(styles.error)}>
-                    {this.state.errorText}
-                </div>
-            );
+            <div style={prepareStyles(styles.error)}>
+                {this.state.errorText}
+            </div>
+        );
 
         const floatingLabelTextElement = caption && (
-                <TextFieldLabel
-                    muiTheme={this.context.theme}
-                    style={styles.floatingLabel}
-                    htmlFor={spanId}
-                    shrink={true}
-                    disabled={false}
-                >
-                    {caption}
-                </TextFieldLabel>
-            );
+            <TextFieldLabel
+                muiTheme={this.context.theme}
+                style={Object.assign(styles.floatingLabel, floatingLabelStyle)}
+                htmlFor={spanId}
+                shrink={true}
+                disabled={false}
+            >
+                {caption}
+            </TextFieldLabel>
+        );
 
         const inputProps = {
             id: spanId,
@@ -236,7 +259,7 @@ class Label extends BaseComponent {
         let isOverFlow = value.length > 33 && (typeof value) === 'string';
         let labelElement = isOverFlow ? (
             <span
-                style={Object.assign(styles.label, {color:blue500, cursor:"help"})}
+                style={Object.assign({}, styles.label, inputStyle, {color: blue500, cursor: "help"})}
                 {...other}
                 {...inputProps}
                 onMouseOver={this.handleMouseOver}
@@ -245,7 +268,7 @@ class Label extends BaseComponent {
             </span>
         ) : (
             <span
-                style={styles.label}
+                style={Object.assign(styles.label, inputStyle)}
                 {...other}
                 {...inputProps}
             >
@@ -254,8 +277,8 @@ class Label extends BaseComponent {
         );
 
 
-        const underlineStyle = isOverFlow ? {borderColor:blue500, borderBottom: "dashed 2px", cursor:"help"} : {};
-        const {open,anchorEl} = this.state;
+        const underlineStyle = isOverFlow ? {borderColor: blue500, borderBottom: "dashed 2px", cursor: "help"} : {};
+        const {open, anchorEl} = this.state;
         return (
             <div
                 style={prepareStyles(styles.root)}
@@ -263,10 +286,10 @@ class Label extends BaseComponent {
                 {floatingLabelTextElement}
                 {labelElement}
                 <TextFieldUnderline
-                    disabled={false}
+                    disabled={true}
                     error={!!this.state.errorText}
                     muiTheme={this.context.theme}
-                    style = {underlineStyle}
+                    style={{display: "none"}}
                 />
                 {errorTextElement}
                 {
@@ -277,13 +300,13 @@ class Label extends BaseComponent {
                             anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             targetOrigin={{horizontal: 'right', vertical: 'top'}}
                             onRequestClose={this.handleRequestClose}
-                            style={{marginTop:'-20px'}}
+                            style={{marginTop: '-20px'}}
                             zDepth={5}
                         >
                             <Paper style={{
-                                    minHeight: 250,
-                                    width: 450,
-                                }}
+                                minHeight: 250,
+                                width: 450,
+                            }}
                             >
                                 <span
                                     style={styles.more}
@@ -291,7 +314,7 @@ class Label extends BaseComponent {
                                     {value}
                                 </span>
                             </Paper>
-                        </Popover>:null
+                        </Popover> : null
                 }
             </div>
         );
