@@ -22,6 +22,9 @@ class GridTile extends BaseComponent {
      * Override the inline-styles of the root element.
      */
     style: PropTypes.object,
+    title: PropTypes.string,
+    actionIcon: PropTypes.string,
+    multiple: PropTypes.bool,
   };
 
   render() {
@@ -30,11 +33,17 @@ class GridTile extends BaseComponent {
         rows,
         style,
         children,
+        title,
+        actionIcon,
+        multiple
     } = this.props;
     return (
         <MUIGridTile cols={cols}
                      rows={rows}
                      style={style}
+                     title={title}
+                     actionIcon={actionIcon}
+                     multiple={multiple}
        >
           {children}
         </MUIGridTile>
