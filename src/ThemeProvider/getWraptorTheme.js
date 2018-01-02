@@ -1,5 +1,5 @@
 import merge from 'lodash.merge';
-import {darken, fade, emphasize, lighten} from 'dotin-material-ui/utils/colorManipulator';
+import {fade} from 'dotin-material-ui/utils/colorManipulator';
 import lightBaseTheme from 'dotin-material-ui/styles/baseThemes/lightBaseTheme';
 import zIndex from 'dotin-material-ui/styles/zIndex';
 import autoprefixer from 'dotin-material-ui/utils/autoprefixer';
@@ -11,9 +11,8 @@ import {
     red500, grey600,
     transparent, cyan500
 } from 'dotin-material-ui/styles/colors';
-//Todo
-/**
- * getWraptorTheme function added to merge customized theme with original theme in dotin-material
+/*
+ * getWraptorTheme function defined to merge customized theme with original theme in dotin-material
  * Get the MUI theme corresponding to a base theme.
  * It's possible to override the computed theme values
  * by providing a second argument. The calculated
@@ -51,9 +50,9 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
                 displayUnderLine:'none'
             },
             label: {
-                lineHeight: 32 + 'px',
+                lineHeight: 30 + 'px',
                 top: 0,
-                height: 32,
+                height: 30,
                 paddingRight: 5,
                 color: grey600
             },
@@ -120,9 +119,10 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
             disabled: {
                 display: "block",
                 backgroundColor: "#e2e2e2",
-                color: "#797676",
                 opacity: 0.8,
-                lineHeight: "32px"
+                lineHeight: "30px",
+                cursor:'not-allowed' ,
+                color : palette.disabledColor
             },
             textarea: {
                 height: 'auto',

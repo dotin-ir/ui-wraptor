@@ -10,11 +10,10 @@ import shallowEqual from 'recompose/shallowEqual';
 import transitions from 'dotin-material-ui/styles/transitions';
 import TextFieldLabel from 'dotin-material-ui/TextField/TextFieldLabel';
 import TextFieldUnderline from 'dotin-material-ui/TextField/TextFieldUnderline';
-import {blue500, orange500} from 'dotin-material-ui/styles/colors';
+import {blue500} from 'dotin-material-ui/styles/colors';
 import warning from 'warning';
 import Popover from "dotin-material-ui/Popover";
-import {MenuItem, Paper, RaisedButton} from "dotin-material-ui";
-import Menu from "../Menu/Menu";
+import { Paper} from "dotin-material-ui";
 
 const getStyles = (props, context, state) => {
     const {
@@ -210,13 +209,14 @@ class Label extends BaseComponent {
             padding: textFieldStyles.padding,
             fontSize: textFieldStyles.fontSize,
             display: textFieldStyles.disabled.display,
-            background: textFieldStyles.disabled.backgroundColor,
-            color: textFieldStyles.disabled.color,
+            color : textFieldStyles.disabled.color,
             opacity: textFieldStyles.disabled.opacity,
             lineHeight: textFieldStyles.disabled.lineHeight,
             borderStyle: textFieldStyles.borderStyle,
             borderWidth: textFieldStyles.borderWidth,
-            borderColor: textFieldStyles.borderColor
+            borderColor: textFieldStyles.borderColor ,
+            borderRadius : textFieldStyles.borderRadius ,
+            cursor :  textFieldStyles.disabled.cursor
         };
         const floatingLabelStyle = {
             position: labelStyles.position,
