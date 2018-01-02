@@ -99,8 +99,9 @@ class ImageSelector extends BaseComponent {
           {imagesInfo.map(image => (
             <GridTile
               key={image.id}
-              title={image.caption}
-              subtitle={<span>{image.caption}</span>}
+              title={
+                  <div onClick={this.handleImageClick.bind(this, image)}>{image.caption}</div>
+              }
               multiple={multiple}
               actionIcon={
                 <IconButton onClick={this.handleImageClick.bind(this, image)}>
