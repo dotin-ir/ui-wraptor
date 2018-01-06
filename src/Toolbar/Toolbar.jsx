@@ -105,6 +105,11 @@ class Toolbar extends BaseComponent {
     }
 
     getMenuItem(menuSize, childData) {
+        const theme = this.context.theme ,
+            itemStyles = theme.resultTableActionMenu.itemStyles ,
+            iconStyles = theme.resultTableActionMenu.iconStyles,
+            innerDivStyle = theme.resultTableActionMenu.innerDivStyle;
+
         //TODO remove item and element
         if (menuSize === 'small') {
             // if (childData.name === 'Item') {
@@ -112,9 +117,11 @@ class Toolbar extends BaseComponent {
                 <MenuItem
                     primaryText={childData.tooltip}
                     leftIcon={childData.className ?
-                        <FontIcon className={childData.className} /> : (childData.icon ? childData.icon : null)}
+                        <FontIcon className={childData.className}  style={iconStyles}/> : (childData.icon ? childData.icon : null)}
                     key={this.generateElementKey()}
                     onTouchTap={childData.onTouchTap}
+                    style={itemStyles}
+                    innerDivStyle={innerDivStyle}
                 />
             );
             // }

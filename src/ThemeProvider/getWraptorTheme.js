@@ -188,6 +188,9 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
                 lineHeight: '40px' ,
                 minHeight : '40px',
             },
+            innerDivStyle:{
+                padding:'0px 50px 0px 16px'
+            },
             iconStyles : {
                 fontSize:20 ,
                 margin:10,
