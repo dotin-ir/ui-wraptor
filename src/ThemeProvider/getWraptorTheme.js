@@ -146,6 +146,54 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
         noMargin:{
             margin:0
         },
+        table : {
+          borderCollapse:'separate' ,
+            actionColumns: {
+              justifyContent:'center'
+            }
+        },
+        tableRow : {
+            stripeColor : '#f7f7f7',
+            hoverColor : '#EBEBEB'
+        },
+        tableRowColumn : {
+            borderWidth : 1 ,
+            borderStyle: 'solid' ,
+            borderColor: '#EBEBEB',
+            textAlign:'center'
+        },
+        tableHeader:{
+                borderBottomWidth:'1px',
+                borderColor : '#e0e0e0',
+                borderStyle:'solid',
+        },
+        tableHeaderColumn:{
+            fontWeight:'bold',
+            borderWidth:1,
+            borderBottomWidth:'2px',
+            borderColor : '#e0e0e0',
+            borderStyle:'solid',
+            color : '#000',
+            textAlign:'center',
+            height:48,
+        },
+        toolbar:{
+            justifyContent:'inherit',
+            width:'100%',
+            backgroundColor:'transparent'
+        },
+        resultTableActionMenu : {
+            itemStyles: {
+                fontSize: 14 ,
+                lineHeight: '40px' ,
+                minHeight : '40px',
+            },
+            iconStyles : {
+                fontSize:20 ,
+                margin:10,
+                color:'#222'
+            }
+        }
     }, customisedTheme, {
         baseTheme, // To provide backward compatibility.
         rawTheme: baseTheme, // To provide backward compatibility.

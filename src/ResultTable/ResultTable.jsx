@@ -6,26 +6,36 @@ import TableHeaderColumn from 'dotin-material-ui/Table/TableHeaderColumn';
 import TableBody from 'dotin-material-ui/Table/TableBody';
 import TableRow from 'dotin-material-ui/Table/TableRow';
 import TableRowColumn from '../TableRowColumn/TableRowColumn';
-
 import Actionbar from '../Toolbar/index';
 import ColumnSelector from '../IconMultiSelectList/index';
 import TableRowIdentifier from '../TableRowIdentifier/index';
-
 import SortSwitch from "../SortColumnSwitch"
-
+import ResultTableHeader from './ResultTableHeader';
 
 const styles = {
     visibleStyle: {
         overflow: 'visible',
     },
     indexColumnStyle: {
-        width: '20px'
+        width: '52px',
+        padding: 0,
     },
     identifierColumnStyle: {
-        width: '20px'
+        width: '5px',
+        padding: 0
+    },
+    actionsWrapper: {
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'center'
     }
-}
+};
+
 class ResultTable extends BaseComponent {
+
+    static contextTypes = {
+        theme: React.PropTypes.object.isRequired
+    };
     static propTypes = {
         /**
          * A json containing data to be shown.
@@ -58,12 +68,14 @@ class ResultTable extends BaseComponent {
 
         onSort: PropTypes.func,
 
-        rowIdentifierDefinitions : PropTypes.array,
+        rowIdentifierDefinitions: PropTypes.array,
 
         /**
          * default color for table row identifier color
          */
-        defaultColor : PropTypes.object,
+        defaultColor: PropTypes.object,
+        title: PropTypes.string,
+        titleActions: PropTypes.array
     };
 
     static defaultProps = {
@@ -74,7 +86,7 @@ class ResultTable extends BaseComponent {
 
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             columnsDefinition: this.props.columnsDefinition,
             data: this.props.data,
         }
@@ -92,23 +104,26 @@ class ResultTable extends BaseComponent {
         ))
     }
 
-    comparator(dataAddress, rowOne, rowTwo){
+    comparator(dataAddress, rowOne, rowTwo) {
         var valOne = this.getValue(rowOne, dataAddress);
         var valTwo = this.getValue(rowTwo, dataAddress);
         return valOne < valTwo ? -1 : valOne > valTwo ? 1 : 0;
     }
-    sortDataASC(columnDefinition){
+
+    sortDataASC(columnDefinition) {
         return this.props.rawData.sort(this.comparator.bind(this, columnDefinition.dataAddress));
     }
-    sortASCHandler(columnDefinition){
+
+    sortASCHandler(columnDefinition) {
         this.props.onSort(this.sortDataASC(columnDefinition));
     }
-    sortDESCHandler(columnDefinition){
+
+    sortDESCHandler(columnDefinition) {
         this.props.onSort(this.sortDataASC(columnDefinition).reverse());
     }
 
-    columnSelectHandler(columnsDefinition){
-        this.setState(Object.assign(this.state,{
+    columnSelectHandler(columnsDefinition) {
+        this.setState(Object.assign(this.state, {
             columnsDefinition: columnsDefinition
         }))
     }
@@ -123,11 +138,11 @@ class ResultTable extends BaseComponent {
             } else if (list === 'all') {
                 selectedRow = data;
             }
-        }else {
-            if(list.length > 0) {
+        } else {
+            if (list.length > 0) {
                 list.map((selectedRowIndex) => {
                     data.map((row, rowIndex) => {
-                        if(rowIndex == selectedRowIndex) {
+                        if (rowIndex == selectedRowIndex) {
                             selectedRow.push(row)
                         }
                     })
@@ -139,6 +154,41 @@ class ResultTable extends BaseComponent {
     }
 
     render() {
+        const theme = this.context.theme,
+            table = theme.table,
+            tableRowColumn = theme.tableRowColumn,
+            tableHeader = theme.tableHeader,
+            tableHeaderColumn = theme.tableHeaderColumn;
+        const tableRowColumnStyles = {
+            borderWidth: tableRowColumn.borderWidth,
+            borderStyle: tableRowColumn.borderStyle,
+            borderColor: tableRowColumn.borderColor,
+            textAlign: tableRowColumn.textAlign
+        };
+        const tableHeaderStyles = {
+            borderBottomWidth: tableHeader.borderBottomWidth,
+            borderBottomStyle: tableHeader.borderStyle,
+            borderBottomColor: tableHeader.borderColor,
+        };
+
+        // const tableHeaderColumn = this.context.theme.tableHeaderColumn;
+        const tableHeaderColumnStyles = {
+            fontWeight: tableHeaderColumn.fontWeight,
+            textAlign: tableHeaderColumn.textAlign,
+            borderColor: tableHeaderColumn.borderColor,
+            borderStyle: tableHeaderColumn.borderStyle,
+            color: tableHeaderColumn.color,
+            height: tableHeaderColumn.height,
+            borderRadius: '0 0 0 0',
+            borderBottomWidth: tableHeaderColumn.borderBottomWidth,
+            borderTopWidth: tableHeaderColumn.borderWidth,
+            borderRightWidth: tableHeaderColumn.borderWidth,
+            borderLeftWidth: tableHeaderColumn.borderWidth
+        };
+        const tableStyles = {
+            borderCollapse: table.borderCollapse
+        };
+        const actionText = theme.locale == 'fa-IR' ? 'رویدادها' : 'Actions';
         var i = 0;
         const {
             data,
@@ -148,7 +198,9 @@ class ResultTable extends BaseComponent {
             multiSelectable,
             rowIdentifierDefinitions,
             hasColumnFilter,
-            defaultColor
+            defaultColor,
+            title,
+            titleActions
         } = this.props;
         var columnSelector = null;
         if (hasColumnFilter == true || hasColumnFilter == 'true')
@@ -156,87 +208,132 @@ class ResultTable extends BaseComponent {
                 <ColumnSelector columnsDefinition={columnsDefinition} onChange={this.columnSelectHandler.bind(this)}/>);
         return (
             <div>
-            <Table fixedFooter={false}
-                   fixedHeader={true}
-                   selectable={selectable}
-                   bodyStyle={styles.visibleStyle}
-                   wrapperStyle={styles.visibleStyle}
-                   multiSelectable={multiSelectable}
-                   onRowSelection={this.onRowSelection.bind(this)}
-            >
-                <TableHeader displaySelectAll={false}
-                             adjustForCheckbox={false}
-                             enableSelectAll={false}
+                {title || titleActions ?
+                    <ResultTableHeader title={title} actions={titleActions}/> : ''}
+                <Table fixedFooter={false}
+                       fixedHeader={true}
+                       selectable={selectable}
+                       bodyStyle={styles.visibleStyle}
+                       wrapperStyle={styles.visibleStyle}
+                       multiSelectable={multiSelectable}
+                       onRowSelection={this.onRowSelection.bind(this)}
+                       style={tableStyles}
                 >
-                    <TableRow>
-                        <TableHeaderColumn style={styles.indexColumnStyle}>
-                            {columnSelector}
-                        </TableHeaderColumn>
-                        {
-                            rowIdentifierDefinitions ?
-                                <TableHeaderColumn style={styles.identifierColumnStyle}/>
-                                :
-                                null
-                        }
-                        {this.state.columnsDefinition.map((columnDefinition) => this.createColumnHeader(columnDefinition))}
-                        <TableHeaderColumn />
-
-                    </TableRow>
-                </TableHeader>
-                <TableBody displayRowCheckbox={selectable}
-                           showRowHover={true}
-                           stripedRows={false}
-                           deselectOnClickaway={false}
-                >
-                    {data.map((row, index) => (
-                        <TableRow key={index}>
-                            <TableRowColumn style={styles.indexColumnStyle}>{index + fromIndex}</TableRowColumn>
+                    <TableHeader displaySelectAll={false}
+                                 adjustForCheckbox={false}
+                                 enableSelectAll={false}
+                                 style={tableHeaderStyles}
+                    >
+                        <TableRow>
+                            <TableHeaderColumn
+                                style={Object.assign({}, tableHeaderColumnStyles, {
+                                    borderRadius: '0 5px 0 0',
+                                    width: !selectable ? styles.indexColumnStyle.width : '24px',
+                                    padding: !selectable ? styles.indexColumnStyle.padding : '0 23px'
+                                })}>
+                                {columnSelector}
+                            </TableHeaderColumn>
+                            {
+                                selectable ? <TableHeaderColumn
+                                    style={Object.assign({}, tableHeaderColumnStyles, {
+                                        width: styles.indexColumnStyle.width,
+                                        padding: styles.indexColumnStyle.padding
+                                    })}>
+                                </TableHeaderColumn> : ''
+                            }
+                            {selectable}
                             {
                                 rowIdentifierDefinitions ?
-                                    <TableRowColumn style={styles.identifierColumnStyle}>
-                                        <TableRowIdentifier rowIdentifierDefinitions={rowIdentifierDefinitions}
-                                                            defaultColor={defaultColor}
-                                                            dataItem={row.dataItem}/>
-                                    </TableRowColumn>:
+                                    <TableHeaderColumn style={Object.assign({}, tableHeaderColumnStyles, {
+                                        width: '3px',
+                                        borderColor: 'green',
+                                        backgroundColor: 'green',
+                                        padding: 0,
+                                    })}/>
+                                    :
                                     null
                             }
-
-                            {this.state.columnsDefinition.map((columnDefinition) =>{
-                                    var text = this.getValue(row.dataItem, columnDefinition.dataAddress);
-                                    return columnDefinition.present || columnDefinition.present === undefined ?
-                                        <TableRowColumn key={i++} tooltip={text}>{text}</TableRowColumn>
-                                    : null
+                            {this.state.columnsDefinition.map((columnDefinition) => this.createColumnHeader(columnDefinition, tableHeaderColumnStyles))}
+                            <TableHeaderColumn
+                                style={Object.assign({}, tableHeaderColumnStyles, {borderRadius: '5px 0 0 0'})}>
+                                {actionText}
+                            </TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody displayRowCheckbox={selectable}
+                               showRowHover={true}
+                               stripedRows={true}
+                               deselectOnClickaway={false}
+                    >
+                        {data.map((row, index) => (
+                            <TableRow key={index}>
+                                <TableRowColumn
+                                    style={
+                                        index < data.length - 1 ?
+                                            Object.assign(styles.indexColumnStyle, tableRowColumnStyles) :
+                                            Object.assign({}, tableRowColumnStyles, {
+                                                borderRadius: '0 0 5px 0',
+                                                width: styles.indexColumnStyle.width,
+                                                padding: styles.indexColumnStyle.padding
+                                            })}
+                                >{index + fromIndex}</TableRowColumn>
+                                {
+                                    rowIdentifierDefinitions ?
+                                        <TableRowColumn style={styles.identifierColumnStyle}>
+                                            <TableRowIdentifier rowIdentifierDefinitions={rowIdentifierDefinitions}
+                                                                defaultColor={defaultColor}
+                                                                dataItem={row.dataItem}/>
+                                        </TableRowColumn> :
+                                        null
                                 }
+
+                                {this.state.columnsDefinition.map((columnDefinition) => {
+                                        var text = this.getValue(row.dataItem, columnDefinition.dataAddress);
+                                        return columnDefinition.present || columnDefinition.present === undefined ?
+                                            <TableRowColumn key={i++} tooltip={text}
+                                                            style={Object.assign({}, tableRowColumnStyles)}>
+                                                {text}
+                                            </TableRowColumn>
+                                            : null
+                                    }
                                 )}
 
-                            <TableRowColumn style={styles.visibleStyle} >
-                                {row.actionbarDefinition && row.actionbarDefinition.length > 0 ? <Actionbar children={row.actionbarDefinition}/> : null}
-                            </TableRowColumn>
+                                <TableRowColumn style={
+                                    index < data.length - 1 ?
+                                        tableRowColumnStyles :
+                                        Object.assign({}, tableRowColumnStyles, {
+                                            borderRadius: '0 0 0 5px',
+                                        })}
 
-
-
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                                >
+                                    {row.actionbarDefinition && row.actionbarDefinition.length > 0 ?
+                                        <Actionbar children={row.actionbarDefinition}/> : null}
+                                </TableRowColumn>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
             </div>
         );
     }
 
-    createColumnHeader(columnDefinition) {
-        var i =0;
+    createColumnHeader(columnDefinition, columnStyles) {
+
+        var i = 0;
         return (
-        columnDefinition.present || columnDefinition.present === undefined ?
-            <TableHeaderColumn key={i++} tooltip={columnDefinition.tooltip ? columnDefinition.tooltip : columnDefinition.name}>
-                {columnDefinition.name}
-                {
-                    columnDefinition.sortable ?
-                        <SortSwitch ascHandler={this.sortASCHandler.bind(this, columnDefinition)}
-                                    descHandler={this.sortDESCHandler.bind(this, columnDefinition)}/>
-                        : null
-                }
-            </TableHeaderColumn>
-            : null
+            columnDefinition.present || columnDefinition.present === undefined ?
+                <TableHeaderColumn key={i++}
+                                   tooltip={columnDefinition.tooltip ? columnDefinition.tooltip : columnDefinition.name}
+                                   style={columnStyles}>
+                    {columnDefinition.name}
+                    {
+                        columnDefinition.sortable ?
+                            <SortSwitch ascHandler={this.sortASCHandler.bind(this, columnDefinition)}
+                                        descHandler={this.sortDESCHandler.bind(this, columnDefinition)}/>
+                            : null
+                    }
+                </TableHeaderColumn>
+                : null
         );
     }
 
@@ -250,7 +347,7 @@ class ResultTable extends BaseComponent {
                     return acc[index];
                 }, acc[segments[0]]);
             }, row);
-        }catch (e){
+        } catch (e) {
             return '';
         }
     }

@@ -7,9 +7,14 @@ const style ={
     },
     ltr:{
         float: 'right',
+    },
+    icon:{
+        display:'inline-block',
+        margin:'10px 5px 5px',
+        verticalAlign:'middle'
     }
 
-}
+};
 class MultiStateIconSwitch extends BaseComponent {
     constructor(props, state) {
         super(props, state);
@@ -26,7 +31,7 @@ class MultiStateIconSwitch extends BaseComponent {
         this.setState({index: this.state.index < this.props.children.length - 1 ? ++this.state.index : 0});
     }
     render() {
-        return <div onClick={this.indexChanger.bind(this)} style={ this.context.theme.isRtl ? style.rtl : style.ltr}>
+        return <div onClick={this.indexChanger.bind(this)} style={ style.icon }>
             {this.props.children[this.state.index]}
         </div>
     }
