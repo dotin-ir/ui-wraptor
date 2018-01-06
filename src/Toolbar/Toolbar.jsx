@@ -8,9 +8,14 @@ import IconMenu from 'dotin-material-ui/IconMenu';
 import MenuItem from 'dotin-material-ui/MenuItem';
 import MoreIcon from 'dotin-material-ui/svg-icons/navigation/more-vert';
 import Measure from 'react-measure';
+import {ToolbarTitle } from 'dotin-material-ui/Toolbar/index';
 
 
 class Toolbar extends BaseComponent {
+    titleBar;
+     size;
+    actionBarSize;
+
     static propTypes = {
         /**
          * A json containing `FontIcon`s that will be aliened in a `ToolbarGroup`.
@@ -23,7 +28,7 @@ class Toolbar extends BaseComponent {
         /**
          * Override the inline-styles of the root element.
          */
-        style: PropTypes.object,
+        title: PropTypes.string
     };
 
     static contextTypes = {
@@ -40,64 +45,78 @@ class Toolbar extends BaseComponent {
     constructor(props, state) {
         super(props, state);
         this.elementKey = 1;
+        this.checkTitleSize = this.checkTitleSize.bind(this);
     }
 
     generateElementKey() {
         return 'Toolbar-' + (++this.elementKey);
     }
 
+    checkTitleSize(){
+        const titleSize = this.titleBar._reactInternalInstance._renderedComponent._hostNode.clientWidth;
+        this.actionBarSize +=titleSize;
+        this.size = this.actionBarSize >= this.state.dimensions.width ? 'small' : 'large';
+    }
     render() {
         const {
             className,
             children,
-            style,
+            title
         } = this.props;
 
         const {width} = this.state.dimensions;
-        const actionBarSize = children ? children.length * this.context.theme.baseTheme.spacing.iconSize * 2 : 0;
-        const size = actionBarSize >= width ? 'small' : 'large';
-
+        this.actionBarSize = children ? children.length * this.context.theme.spacing.iconSize * 2 : 0 ;
+         this.size = this.actionBarSize >= width ? 'small' : 'large';
         return <Measure
             onMeasure={(dimensions) => {
           this.setState({dimensions})
         }}
         >
-            <div>
-                { size === 'small'
-                    ?
-                        (<IconMenu
-                            iconButtonElement={ <IconButton touch={true}> <MoreIcon /> </IconButton> }
-                            useLayerForClickAway={true}
-                        >
-                            {children.map((child) => this.getMenuItem(size, child))}
-                        </IconMenu>)
-                    :
-                        (<MUIToolbar
-                            className={className}
-                            style={Object.assign({backgroundColor: 'rgba(255,0,0,0)',}, style)}
-                        >
-                            <ToolbarGroup>
-                                {children.map((child) => this.getMenuItem(size, child))}
-                            </ToolbarGroup>
-                        </MUIToolbar>)
+            <MUIToolbar className={className}
+                        style={Object.assign({},this.context.theme.toolbar)}
+             >
+                {
+                    title ?
+                            <ToolbarGroup ref={(titleBar)=>this.titleBar = titleBar}>
+                                <ToolbarTitle text={title} style={{color:'#222'}}/>
+                            </ToolbarGroup> : null
                 }
-            </div>
+                {
+                    this.titleBar !== null && this.titleBar !== undefined ? this.checkTitleSize() : ''
+                }
+                {
+                    this.size === 'small'
+                    ?
+                    (<IconMenu
+                        iconButtonElement={<IconButton touch={true}> <MoreIcon/> </IconButton>}
+                        useLayerForClickAway={true}
+                    >
+                        {children.map((child) => this.getMenuItem(this.size, child))}
+                    </IconMenu>)
+                    :
+                    (
+                        <ToolbarGroup>
+                            {children.map((child) => this.getMenuItem(this.size, child))}
+                        </ToolbarGroup>
+                    )
+                }
+            </MUIToolbar>
         </Measure>;
     }
 
     getMenuItem(menuSize, childData) {
-
         //TODO remove item and element
         if (menuSize === 'small') {
             // if (childData.name === 'Item') {
-                return (
-                    <MenuItem
-                        primaryText={childData.tooltip}
-                        leftIcon={childData.className ? <FontIcon className={childData.className} /> : (childData.icon ? childData.icon : null)}
-                        key={this.generateElementKey()}
-                        onTouchTap={childData.onTouchTap}
-                    />
-                );
+            return (
+                <MenuItem
+                    primaryText={childData.tooltip}
+                    leftIcon={childData.className ?
+                        <FontIcon className={childData.className} /> : (childData.icon ? childData.icon : null)}
+                    key={this.generateElementKey()}
+                    onTouchTap={childData.onTouchTap}
+                />
+            );
             // }
             // else if (childData.name === 'Element') {
             //     return (
@@ -114,10 +133,11 @@ class Toolbar extends BaseComponent {
             // }
         } else {
             // if (childData.name === 'Item') {
-                return <IconButton tooltip={childData.tooltip} onTouchTap={childData.onTouchTap}
-                                   key={this.generateElementKey()}>
-                    {childData.className ? <FontIcon className={childData.className} /> : (childData.icon ? childData.icon : null)}
-                </IconButton>;
+            return <IconButton tooltip={childData.tooltip} onTouchTap={childData.onTouchTap}
+                               key={this.generateElementKey()}>
+                {childData.className ?
+                    <FontIcon className={childData.className}/> : (childData.icon ? childData.icon : null)}
+            </IconButton>;
             // }
             // else if (childData.name === 'Element') {
             //     return (childData.element);
