@@ -160,7 +160,9 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
             borderWidth : 1 ,
             borderStyle: 'solid' ,
             borderColor: '#EBEBEB',
-            textAlign:'center'
+            textAlign:'center',
+            height:40 ,
+            fontSize: 12
         },
         tableHeader:{
                 borderBottomWidth:'1px',
@@ -175,7 +177,7 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
             borderStyle:'solid',
             color : '#000',
             textAlign:'center',
-            height:48,
+            height:40,
         },
         toolbar:{
             justifyContent:'inherit',
@@ -184,12 +186,13 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
         },
         resultTableActionMenu : {
             itemStyles: {
-                fontSize: 14 ,
+                fontSize: 12 ,
                 lineHeight: '40px' ,
                 minHeight : '40px',
             },
             innerDivStyle:{
-                padding:'0px 50px 0px 16px'
+                paddingLeft:50 ,
+                paddingRight:10 ,
             },
             iconStyles : {
                 fontSize:20 ,

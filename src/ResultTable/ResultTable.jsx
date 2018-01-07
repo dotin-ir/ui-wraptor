@@ -163,7 +163,9 @@ class ResultTable extends BaseComponent {
             borderWidth: tableRowColumn.borderWidth,
             borderStyle: tableRowColumn.borderStyle,
             borderColor: tableRowColumn.borderColor,
-            textAlign: tableRowColumn.textAlign
+            textAlign: tableRowColumn.textAlign,
+            height: tableRowColumn.height,
+            fontSize : tableRowColumn.fontSize
         };
         const tableHeaderStyles = {
             borderBottomWidth: tableHeader.borderBottomWidth,
@@ -246,8 +248,6 @@ class ResultTable extends BaseComponent {
                                 rowIdentifierDefinitions ?
                                     <TableHeaderColumn style={Object.assign({}, tableHeaderColumnStyles, {
                                         width: '3px',
-                                        borderColor: 'green',
-                                        backgroundColor: 'green',
                                         padding: 0,
                                     })}/>
                                     :
@@ -300,9 +300,12 @@ class ResultTable extends BaseComponent {
 
                                 <TableRowColumn style={
                                     index < data.length - 1 ?
-                                        tableRowColumnStyles :
+                                        Object.assign({}, tableRowColumnStyles, {
+                                            padding: 0
+                                        }):
                                         Object.assign({}, tableRowColumnStyles, {
                                             borderRadius: '0 0 0 5px',
+                                            padding : 0
                                         })}
 
                                 >
