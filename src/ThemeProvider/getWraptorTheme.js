@@ -34,6 +34,7 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
     const baseTheme = {spacing, fontFamily, palette};
 
     customisedTheme = merge({
+        palette: {},
         autoComplete: {
             marginTop: -12,
         },
@@ -47,7 +48,7 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
                 height: 45,
                 fontSize: 14,
                 margin: 0,
-                displayUnderLine:'none'
+                displayUnderLine: 'none'
             },
             label: {
                 lineHeight: 30 + 'px',
@@ -62,8 +63,8 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
                 lineHeight: "100%",
                 padding: "0 6px",
                 textAlign: "center",
-                width:36,
-                fill:"#888888"
+                width: 36,
+                fill: "#888888"
             },
             list: {
                 paddingTop: 0,
@@ -71,7 +72,7 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
             },
             listItem: {
                 border: 0,
-               boxShadow:'0 0 1px #bbb',
+                boxShadow: '0 0 1px #bbb',
                 marginRight: -10,
                 fontSize: 12
             }
@@ -102,7 +103,7 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
             showUnderLine: false,
             borderWidth: 1,
             borderStyle: 'solid',
-            borderRadius: 3 ,
+            borderRadius: 3,
             margin: 0,
             height: 30,
             padding: '0 10px',
@@ -121,8 +122,8 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
                 backgroundColor: "#e2e2e2",
                 opacity: 0.8,
                 lineHeight: "30px",
-                cursor:'not-allowed' ,
-                color : palette.disabledColor
+                cursor: 'not-allowed',
+                color: palette.disabledColor
             },
             textarea: {
                 height: 'auto',
@@ -140,64 +141,77 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
                 color: cyan500
             }
         },
-        noPadding:{
-            padding:0
+        noPadding: {
+            padding: 0
         },
-        noMargin:{
-            margin:0
+        noMargin: {
+            margin: 0
         },
-        table : {
-          borderCollapse:'separate' ,
+        table: {
+            borderCollapse: 'separate',
             actionColumns: {
-              justifyContent:'center'
+                justifyContent: 'center'
             }
         },
-        tableRow : {
-            stripeColor : '#f7f7f7',
-            hoverColor : '#EBEBEB'
+        tableRow: {
+            stripeColor: '#f7f7f7',
+            hoverColor: '#EBEBEB',
+            height: 44,
         },
-        tableRowColumn : {
-            borderWidth : 1 ,
-            borderStyle: 'solid' ,
+        tableRowColumn: {
+            borderWidth: 1,
+            borderStyle: 'solid',
             borderColor: '#EBEBEB',
-            textAlign:'center',
-            height:40 ,
-            fontSize: 12
+            textAlign: 'left',
+            height: 40,
+            fontSize: 12,
+            paddingLeft: 15,
+            paddingRight: 15
         },
-        tableHeader:{
-                borderBottomWidth:'1px',
-                borderColor : '#e0e0e0',
-                borderStyle:'solid',
+        tableHeader: {
+            borderBottomWidth: '1px',
+            borderColor: '#e0e0e0',
+            borderStyle: 'solid',
         },
-        tableHeaderColumn:{
-            fontWeight:'bold',
-            borderWidth:1,
-            borderBottomWidth:'2px',
-            borderColor : '#e0e0e0',
-            borderStyle:'solid',
-            color : '#000',
-            textAlign:'center',
-            height:40,
+        tableHeaderColumn: {
+            fontWeight: 'bold',
+            borderWidth: 1,
+            borderBottomWidth: '2px',
+            borderColor: '#e0e0e0',
+            borderStyle: 'solid',
+            color: '#222',
+            textAlign: 'left',
+            height: 40,
+            paddingLeft: 15,
+            paddingRight: 15
         },
-        toolbar:{
-            justifyContent:'inherit',
-            width:'100%',
-            backgroundColor:'transparent'
+        raisedButton: {
+            margin: '0 5px',
+            minWidth: 100,
+            borderRadius: 3,
+            overflow:'hidden'
         },
-        resultTableActionMenu : {
+        toolbar: {
+            justifyContent: 'inherit',
+            width: '100%',
+            backgroundColor: 'transparent',
+            height: 42,
+            padding: '0 15px'
+        },
+        resultTableActionMenu: {
             itemStyles: {
-                fontSize: 12 ,
-                lineHeight: '40px' ,
-                minHeight : '40px',
+                fontSize: 12,
+                lineHeight: '40px',
+                minHeight: '40px',
             },
-            innerDivStyle:{
-                paddingLeft:50 ,
-                paddingRight:10 ,
+            innerDivStyle: {
+                paddingLeft: 50,
+                paddingRight: 10,
             },
-            iconStyles : {
-                fontSize:20 ,
-                margin:10,
-                color:'#222'
+            iconStyles: {
+                fontSize: 20,
+                margin: 10,
+                color: '#222'
             }
         }
     }, customisedTheme, {

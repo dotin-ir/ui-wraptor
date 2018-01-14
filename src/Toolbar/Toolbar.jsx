@@ -109,7 +109,6 @@ class Toolbar extends BaseComponent {
             itemStyles = theme.resultTableActionMenu.itemStyles ,
             iconStyles = theme.resultTableActionMenu.iconStyles,
             innerDivStyle = theme.resultTableActionMenu.innerDivStyle;
-
         //TODO remove item and element
         if (menuSize === 'small') {
             // if (childData.name === 'Item') {

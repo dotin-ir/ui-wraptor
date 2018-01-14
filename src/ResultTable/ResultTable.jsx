@@ -19,10 +19,15 @@ const styles = {
     indexColumnStyle: {
         width: '52px',
         padding: 0,
+        textAlign: 'center'
     },
     identifierColumnStyle: {
-        width: '5px',
-        padding: 0
+        width: '6px',
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        bottom: 0,
+        backgroundColor: 'green'
     },
     actionsWrapper: {
         display: 'flex',
@@ -156,6 +161,7 @@ class ResultTable extends BaseComponent {
     render() {
         const theme = this.context.theme,
             table = theme.table,
+            tableRowStyle = theme.tableRow ,
             tableRowColumn = theme.tableRowColumn,
             tableHeader = theme.tableHeader,
             tableHeaderColumn = theme.tableHeaderColumn;
@@ -165,7 +171,9 @@ class ResultTable extends BaseComponent {
             borderColor: tableRowColumn.borderColor,
             textAlign: tableRowColumn.textAlign,
             height: tableRowColumn.height,
-            fontSize : tableRowColumn.fontSize
+            fontSize: tableRowColumn.fontSize,
+            paddingLeft: tableRowColumn.paddingLeft,
+            paddingRight: tableRowColumn.paddingRight
         };
         const tableHeaderStyles = {
             borderBottomWidth: tableHeader.borderBottomWidth,
@@ -185,10 +193,15 @@ class ResultTable extends BaseComponent {
             borderBottomWidth: tableHeaderColumn.borderBottomWidth,
             borderTopWidth: tableHeaderColumn.borderWidth,
             borderRightWidth: tableHeaderColumn.borderWidth,
-            borderLeftWidth: tableHeaderColumn.borderWidth
+            borderLeftWidth: tableHeaderColumn.borderWidth,
+            paddingLeft: tableHeaderColumn.paddingLeft,
+            paddingRight: tableHeaderColumn.paddingRight
         };
         const tableStyles = {
             borderCollapse: table.borderCollapse
+        };
+        const tableRowStyles = {
+            height : tableRowStyle.height
         };
         const actionText = theme.locale == 'fa-IR' ? 'رویدادها' : 'Actions';
         var i = 0;
@@ -231,7 +244,7 @@ class ResultTable extends BaseComponent {
                                 style={Object.assign({}, tableHeaderColumnStyles, {
                                     borderRadius: '0 5px 0 0',
                                     width: !selectable ? styles.indexColumnStyle.width : '24px',
-                                    padding: !selectable ? styles.indexColumnStyle.padding : '0 23px'
+                                    padding: !selectable ? styles.indexColumnStyle.padding : '0 23px',
                                 })}>
                                 {columnSelector}
                             </TableHeaderColumn>
@@ -244,7 +257,7 @@ class ResultTable extends BaseComponent {
                                 </TableHeaderColumn> : ''
                             }
                             {selectable}
-                            {
+                            {/*{
                                 rowIdentifierDefinitions ?
                                     <TableHeaderColumn style={Object.assign({}, tableHeaderColumnStyles, {
                                         width: '3px',
@@ -252,12 +265,20 @@ class ResultTable extends BaseComponent {
                                     })}/>
                                     :
                                     null
-                            }
+                            }*/}
                             {this.state.columnsDefinition.map((columnDefinition) => this.createColumnHeader(columnDefinition, tableHeaderColumnStyles))}
-                            <TableHeaderColumn
-                                style={Object.assign({}, tableHeaderColumnStyles, {borderRadius: '5px 0 0 0'})}>
-                                {actionText}
-                            </TableHeaderColumn>
+
+
+                            {
+                                (data.find(row => row.actionbarDefinition && row.actionbarDefinition.length > 0)) ?
+                                    <TableHeaderColumn
+                                        style={Object.assign({}, tableHeaderColumnStyles, {borderRadius: '5px 0 0 0'})}>
+                                        {actionText}
+                                    </TableHeaderColumn> : null
+
+                            }
+
+
                         </TableRow>
                     </TableHeader>
                     <TableBody displayRowCheckbox={selectable}
@@ -266,27 +287,23 @@ class ResultTable extends BaseComponent {
                                deselectOnClickaway={false}
                     >
                         {data.map((row, index) => (
-                            <TableRow key={index}>
+                            <TableRow key={index} style={tableRowStyles}>
                                 <TableRowColumn
                                     style={
                                         index < data.length - 1 ?
-                                            Object.assign(styles.indexColumnStyle, tableRowColumnStyles) :
+                                            Object.assign(styles.indexColumnStyle, tableRowColumnStyles, {textAlign: 'center'}) :
                                             Object.assign({}, tableRowColumnStyles, {
                                                 borderRadius: '0 0 5px 0',
                                                 width: styles.indexColumnStyle.width,
-                                                padding: styles.indexColumnStyle.padding
+                                                padding: styles.indexColumnStyle.padding,
+                                                textAlign: 'center'
                                             })}
-                                >{index + fromIndex}</TableRowColumn>
-                                {
-                                    rowIdentifierDefinitions ?
-                                        <TableRowColumn style={styles.identifierColumnStyle}>
-                                            <TableRowIdentifier rowIdentifierDefinitions={rowIdentifierDefinitions}
-                                                                defaultColor={defaultColor}
-                                                                dataItem={row.dataItem}/>
-                                        </TableRowColumn> :
-                                        null
-                                }
-
+                                >{index + fromIndex}
+                                    {
+                                        rowIdentifierDefinitions ?
+                                            <span style={styles.identifierColumnStyle}></span> : null
+                                    }
+                                </TableRowColumn>
                                 {this.state.columnsDefinition.map((columnDefinition) => {
                                         var text = this.getValue(row.dataItem, columnDefinition.dataAddress);
                                         return columnDefinition.present || columnDefinition.present === undefined ?
@@ -298,20 +315,22 @@ class ResultTable extends BaseComponent {
                                     }
                                 )}
 
-                                <TableRowColumn style={
-                                    index < data.length - 1 ?
-                                        Object.assign({}, tableRowColumnStyles, {
-                                            padding: 0
-                                        }):
-                                        Object.assign({}, tableRowColumnStyles, {
-                                            borderRadius: '0 0 0 5px',
-                                            padding : 0
-                                        })}
+                                {
+                                    row.actionbarDefinition && row.actionbarDefinition.length > 0 ?
+                                        <TableRowColumn style={
+                                            index < data.length - 1 ?
+                                                Object.assign({}, tableRowColumnStyles, {
+                                                    padding: 0
+                                                }) :
+                                                Object.assign({}, tableRowColumnStyles, {
+                                                    borderRadius: '0 0 0 5px',
+                                                    padding: 0
+                                                })}
+                                        >
+                                                <Actionbar children={row.actionbarDefinition}/>
+                                        </TableRowColumn> : null
+                                }
 
-                                >
-                                    {row.actionbarDefinition && row.actionbarDefinition.length > 0 ?
-                                        <Actionbar children={row.actionbarDefinition}/> : null}
-                                </TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>

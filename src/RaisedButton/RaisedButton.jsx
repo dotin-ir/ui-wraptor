@@ -4,6 +4,9 @@ import BaseComponent from "../BaseComponent";
 
 
 class RaisedButton extends BaseComponent {
+    static contextTypes = {
+        theme : PropTypes.object.isRequired
+    };
   static propTypes = {
     /**
      * If true, the button will be disabled.
@@ -59,6 +62,15 @@ class RaisedButton extends BaseComponent {
         style,
         children,
     } = this.props;
+    const theme = this.context.theme ,
+        raisedButtonStyles = theme.raisedButton;
+    const styles = Object.assign({},{
+        margin:raisedButtonStyles.margin,
+        minWidth:raisedButtonStyles.minWidth,
+        borderRadius:raisedButtonStyles.borderRadius,
+        overflow:raisedButtonStyles.overflow
+    },style);
+
     return (
         <MUIRaisedButton label={label}
                          disabled={disabled}
@@ -68,7 +80,7 @@ class RaisedButton extends BaseComponent {
                          labelPosition={labelPosition}
                          primary={primary}
                          secondary={secondary}
-                         style={style}
+                         style={styles}
         >
           {children}
         </MUIRaisedButton>
