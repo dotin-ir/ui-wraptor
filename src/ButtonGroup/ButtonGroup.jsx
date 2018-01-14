@@ -29,9 +29,10 @@ class ButtonGroup extends BaseComponent {
         const actions = [] ;
 
         if (buttons && buttons.length > 0) {
-            buttons.forEach(action => {
+            buttons.map((action, index) => {
                 actions.push(
                     <RaisedButton
+                        key = {index}
                         label={action.label}
                         primary={action.isPrimary}
                         style={btnStyle}
