@@ -52,6 +52,7 @@ class TextField extends BaseComponent {
          * Override the inline-styles of the root element.
          */
         style: PropTypes.object,
+        inputStyle: PropTypes.object,
         /**
          * The value of the text field.
          */
@@ -59,6 +60,7 @@ class TextField extends BaseComponent {
         validate: PropTypes.func,
         onEnter: PropTypes.func,
         onFocus: PropTypes.func,
+        onBlur: PropTypes.func,
         onKeyDown: PropTypes.func,
         /**
          *  If true, a textarea element will be rendered.
@@ -139,6 +141,7 @@ class TextField extends BaseComponent {
             rowsMax,
             textareaStyle,
             onFocus,
+            onBlur,
             fullWidth,
         } = this.props;
 
@@ -199,11 +202,12 @@ class TextField extends BaseComponent {
                           hintText={hintText}
                           id={id}
                           onChange={this.handleChange.bind(this)}
-                          inputStyle={inputStyle}
+                          inputStyle={Object.assign({}, inputStyle, this.props.inputStyle) }
                           style={style}
                           value={value}
                           type={type}
                           onKeyDown={this.handleKeyDown.bind(this)}
+                          onBlur={onBlur}
                           onFocus={onFocus}
                           multiLine={multiLine}
                           rows={rows}
