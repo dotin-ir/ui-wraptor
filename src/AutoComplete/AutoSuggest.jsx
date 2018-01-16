@@ -46,7 +46,7 @@ class AutoSuggest extends Component {
         /**
          * Location of the anchor for the auto complete.
          */
-        anchorOrigin: PropTypes.origin,
+        anchorOrigin: PropTypes.any,
         /**
          * If true, the auto complete is animated as it is toggled.
          */
@@ -172,7 +172,7 @@ class AutoSuggest extends Component {
         /**
          * Origin for location of target.
          */
-        targetOrigin: PropTypes.origin,
+        targetOrigin: PropTypes.any,
         /**
          * Override the inline-styles of AutoSuggest's TextField element.
          */
@@ -296,10 +296,7 @@ class AutoSuggest extends Component {
             }, () => {
                 updateInput();
                 this.timerTouchTapCloseId();
-                if(this.props.setEmptyAfterAction) {
-                    this.setState({searchText: ''});
-                    this.props.onNewRequest(''); //TODO
-                }
+                if(this.props.setEmptyAfterAction) this.setState({searchText: ''});
             });
         }
     };
@@ -578,8 +575,6 @@ class AutoSuggest extends Component {
         });
 
         this.requestsList = requestsList;
-
-        console.log("render", requestsList)
 
         const menu = open && requestsList.length > 0 && (
                 <Menu
