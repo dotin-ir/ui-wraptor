@@ -150,17 +150,16 @@ class TextField extends BaseComponent {
             textFieldStyles = theme.textField,
             textarea = textFieldStyles.textarea,
             labelStyles = theme.label,
-            errorStyles = textFieldStyles.errorStyle;
-
+            errorStyles = textFieldStyles.errorStyle ;
         const inputStyle = {
             height: textFieldStyles.height,
             padding: textFieldStyles.padding,
             fontSize: textFieldStyles.fontSize,
             borderStyle: textFieldStyles.borderStyle,
             borderWidth: textFieldStyles.borderWidth,
-            borderColor: textFieldStyles.borderColor,
+            borderColor: textFieldStyles.borderColor ,
             borderRadius : textFieldStyles.borderRadius,
-            marginTop:textFieldStyles.margin
+            marginTop:textFieldStyles.margin,
         };
         multiLine ? Object.assign(inputStyle, {
             height: 'auto',
@@ -168,6 +167,9 @@ class TextField extends BaseComponent {
             minHeight: textFieldStyles.height
         }) : '';
 
+        !label || label === '' || label === undefined ? Object.assign(inputStyle,{
+            marginTop : 24
+        }) : '';
         // boolean for determine material default underline showed or hide
         const showUnderLine = textFieldStyles.showUnderLine;
         // styles for label in textField
