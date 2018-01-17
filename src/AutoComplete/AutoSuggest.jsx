@@ -353,8 +353,6 @@ class AutoSuggest extends Component {
         }
     };
 
-    setFilterList
-
     handleChange = (event) => {
         const {dataSource, maxSearchResults, styles} = this.props
         let requestsList = [];
@@ -431,7 +429,7 @@ class AutoSuggest extends Component {
         }
 
         this.setState({inputStyle: {color: this.context.theme.textField.textColor}});
-        if(this.props.setEmptyAfterAction) this.setState({searchText: ''});
+        // if(this.props.setEmptyAfterAction) this.setState({searchText: ''});
     };
 
     handleFocus = (event) => {
@@ -487,25 +485,17 @@ class AutoSuggest extends Component {
             onNewRequest, // eslint-disable-line no-unused-vars
             onUpdateInput, // eslint-disable-line no-unused-vars
             openOnFocus, // eslint-disable-line no-unused-vars
-            popoverStyle,
-            inputStyle,
             popoverProps,
             searchText: searchTextProp, // eslint-disable-line no-unused-vars
+            popoverStyle,
+            inputStyle,
+
             ...other
         } = this.props;
 
         const {
             ...popoverOther
         } = popoverProps || {};
-
-        // const textFieldStyles = this.context.theme.textField
-        const labelStyles = this.context.theme.label
-
-        const floatingLabelStyle = {
-            position: labelStyles.position,
-            fontSize: labelStyles.fontSize,
-            color: labelStyles.color,
-        };
 
         const {
             open,
@@ -632,66 +622,6 @@ class AutoSuggest extends Component {
             </div>
         );
     }
-}
-
-function filterList(dataSource, dataSourceConfig, filter) {
-    const requestsList = []
-
-    dataSource.every((item, index) => {
-        switch (typeof item) {
-            case 'string':
-                if (filter(searchText, item, item)) {
-                    requestsList.push({
-                        text: item,
-                        value: (
-                            <MenuItem
-                                innerDivStyle={styles.innerDiv}
-                                value={item}
-                                primaryText={item}
-                                disableFocusRipple={disableFocusRipple}
-                                key={index}
-                            />),
-                    });
-                }
-                break;
-
-            case 'object':
-                if (item && typeof item[dataSourceConfig.text] === 'string') {
-                    const itemText = item[dataSourceConfig.text];
-                    if (!filter(searchText, itemText, item)) break;
-
-                    const itemValue = item[dataSourceConfig.value];
-                    if (itemValue.type && (itemValue.type.muiName === MenuItem.muiName ||
-                        itemValue.type.muiName === Divider.muiName)) {
-                        requestsList.push({
-                            text: itemText,
-                            value: React.cloneElement(itemValue, {
-                                key: index,
-                                disableFocusRipple: disableFocusRipple,
-                            }),
-                        });
-                    } else {
-                        requestsList.push({
-                            text: itemText,
-                            value: (
-                                <MenuItem
-                                    innerDivStyle={styles.innerDiv}
-                                    primaryText={itemText}
-                                    disableFocusRipple={disableFocusRipple}
-                                    key={index}
-                                />),
-                        });
-                    }
-                }
-                break;
-
-            default:
-            // Do nothing
-        }
-
-        return requestsList;
-    });
-
 }
 
 AutoSuggest.levenshteinDistance = (searchText, key) => {
