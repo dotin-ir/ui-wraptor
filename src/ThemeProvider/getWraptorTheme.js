@@ -82,7 +82,98 @@ function getWraptorCustomisedTheme(customisedTheme, ...more) {
             secondaryTextColor: palette.secondaryTextColor,
             leftIconColor: grey600,
             rightIconColor: grey600,
+            cursor:'move',
         },
+/*_____________________________________________________________________________*/
+        sideNav: {
+            nestedListStyle:{
+                backgroundColor: '#222222',
+                borderLeftLevel1:"5px solid #9acfb4",
+                notBorderLeftLevel1:"none",
+                paddingLeftLevel1:"0",
+                paddingLeftLevel2:"5px",
+                paddingLeftLevel3:"7px",
+            },
+            fontColor:{
+                level1:"#fff",
+                level2:"#CECECE",
+                level3:"#A2A0A0",
+            },
+            fontSize:{
+                level1:"14px",
+                level2:"13px",
+                level3:"12px",
+            },
+            listStyle:{
+                fontWeight:500,
+                paddingBottom:0,
+                paddingTop:0
+            },
+            leftIconStyle:{
+                fontSize:11,
+                fontWeight:"100"
+            },
+            companyName:{
+                brandColor:"#9acfb4",
+                fontSize:14,
+                display:"block",
+                right:0,
+                top:10,
+            },
+            menuContainer:{
+                backgroundColor:"#222222",
+                height:window.innerHeight,
+                overflow:"hidden"
+            },
+            companyBrandContainer:{
+                height:70,
+                display:"block",
+                position:"relative",
+                backgroundColor:"#404040",
+                overflow:"overlay"
+            },
+            brandNameContainer:{
+                float:"right",
+                height: 40,
+                marginLeft:30,
+                marginTop:10,
+                backgroundColor:"transparent",
+                marginRight:"10px"
+            },
+            companyLogoContainer:{
+                float:"left",
+                backgroundColor:"transparent"
+            },
+            companyLogo:{
+                fontSize:40,
+                width: 60,
+                height: 60,
+                top:10,
+                marginLeft:"10px"
+            },
+            listMenuContainer:{
+                height: "100%",
+                width: "100%",
+                overflow:"hidden" ,
+                position: "relative",
+                backgroundColor:"#404040"
+            },
+            listMenuNoScroll:{
+                position: "absolute",
+                top:"0",
+                bottom: "0",
+                left:"0",
+                right:"0",
+                overflowY: "overlay",
+                backgroundColor:"#404040"
+            },
+            menuListStyle:{
+                backgroundColor:"#404040"
+            }
+
+
+        },
+/*_____________________________________________________________________________*/
         menu: {
             backgroundColor: palette.canvasColor,
             containerBackgroundColor: palette.canvasColor,
