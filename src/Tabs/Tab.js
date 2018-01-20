@@ -28,7 +28,7 @@ class Tab extends Component {
      * @ignore
      * This property is overriden by the Tabs component.
      */
-    onTouchTap: PropTypes.func,
+    onClick: PropTypes.func,
     /**
     * Fired when the active tab changes by touch or tap.
     * Use this event to specify any functionality when an active tab changes.
@@ -63,7 +63,7 @@ class Tab extends Component {
       label,
       style,
       children,
-      onTouchTap,
+      onClick,
       onActive,
       value,
       width,
@@ -75,7 +75,7 @@ class Tab extends Component {
         <MUTab icon={icon}
                label={label}
                style={style}
-               onTouchTap={onTouchTap}
+               onClick={onClick}
                onActive={onActive}
                value={value}
                width={width}

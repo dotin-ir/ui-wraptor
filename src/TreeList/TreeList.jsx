@@ -18,8 +18,8 @@ class TreeList extends BaseComponent {
         style: PropTypes.object,
         expandedListItems: PropTypes.array,
         activeListItem: PropTypes.number,
-        handleTouchTap: PropTypes.func,
-        handleTouchTapInSearchMode: PropTypes.func,
+        handleClick: PropTypes.func,
+        handleClickInSearchMode: PropTypes.func,
         handleSearch: PropTypes.func,
         listHeight: PropTypes.number,
         useFolderIcons: PropTypes.bool,
@@ -45,12 +45,12 @@ class TreeList extends BaseComponent {
         }
 
         this.searchMode = false
-        this.handleTouchTap = this.handleTouchTap.bind(this)
+        this.handleClick = this.handleClick.bind(this)
         this.handleMouseOver = this.handleMouseOver.bind(this)
         this.handleMouseOut = this.handleMouseOut.bind(this)
         this.handleCheck = this.handleCheck.bind(this)
     }
-    handleTouchTap(listItem, index) {
+    handleClick(listItem, index) {
         if (this.searchMode) {
             if (!listItem.children) {
                 this.setState({
@@ -78,8 +78,8 @@ class TreeList extends BaseComponent {
             }
         }
 
-        if (this.searchMode && this.props.handleTouchTapInSearchMode) this.props.handleTouchTapInSearchMode(listItem, index)
-        if (!this.searchMode && this.props.handleTouchTap) this.props.handleTouchTap(listItem, index)
+        if (this.searchMode && this.props.handleClickInSearchMode) this.props.handleClickInSearchMode(listItem, index)
+        if (!this.searchMode && this.props.handleClick) this.props.handleClick(listItem, index)
     }
 
     handleMouseOver(e, listItem) {
@@ -246,8 +246,8 @@ class TreeList extends BaseComponent {
                                 rightIcon={(listItem.hasRightIcon)? getRightIcon(listItem) : null}
                                 selectable = {selectable}
                                 multiSelectable = {multiSelectable}
-                                onTouchTap={()=> {
-                                    this.handleTouchTap(listItem, i)
+                                onClick={()=> {
+                                    this.handleClick(listItem, i)
                                 }}
                                 onMouseOver={(e)=> {
                                     this.handleMouseOver(e,listItem, i)
@@ -337,7 +337,7 @@ class TreeList extends BaseComponent {
                             return <MenuItem primaryText={action.name}
                                              key = {index}
                                              leftIcon={action.className ? <FontIcon className={action.className} /> : (action.icon ? action.icon : null)}
-                                             onTouchTap={action.onTouchTap}/>
+                                             onClick={action.onClick}/>
                         })
                     }
                 </IconMenu>

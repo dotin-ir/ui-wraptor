@@ -37,10 +37,10 @@ class SortColumnSwitch extends BaseComponent {
         } = this.props;
         return (
             <MultiStateIconSwitch>
-                <IconButton onTouchTap={ascHandler} iconStyle={styles.smallIcon} style={styles.small}>
+                <IconButton onClick={ascHandler} iconStyle={styles.smallIcon} style={styles.small}>
                     <SortASC  />
                 </IconButton>
-                <IconButton onTouchTap={descHandler} iconStyle={styles.smallIcon} style={styles.small}>
+                <IconButton onClick={descHandler} iconStyle={styles.smallIcon} style={styles.small}>
                     <SortDesc />
                 </IconButton>
             </MultiStateIconSwitch>

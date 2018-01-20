@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import keycode from 'keycode';
 import TextField from '../TextField';
@@ -7,9 +7,10 @@ import MenuItem from 'dotin-material-ui/MenuItem/MenuItem';
 import Divider from 'dotin-material-ui/Divider';
 import Popover from 'dotin-material-ui/Popover';
 import {dangerColor} from '../styles/colors';
+import BaseComponent from "../BaseComponent/BaseComponent";
 
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
     const {anchorEl} = state;
     const {fullWidth} = props;
 
@@ -40,21 +41,13 @@ function getStyles(props, context, state) {
     return styles;
 }
 
-class AutoSuggest extends Component {
+class AutoSuggest extends BaseComponent {
 
     static propTypes = {
         /**
          * Location of the anchor for the auto complete.
          */
         anchorOrigin: PropTypes.any,
-        /**
-         * If true, the auto complete is animated as it is toggled.
-         */
-        animated: PropTypes.bool,
-        /**
-         * Override the default animation component used.
-         */
-        animation: PropTypes.func,
         /**
          * Array of strings or nodes used to populate the list.
          */
@@ -74,14 +67,6 @@ class AutoSuggest extends Component {
          */
         disableFocusRipple: PropTypes.bool,
         /**
-         * Override style prop for error.
-         */
-        errorStyle: PropTypes.object,
-        /**
-         * The error content to display.
-         */
-        errorText: PropTypes.node,
-        /**
          * Callback function used to filter the auto complete.
          *
          * @param {string} searchText The text to search for within `dataSource`.
@@ -92,7 +77,7 @@ class AutoSuggest extends Component {
         /**
          * The content to use for adding floating label element.
          */
-        floatingLabelText: PropTypes.node,
+        label: PropTypes.node,
         /**
          * If true, the field receives the property `width: 100%`.
          */
@@ -101,10 +86,6 @@ class AutoSuggest extends Component {
          * The hint content to display.
          */
         hintText: PropTypes.node,
-        /**
-         * Override style for list.
-         */
-        listStyle: PropTypes.object,
         /**
          * The max number of search results to be shown.
          * By default it shows all the items which matches filter.
@@ -118,10 +99,6 @@ class AutoSuggest extends Component {
          * Props to be passed to menu.
          */
         menuProps: PropTypes.object,
-        /**
-         * Override style for menu.
-         */
-        menuStyle: PropTypes.object,
         /** @ignore */
         onBlur: PropTypes.func,
         /**
@@ -181,6 +158,10 @@ class AutoSuggest extends Component {
         popoverStyle: PropTypes.object,
 
         setEmptyAfterAction: PropTypes.bool,
+
+        id: PropTypes.string,
+
+        inputStyle: PropTypes.object,
     };
 
     static defaultProps = {
@@ -223,8 +204,9 @@ class AutoSuggest extends Component {
         this.setState({
             open: this.props.open,
             searchText: this.props.searchText || '',
+            inputStyle: this.props.inputStyle || {},
         });
-        this.timerTouchTapCloseId = null;
+        this.timerClickCloseId = null;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -242,7 +224,7 @@ class AutoSuggest extends Component {
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timerTouchTapCloseId);
+        clearTimeout(this.timerClickCloseId);
         clearTimeout(this.timerBlurClose);
     }
 
@@ -270,7 +252,7 @@ class AutoSuggest extends Component {
         event.preventDefault();
     };
 
-    handleItemTouchTap = (event, child) => {
+    handleItemClick = (event, child) => {
         const dataSource = this.props.dataSource;
         let index = parseInt(child.key, 10);
         const chosenRequest = dataSource[index];
@@ -280,8 +262,8 @@ class AutoSuggest extends Component {
             source: 'touchTap',
         });
 
-        this.timerTouchTapCloseId = () => setTimeout(() => {
-            this.timerTouchTapCloseId = null;
+        this.timerClickCloseId = () => setTimeout(() => {
+            this.timerClickCloseId = null;
             this.close();
             this.props.onNewRequest(chosenRequest, index);
         }, this.props.menuCloseDelay);
@@ -289,13 +271,13 @@ class AutoSuggest extends Component {
         if (typeof this.props.searchText !== 'undefined') {
             this.setState({searchText: ''})
             updateInput();
-            this.timerTouchTapCloseId();
+            this.timerClickCloseId();
         } else {
             this.setState({
                 searchText: searchText,
             }, () => {
                 updateInput();
-                this.timerTouchTapCloseId();
+                this.timerClickCloseId();
                 if(this.props.setEmptyAfterAction) this.setState({searchText: ''});
             });
         }
@@ -330,7 +312,7 @@ class AutoSuggest extends Component {
                             inputStyle: {color: this.context.theme.textField.textColor}
                         });
                         this.props.onNewRequest(this.props.dataSource[index], index);
-                        this.handleItemTouchTap({}, this.requestsList[0].value);
+                        this.handleItemClick({}, this.requestsList[0].value);
                     }
                 }
                 break;
@@ -418,7 +400,7 @@ class AutoSuggest extends Component {
     };
 
     handleBlur = (event) => {
-        if (this.state.focusTextField && this.timerTouchTapCloseId === null) {
+        if (this.state.focusTextField && this.timerClickCloseId === null) {
             this.timerBlurClose = setTimeout(() => {
                 this.close();
             }, 0);
@@ -460,33 +442,28 @@ class AutoSuggest extends Component {
     render() {
         const {
             anchorOrigin,
-            animated,
-            animation,
             dataSource,
-            dataSourceConfig, // eslint-disable-line no-unused-vars
+            dataSourceConfig,
             disableFocusRipple,
-            errorStyle,
-            floatingLabelText,
+            label,
             filter,
             fullWidth,
             style,
             hintText,
             maxSearchResults,
-            menuCloseDelay, // eslint-disable-line no-unused-vars
+            menuCloseDelay,
             textFieldStyle,
-            menuStyle,
             menuProps,
-            listStyle,
             targetOrigin,
-            onBlur, // eslint-disable-line no-unused-vars
-            onClose, // eslint-disable-line no-unused-vars
-            onFocus, // eslint-disable-line no-unused-vars
-            onKeyDown, // eslint-disable-line no-unused-vars
-            onNewRequest, // eslint-disable-line no-unused-vars
-            onUpdateInput, // eslint-disable-line no-unused-vars
-            openOnFocus, // eslint-disable-line no-unused-vars
+            onBlur,
+            onClose,
+            onFocus,
+            onKeyDown,
+            onNewRequest,
+            onUpdateInput,
+            openOnFocus,
             popoverProps,
-            searchText: searchTextProp, // eslint-disable-line no-unused-vars
+            searchText: searchTextProp,
             popoverStyle,
             inputStyle,
 
@@ -505,7 +482,7 @@ class AutoSuggest extends Component {
         } = this.state;
 
         const {prepareStyles} = this.context.theme;
-        const styles = getStyles(this.props, this.context, this.state);
+        const styles = getStyles(this.props, this.state);
 
         const requestsList = [];
 
@@ -573,10 +550,10 @@ class AutoSuggest extends Component {
                     disableAutoFocus={focusTextField}
                     onEscKeyDown={this.handleEscKeyDown}
                     initiallyKeyboardFocused={true}
-                    onItemTouchTap={this.handleItemTouchTap}
+                    onItemClick={this.handleItemClick}
                     onMouseDown={this.handleMouseDown}
-                    style={Object.assign(styles.menu, menuStyle)}
-                    listStyle={Object.assign(styles.list, listStyle)}
+                    style={styles.menu}
+                    listStyle={styles.list}
                     {...menuProps}
                 >
                     {requestsList.map((i) => i.value)}
@@ -591,11 +568,10 @@ class AutoSuggest extends Component {
                     onBlur={this.handleBlur}
                     onFocus={this.handleFocus}
                     onKeyDown={this.handleKeyDown}
-                    floatingLabelText={floatingLabelText}
+                    floatingLabelText={label}
                     hintText={hintText}
                     fullWidth={fullWidth}
                     multiLine={false}
-                    errorStyle={errorStyle}
                    inputStyle={Object.assign({},inputStyle, this.state.inputStyle)}
                     {...other}
                     // value and onChange are idiomatic properties often leaked.
@@ -612,8 +588,6 @@ class AutoSuggest extends Component {
                     anchorEl={anchorEl}
                     useLayerForClickAway={false}
                     onRequestClose={this.handleRequestClose}
-                    animated={animated}
-                    animation={animation}
                     popoverStyle={popoverStyle}
                     {...popoverOther}
                 >

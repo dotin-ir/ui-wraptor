@@ -50,7 +50,10 @@ class ListItem extends BaseComponent {
         insetChildren: PropTypes.bool,
         /**
          * Use to control if the list item should render as keyboard focused.  If
-         input autocomplete).
+         * undefined (default), this will be automatically managed.  If provided,
+         * it will change the components style.  Note that this will not change the
+         * actual focus - and should only be used when you want to simulate
+         * keyboard focus (eg. in a rich text input autocomplete).
          */
         isKeyboardFocused: PropTypes.bool,
         /**
@@ -75,6 +78,12 @@ class ListItem extends BaseComponent {
          */
         nestedLevel: PropTypes.number,
         /**
+         * Callback function fired when the list item is clicked.
+         *
+         * @param {object} event Click event targeting the list item.
+         */
+        onClick: PropTypes.func,
+        /**
          * Callback function fired when the `ListItem` is focused or blurred by the keyboard.
          *
          * @param {object} event `focus` or `blur` event targeting the `ListItem`.
@@ -86,7 +95,7 @@ class ListItem extends BaseComponent {
         /** @ignore */
         onMouseLeave: PropTypes.func,
         /**
-         * Callbak function fired when the `ListItem` toggles its nested list.
+         * Callback function fired when the `ListItem` toggles its nested list.
          *
          * @param {object} listItem The `ListItem`.
          */
@@ -95,8 +104,6 @@ class ListItem extends BaseComponent {
         onTouchEnd: PropTypes.func,
         /** @ignore */
         onTouchStart: PropTypes.func,
-        /** @ignore */
-        onTouchTap: PropTypes.func,
         /**
          * Control toggle state of nested list.
          */
@@ -167,7 +174,7 @@ class ListItem extends BaseComponent {
             onNestedListToggle,
             onTouchEnd,
             onTouchStart,
-            onTouchTap,
+            onClick,
             open,
             primaryText,
             primaryTogglesNestedList,
@@ -197,7 +204,7 @@ class ListItem extends BaseComponent {
                             onNestedListToggle={onNestedListToggle}
                             onTouchEnd={onTouchEnd}
                             onTouchStart={onTouchStart}
-                            onTouchTap={onTouchTap}
+                            onClick={onClick}
                             open={open}
                             primaryText={primaryText}
                             primaryTogglesNestedList={primaryTogglesNestedList}

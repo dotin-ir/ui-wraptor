@@ -118,7 +118,7 @@ class Toolbar extends BaseComponent {
                     leftIcon={childData.className ?
                         <FontIcon className={childData.className}  style={iconStyles}/> : (childData.icon ? childData.icon : null)}
                     key={this.generateElementKey()}
-                    onTouchTap={childData.onTouchTap}
+                    onClick={childData.onClick}
                     style={itemStyles}
                     innerDivStyle={innerDivStyle}
                 />
@@ -139,7 +139,7 @@ class Toolbar extends BaseComponent {
             // }
         } else {
             // if (childData.name === 'Item') {
-            return <IconButton tooltip={childData.tooltip} onTouchTap={childData.onTouchTap}
+            return <IconButton tooltip={childData.tooltip} onClick={childData.onClick}
                                key={this.generateElementKey()}>
                 {childData.className ?
                     <FontIcon className={childData.className}/> : (childData.icon ? childData.icon : null)}

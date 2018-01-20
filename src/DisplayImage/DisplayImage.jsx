@@ -24,11 +24,11 @@ class DisplayImage extends BaseComponent {
         this.state= {
             iOpen : false
         };
-        this.onTouchTap = this.onTouchTap.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.closeImage = this.closeImage.bind(this);
     }
 
-    onTouchTap() {
+    onClick() {
         this.setState({
             isOpen : true
         });
@@ -47,7 +47,7 @@ class DisplayImage extends BaseComponent {
         } = this.props;
         return <div>
             <MUIconButton
-                onTouchTap={this.onTouchTap}
+                onClick={this.onClick}
             >
                 <DisplayImageIcon />
             </MUIconButton>

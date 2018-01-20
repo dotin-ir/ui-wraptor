@@ -107,7 +107,7 @@ class SideNav extends BaseComponent {
             return <ListItem
                 primaryText={navItem.caption}
                 primaryTogglesNestedList={Array.isArray(navItem.subItems) && navItem.subItems.length > 0}
-                onTouchTap={this.props.onSelect.bind(null, navItem)}
+                onClick={!navItem.subItems ? this.props.onSelect.bind(null, navItem) : ()=>{}}
                 onNestedListToggle={this.handleNestedListToggle.bind(this, navItem, level)}
                 nestedItems={navItem.subItems && this.createNavItemElements(navItem.subItems, level)}
                 leftIcon={level >= 3 && <FontIcon style={{

@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react';
 import BaseComponent from "../BaseComponent";
 import MUIDatePicker from 'dotin-material-ui/DatePicker';
 import areIntlLocalesSupported from 'intl-locales-supported';
+import persianUtils from 'material-ui-persian-date-picker-utils';
+import {defaultUtils} from 'dotin-material-ui/DatePicker/dateUtils'
 
 class DatePicker extends BaseComponent {
 
@@ -129,60 +131,38 @@ class DatePicker extends BaseComponent {
 
         let locale = (this.props.locale !== null && this.props.locale !== undefined) ? this.props.locale : this.context.theme.locale;
         let DateTimeFormat;
-        if (areIntlLocalesSupported(['fr', 'fa-IR'])) {
+        if (areIntlLocalesSupported([locale])) {
             DateTimeFormat = global.Intl.DateTimeFormat;
         } else {
             const IntlPolyfill = require('intl');
             DateTimeFormat = IntlPolyfill.DateTimeFormat;
-            require('intl/locale-data/jsonp/fr');
-            require('intl/locale-data/jsonp/fa-IR');
+            require(`intl/locale-data/jsonp/${locale}`);
         }
-        return (value ?
-                <MUIDatePicker
-                    className={className}
-                    defaultDate={defaultDate}
-                    disabled={disabled}
-                    disableYearSelection={disableYearSelection}
-                    floatingLabelText={label}
-                    locale={locale}
-                    DateTimeFormat={DateTimeFormat}
-                    okLabel={okLabel}
-                    cancelLabel={cancelLabel}
-                    firstDayOfWeek={firstDayOfWeek}
-                    maxDate={maxDate}
-                    minDate={minDate}
-                    shouldDisableDate={shouldDisableDate}
-                    onChange={onChange}
-                    id={id}
-                    style={style}
-                    value={value}
-                    floatingLabelStyle={floatingLabelStyle}
-                    underlineShow={false}
-                    inputStyle={inputStyle}
-                    floatingLabelFocusStyle={floatingLabelFocusStyle}
-                /> :
-                <MUIDatePicker
-                    className={className}
-                    defaultDate={defaultDate}
-                    disabled={disabled}
-                    disableYearSelection={disableYearSelection}
-                    floatingLabelText={label}
-                    locale={locale}
-                    DateTimeFormat={DateTimeFormat}
-                    okLabel={okLabel}
-                    cancelLabel={cancelLabel}
-                    firstDayOfWeek={firstDayOfWeek}
-                    maxDate={maxDate}
-                    minDate={minDate}
-                    shouldDisableDate={shouldDisableDate}
-                    onChange={onChange}
-                    id={id}
-                    style={style}
-                    floatingLabelStyle={floatingLabelStyle}
-                    underlineShow={false}
-                    inputStyle={inputStyle}
-                    floatingLabelFocusStyle={floatingLabelFocusStyle}
-                />
+        return (
+            <MUIDatePicker
+                className={className}
+                defaultDate={defaultDate}
+                disabled={disabled}
+                disableYearSelection={disableYearSelection}
+                floatingLabelText={label}
+                locale={locale}
+                DateTimeFormat={DateTimeFormat}
+                okLabel={okLabel}
+                cancelLabel={cancelLabel}
+                firstDayOfWeek={firstDayOfWeek}
+                maxDate={maxDate}
+                minDate={minDate}
+                shouldDisableDate={shouldDisableDate}
+                onChange={onChange}
+                id={id}
+                style={style}
+                value={value}
+                floatingLabelStyle={floatingLabelStyle}
+                underlineShow={false}
+                inputStyle={inputStyle}
+                floatingLabelFocusStyle={floatingLabelFocusStyle}
+                utils={(locale && locale === 'fa-IR' ? persianUtils : defaultUtils)}
+            />
         );
     }
 }

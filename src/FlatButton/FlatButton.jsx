@@ -11,7 +11,6 @@ class FlatButton extends BaseComponent {
         keyboardFocused:PropTypes.bool,
         label:PropTypes.string,
         onClick:PropTypes.func,
-        onTouchTap:PropTypes.func,
         primary:PropTypes.bool,
         secondary:PropTypes.bool,
         style:PropTypes.any,
@@ -26,7 +25,6 @@ class FlatButton extends BaseComponent {
                 keyboardFocused={this.props.keyboardFocused}
                 label={this.props.label}
                 onClick={this.props.onClick}
-                onTouchTap={this.props.onTouchTap}
                 primary={this.props.primary}
                 secondary={this.props.secondary}
                 style={this.props.style}

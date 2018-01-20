@@ -22,8 +22,8 @@ class Tree extends React.Component {
             searchTerm: '',
         }
         this.handleSearch = this.handleSearch.bind(this)
-        this.handleTouchTap = this.handleTouchTap.bind(this)
-        this.handleTouchTapInSearchMode = this.handleTouchTapInSearchMode.bind(this)
+        this.handleClick = this.handleClick.bind(this)
+        this.handleClickInSearchMode = this.handleClickInSearchMode.bind(this)
     }
 
     componentDidUpdate({}, prevState) {
@@ -43,7 +43,7 @@ class Tree extends React.Component {
         this.setState(Object.assign({}, this.state, {searchTerm: searchTerm}))
     }
 
-    handleTouchTap(listItem, index) {
+    handleClick(listItem, index) {
         if (listItem.children) {
             const indexOfListItemInArray = this.state.expandedListItems.indexOf(index)
             if  (indexOfListItemInArray === -1) {
@@ -65,7 +65,7 @@ class Tree extends React.Component {
         }
     }
 
-    handleTouchTapInSearchMode(listItem, index) {
+    handleClickInSearchMode(listItem, index) {
         if (!listItem.children) {
             const expandedListItems = getAllParents(listItem, this.props.listItems , [])
 
@@ -91,8 +91,8 @@ class Tree extends React.Component {
                     haveSearchbar={true}
                     activeListItem={activeListItem}
                     expandedListItems={expandedListItems}
-                    handleTouchTap={this.handleTouchTap}
-                    handleTouchTapInSearchMode={this.handleTouchTapInSearchMode}
+                    handleClick={this.handleClick}
+                    handleClickInSearchMode={this.handleClickInSearchMode}
                     handleSearch={this.handleSearch}
                     searchTerm={searchTerm}
                     searchBarCaption = {searchBarCaption}

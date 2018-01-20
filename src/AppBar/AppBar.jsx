@@ -41,23 +41,23 @@ class AppBar extends BaseComponent {
          */
         iconStyleRight: PropTypes.object,
         /**
-         * Callback function for when the left icon is selected via a touch tap.
+     * Callback function for when the left icon is selected via a click.
          *
-         * @param {object} event TouchTap event targeting the left `IconButton`.
+     * @param {object} event Click event targeting the left `IconButton`.
          */
-        onLeftIconButtonTouchTap: PropTypes.func,
+    onLeftIconButtonClick: PropTypes.func,
         /**
-         * Callback function for when the right icon is selected via a touch tap.
+     * Callback function for when the right icon is selected via a click.
          *
-         * @param {object} event TouchTap event targeting the right `IconButton`.
+     * @param {object} event Click event targeting the right `IconButton`.
          */
-        onRightIconButtonTouchTap: PropTypes.func,
+    onRightIconButtonClick: PropTypes.func,
         /**
-         * Callback function for when the title text is selected via a touch tap.
+     * Callback function for when the title text is selected via a click.
          *
-         * @param {object} event TouchTap event targeting the `title` node.
+     * @param {object} event Click event targeting the `title` node.
          */
-        onTitleTouchTap: PropTypes.func,
+    onTitleClick: PropTypes.func,
         /**
          * Determines whether or not to display the Menu icon next to the title.
          * Setting this prop to false will hide the icon.
@@ -87,9 +87,9 @@ class AppBar extends BaseComponent {
             iconElementRight,
             iconStyleLeft,
             iconStyleRight,
-            onLeftIconButtonTouchTap, // eslint-disable-line no-unused-vars
-            onRightIconButtonTouchTap, // eslint-disable-line no-unused-vars
-            onTitleTouchTap, // eslint-disable-line no-unused-vars
+            onLeftIconButtonClick, // eslint-disable-line no-unused-vars
+            onRightIconButtonClick, // eslint-disable-line no-unused-vars
+            onTitleClick, // eslint-disable-line no-unused-vars
             showMenuIconButton,
             style,
             title,
@@ -102,14 +102,14 @@ class AppBar extends BaseComponent {
             titleStyle={titleStyle}
             iconStyleLeft={iconStyleLeft}
             iconStyleRight={iconStyleRight}
-            onTitleTouchTap={onTitleTouchTap}
+            onTitleClick={onTitleClick}
             showMenuIconButton={showMenuIconButton}
             iconElementLeft={iconElementLeft}
             iconElementRight={iconElementRight}
             iconClassNameLeft={iconClassNameLeft}
             iconClassNameRight={iconClassNameRight}
-            onLeftIconButtonTouchTap={onLeftIconButtonTouchTap}
-            onRightIconButtonTouchTap={onRightIconButtonTouchTap}
+            onLeftIconButtonClick={onLeftIconButtonClick}
+            onRightIconButtonClick={onRightIconButtonClick}
             className={className}
             style={style}
         >

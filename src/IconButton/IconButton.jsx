@@ -50,7 +50,7 @@ class IconButton extends BaseComponent {
      * Override the inline-styles of the tooltip element.
      */
     tooltipStyles: PropTypes.object,
-    onTouchTap: PropTypes.func,
+    onClick: PropTypes.func,
   };
 
   static defaultProps = {
@@ -70,7 +70,7 @@ class IconButton extends BaseComponent {
         tooltip,
         tooltipPosition,
         tooltipStyles,
-        onTouchTap,
+        onClick,
     } = this.props;
     return (
         <MUIconButton className={className}
@@ -82,7 +82,7 @@ class IconButton extends BaseComponent {
                       tooltip={tooltip}
                       tooltipPosition={tooltipPosition}
                       tooltipStyles={tooltipStyles}
-                      onTouchTap={onTouchTap}
+                      onClick={onClick}
        >
           {children}
         </MUIconButton>

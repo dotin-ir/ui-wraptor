@@ -43,7 +43,7 @@ class PasswordField extends BaseComponent {
         /**
          * Callback function fired when a menu item is selected.
          *
-         * @param {object} event TouchTap event targeting the menu item
+         * @param {object} event Click event targeting the menu item
          * that was selected.
          * @param {number} key The index of the selected menu item.
          * @param {any} payload The `value` prop of the selected menu item.

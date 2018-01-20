@@ -33,9 +33,9 @@ class Chip extends BaseComponent {
         /**
          * Callback function fired when the `Chip` element is touch-tapped.
          *
-         * @param {object} event TouchTap event targeting the element.
+         * @param {object} event Click event targeting the element.
          */
-        onTouchTap: PropTypes.func,
+        onClick: PropTypes.func,
         /**
          * Override the inline-styles of the root element.
          */
@@ -50,7 +50,7 @@ class Chip extends BaseComponent {
             labelColor,
             labelStyle,
             onRequestDelete,
-            onTouchTap,
+            onClick,
             style,
         } = this.props;
         return <MUIChip
@@ -59,7 +59,7 @@ class Chip extends BaseComponent {
                 labelColor={labelColor}
                 labelStyle={labelStyle}
                 onRequestDelete={onRequestDelete}
-                onTouchTap={onTouchTap}
+                onClick={onClick}
                 style={style}
             >
             {children}

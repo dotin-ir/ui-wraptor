@@ -39,11 +39,11 @@ export class Expander extends BaseComponent {
         let display = this.state.open ? 'inherit' : 'none';
         return (
             <Paper>
-                <Toolbar onTouchTap={this.handleClick.bind(this)} style={{cursor: 'pointer'}}>
+                <Toolbar onClick={this.handleClick.bind(this)} style={{cursor: 'pointer'}}>
                     <ToolbarGroup noGutter={true} style={{backgroundColor: 'transparent'}}>
                         <IconButton
                             tooltip={toolTip}
-                            onTouchTap={this.handleClick.bind(this)}
+                            onClick={this.handleClick.bind(this)}
                             iconClassName={className}
                             iconStyle={{fontSize: 14}}
                         />

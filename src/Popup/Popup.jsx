@@ -20,11 +20,11 @@ class Popup extends BaseComponent {
         this.state = {
             open: true,
             actions: [<FlatButton label={props.closeCaption} secondary={true}
-                                  onTouchTap={this.handleClose.bind(this)}/>],
+                                  onClick={this.handleClose.bind(this)}/>],
             isInitial: false
         };
         this.defaultAction = [<FlatButton label={props.closeCaption} secondary={true}
-                                          onTouchTap={this.handleClose.bind(this)}/>];
+                                          onClick={this.handleClose.bind(this)}/>];
         this.initActionBar = this.initActionBar.bind(this);
     }
 

@@ -12,7 +12,7 @@ class TreeListItem extends BaseComponent {
         style: PropTypes.object.isRequired,
         leftIcon: PropTypes.element,
         rightIcon: PropTypes.element,
-        onTouchTap: PropTypes.func,
+        onClick: PropTypes.func,
         onMouseOver: PropTypes.func,
         onMouseOut: PropTypes.func,
         onCheck: PropTypes.func,
@@ -29,7 +29,7 @@ class TreeListItem extends BaseComponent {
     render() {
         const {listItem, primaryText, style} = this.props;
         const {checked, selectable} = this.props;
-        const {onTouchTap, onMouseOver, onMouseOut, onCheck, leftIcon, rightIcon} = this.props;
+        const {onClick, onMouseOver, onMouseOut, onCheck, leftIcon, rightIcon} = this.props;
         const {connectDragSource, connectDropTarget} = this.props;
         const styles = {
             root: {
@@ -54,7 +54,7 @@ class TreeListItem extends BaseComponent {
                 <span style={Object.assign({}, styles.root)}
                       onMouseEnter={onMouseOver}
                 >
-                    <span onTouchTap={onTouchTap}>
+                    <span onClick={onClick}>
                     {leftIcon}
                         {connectDropTarget(
                             connectDragSource(

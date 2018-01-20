@@ -64,14 +64,14 @@ export default class IconMultiSelectList extends Component {
         return (
             <div>
                 <IconMenu
-                    iconButtonElement={<IconButton onTouchTap={this.switchShowList}><ContentFilter /></IconButton>}
+                    iconButtonElement={<IconButton onClick={this.switchShowList}><ContentFilter /></IconButton>}
                     onChange={this.handleChangeMultiple}
                     value={this.state.valueMultiple}
                     multiple={true}
                     open={this.state.menuOpen}
                 >
                     {columnsDefinition.map((columnDefinition, key)=>this.createMenuItems(columnDefinition,key))}
-                    <IconButton onTouchTap={this.save.bind(this,columnsDefinition)}><SaveButton /></IconButton>
+                    <IconButton onClick={this.save.bind(this,columnsDefinition)}><SaveButton /></IconButton>
                 </IconMenu>
             </div>
         );
